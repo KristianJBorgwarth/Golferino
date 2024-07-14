@@ -3,7 +3,7 @@ from rest_framework import serializers
 # core/serializers.py
 
 from rest_framework import serializers
-from .models import Player
+from .models.player_model import Player
 
 
 class PlayerSerializer(serializers.ModelSerializer):

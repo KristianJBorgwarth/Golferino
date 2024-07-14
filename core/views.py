@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Player
+
+from .models.player_model import Player
 from .serializers import PlayerSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
