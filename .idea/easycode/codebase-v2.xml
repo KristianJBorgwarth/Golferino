@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/core/migrations/__init__.py;C:/Projects/Golferino/core/__init__.py;C:/Projects/Golferino/core/admin.py;C:/Projects/Golferino/core/apps.py;C:/Projects/Golferino/core/models.py;C:/Projects/Golferino/core/serializers.py;C:/Projects/Golferino/core/tests.py;C:/Projects/Golferino/core/urls.py;C:/Projects/Golferino/core/views.py;C:/Projects/Golferino/Golferino/__init__.py;C:/Projects/Golferino/Golferino/asgi.py;C:/Projects/Golferino/Golferino/settings.py;C:/Projects/Golferino/Golferino/urls.py;C:/Projects/Golferino/Golferino/wsgi.py;C:/Projects/Golferino/manage.py" />
+  </component>
+</project>
