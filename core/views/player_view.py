@@ -3,30 +3,28 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
-from core.models.player_model import Player
-from core.serializers import PlayerSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from core.serializers.player_serializer import PlayerSerializer
+from core.services.player_service import PlayerService
+from core.views.ResponseEnvelope import ResponseEnvelope
 
 
-# Create your views here.
 class PlayerView(APIView):
-    @swagger_auto_schema(
-        responses={200: PlayerSerializer(many=True)}
-    )
-    def get(self, request, pk=None):
-        if pk:
-            try:
-                player = Player.objects.get(pk=pk)
-            except Player.DoesNotExist:
-                return Response(status=status.HTTP_204_NO_CONTENT)
-            serializer = PlayerSerializer(player)
-            return Response(serializer.data)
-        else:
-            players = Player.objects.all()
-            serializer = PlayerSerializer(players, many=True)
-            return Response(serializer.data)
 
-    def create(self, request):
-        pass
+    @swagger_auto_schema(request_body=PlayerSerializer,
+                         responses={201: PlayerSerializer})
+    def post(self, request):
+        result = PlayerService.create_player(request.data)
+        if result.success:
+            return ResponseEnvelope.success(
+                data=PlayerSerializer(result.value).data,
+                message="Player created successfully",
+                status_code=status.HTTP_201_CREATED
+            ).to_response()
+        else:
+            return ResponseEnvelope.fail(
+                error=result.error,
+                status_code=status.HTTP_400_BAD_REQUEST
+            ).to_response()
+
