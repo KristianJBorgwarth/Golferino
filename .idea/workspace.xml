@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc2079bf-1144-4042-b24c-71cba6feac7e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/golfcourse_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/golfhole_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/location_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/player_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/playerround_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/round_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/score_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +47,7 @@
     "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "krfi/feat/create-player",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -109,7 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1720978326784</updated>
-      <workItem from="1720978329479" duration="5345000" />
+      <workItem from="1720978329479" duration="6048000" />
     </task>
     <servers />
   </component>
