@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc2079bf-1144-4042-b24c-71cba6feac7e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/golfcourse_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/golfhole_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/location_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/player_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/playerround_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/round_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/models/score_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
+    <list default="true" id="fc2079bf-1144-4042-b24c-71cba6feac7e" name="Changes" comment="git now ignores __pycache__, .idea and .vscode">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +21,15 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -53,11 +50,13 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "Django Server.Golferino.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "lms/feat/add-gitignore-file",
+    "last_opened_file_path": "C:/Users/B224195/other_code/Golferino",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -96,8 +95,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.18034.82" />
-        <option value="bundled-python-sdk-975db3bf15a3-2767605e8bc2-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.18034.82" />
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
@@ -111,6 +109,15 @@
       <updated>1720978326784</updated>
       <workItem from="1720978329479" duration="5345000" />
     </task>
+    <task id="LOCAL-00001" summary="git now ignores __pycache__, .idea and .vscode">
+      <option name="closed" value="true" />
+      <created>1721032513176</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721032513176</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,5 +125,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="git now ignores __pycache__, .idea and .vscode" />
+    <option name="LAST_COMMIT_MESSAGE" value="git now ignores __pycache__, .idea and .vscode" />
   </component>
 </project>
