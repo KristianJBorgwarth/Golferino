@@ -16,7 +16,7 @@ class PlayerView(APIView):
                          responses={201: PlayerSerializer})
     def post(self, request):
         result = PlayerService.create_player(request.data)
-        if result.success:
+        if result.is_success:
             return ResponseEnvelope.success(
                 data=PlayerSerializer(result.value).data,
                 message="Player created successfully",
