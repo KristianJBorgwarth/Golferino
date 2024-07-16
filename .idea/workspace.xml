@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5095e267-98f9-47bb-ae8c-02ba33d9d8bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Golferino.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Golferino.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/data_access/base_repositories/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/data_access/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/data_access/repositories/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/golfcourse_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/golfcourse_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/golfhole_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/golfhole_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/location_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/location_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/player_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/player_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/playerround_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/playerround_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/round_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/round_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models/score_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/score_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/serializers/player_serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/serializers/player_serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/services/player_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/services/player_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_create_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_create_player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_get_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_get_player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +29,13 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -25,11 +44,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "krfi/feat/repository-setup",
     "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\Golferino\core\data_access" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

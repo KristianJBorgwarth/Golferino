@@ -1,6 +1,6 @@
 from django.db import models
-from core.models.golfcourse_model import Golfcourse
-from core.models.player_model import Player
+from core.data_access.models.golfcourse_model import Golfcourse
+from core.data_access.models.player_model import Player
 
 
 class Playerround(models.Model):

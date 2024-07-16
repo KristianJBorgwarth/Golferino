@@ -1,5 +1,5 @@
 from django.db import models
-from core.models.golfcourse_model import Golfcourse
+from core.data_access.models.golfcourse_model import Golfcourse
 
 
 class Round(models.Model):

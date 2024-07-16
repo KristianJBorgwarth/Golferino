@@ -1,6 +1,6 @@
 from django.db import models
-from core.models.golfhole_model import Golfhole
-from core.models.playerround_model import Playerround
+from core.data_access.models.golfhole_model import Golfhole
+from core.data_access.models.playerround_model import Playerround
 
 
 class Score(models.Model):

@@ -11,10 +11,11 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import patch
 
-from core.models.player_model import Player
+from core.data_access.models.player_model import Player
 from core.serializers.player_serializer import PlayerSerializer
 from core.common.results import Result
 from core.common.error_messages import ErrorMessage
+
 
 class PlayerViewTests(APITestCase):
 
