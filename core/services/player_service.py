@@ -1,9 +1,8 @@
 from core.common.error_messages import ErrorMessage
 from core.common.results import Result
-from core.models.player_model import Player
+from core.data_access.models.player_model import Player
 from core.serializers.player_serializer import PlayerSerializer
 from rest_framework import status
-from rest_framework.response import Response
 
 
 class PlayerService:

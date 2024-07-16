@@ -14,7 +14,7 @@ from core.serializers.player_serializer import PlayerSerializer
 
 class TestPlayerService(unittest.TestCase):
 
-    @patch('core.models.player_model.Player.objects.filter')
+    @patch('core.data_access.models.player_model.Player.objects.filter')
     @patch('core.serializers.player_serializer.PlayerSerializer.save')
     @patch('core.serializers.player_serializer.PlayerSerializer.is_valid')
     def test_create_player_email_exists(self, mock_is_valid, mock_save, mock_filter):
@@ -37,7 +37,7 @@ class TestPlayerService(unittest.TestCase):
         mock_filter.return_value.exists.assert_called_once()
         mock_save.assert_not_called()
 
-    @patch('core.models.player_model.Player.objects.filter')
+    @patch('core.data_access.models.player_model.Player.objects.filter')
     @patch('core.serializers.player_serializer.PlayerSerializer.save')
     @patch('core.serializers.player_serializer.PlayerSerializer.is_valid')
     def test_create_player_success(self, mock_is_valid, mock_save, mock_filter):
@@ -60,7 +60,7 @@ class TestPlayerService(unittest.TestCase):
         mock_filter.assert_called_once_with(email=data['email'])
         mock_save.assert_called_once()
 
-    @patch('core.models.player_model.Player.objects.filter')
+    @patch('core.data_access.models.player_model.Player.objects.filter')
     @patch('core.serializers.player_serializer.PlayerSerializer.save')
     @patch('core.serializers.player_serializer.PlayerSerializer.is_valid')
     def test_create_player_invalid_data(self, mock_is_valid, mock_save, mock_filter):
