@@ -27,5 +27,9 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python -m unittest discover -s tests -p "test_*.py"
+        # Ensure migrations are applied
+        python manage.py makemigrations
+        python manage.py migrate
+        # Run unittests
+        python manage.py test
         

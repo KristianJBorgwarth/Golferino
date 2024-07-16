@@ -8,6 +8,7 @@ from core.common.error_messages import ErrorMessage
 
 # Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
+
 django.setup()
 
 from django.test import TestCase
