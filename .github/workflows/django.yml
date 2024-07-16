@@ -27,5 +27,5 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python -m unittest discover -s tests -t ./tests in ./tests
+        python manage.py test --verbosity=2
         
