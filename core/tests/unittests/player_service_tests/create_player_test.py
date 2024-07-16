@@ -31,7 +31,7 @@ class TestPlayerService(unittest.TestCase):
         result = PlayerService.create_player(data)
 
         # Assertions
-        self.assertFalse(result.success)
+        self.assertFalse(result.is_success)
         self.assertEqual(result.error, "Email already exists")
         mock_filter.assert_called_once_with(email=data['email'])
         mock_filter.return_value.exists.assert_called_once()
@@ -56,7 +56,7 @@ class TestPlayerService(unittest.TestCase):
         result = PlayerService.create_player(data)
 
         # Assertions
-        self.assertTrue(result.success)
+        self.assertTrue(result.is_success)
         mock_filter.assert_called_once_with(email=data['email'])
         mock_save.assert_called_once()
 
@@ -79,7 +79,7 @@ class TestPlayerService(unittest.TestCase):
         result = PlayerService.create_player(data)
 
         # Assertions
-        self.assertFalse(result.success)
+        self.assertFalse(result.is_success)
         self.assertEqual(result.error, mock_errors)
         mock_filter.assert_called_once_with(email=data['email'])
         mock_save.assert_not_called()
