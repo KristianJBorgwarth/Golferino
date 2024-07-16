@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5095e267-98f9-47bb-ae8c-02ba33d9d8bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core/data_access/base_repositories/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/data_access/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/data_access/repositories/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/golfcourse_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/golfcourse_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/golfhole_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/golfhole_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/location_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/location_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/player_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/player_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/playerround_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/playerround_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/round_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/round_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models/score_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/score_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/serializers/player_serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/serializers/player_serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/data_access/repositories/player_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Golferino.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Golferino.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/data_access/base_repositories/base_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/base_repositories/base_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/data_access/base_repositories/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/base_repositories/repository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/services/player_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/services/player_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/views/player_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views/player_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_create_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_create_player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_get_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unittests/player_service_tests/test_get_player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +31,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -44,7 +43,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "krfi/feat/repository-setup",
+    "Python tests.Python tests for test_create_player.TestPlayerService.test_create_player_invalid_data.executor": "Run",
+    "Python tests.Python tests for test_create_player.TestPlayerService.test_create_player_success.executor": "Run",
+    "Python tests.Python tests in manage.py.executor": "Run",
+    "Python tests.Python tests in python manage.py test.executor": "Run",
+    "Python tests.Python tests in test_create_player.py.executor": "Run",
+    "Python tests.Python tests in tests.executor": "Run",
+    "Python.manage.executor": "Run",
+    "Python.manage.py test.executor": "Run",
+    "git-widget-placeholder": "lms/feat/player-repository",
+    "last_opened_file_path": "D:/Udvikling/Golferino/manage.py",
     "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
@@ -53,6 +61,194 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projects\Golferino\core\data_access" />
     </key>
+  </component>
+  <component name="RunManager" selected="Python.manage.py test">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="manage.py test" type="PythonConfigurationType" factoryName="Python">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.10 (Golferino)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="test" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Docutils task">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Sphinx task">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_create_player.TestPlayerService.test_create_player_invalid_data" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unittests/player_service_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_create_player.TestPlayerService.test_create_player_invalid_data&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_create_player.TestPlayerService.test_create_player_success" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unittests/player_service_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_create_player.TestPlayerService.test_create_player_success&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in manage.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.10 (Golferino)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;test&quot;" />
+      <option name="_new_target" value="&quot;D:\\Udvikling\\Golferino\\manage.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in tests" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="Golferino" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.manage.py test" />
+      <item itemvalue="Python tests.Python tests in tests" />
+      <item itemvalue="Python tests.Python tests for test_create_player.TestPlayerService.test_create_player_invalid_data" />
+      <item itemvalue="Python tests.Python tests for test_create_player.TestPlayerService.test_create_player_success" />
+      <item itemvalue="Python tests.Python tests in manage.py" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests in tests" />
+        <item itemvalue="Python tests.Python tests for test_create_player.TestPlayerService.test_create_player_success" />
+        <item itemvalue="Python tests.Python tests in manage.py" />
+        <item itemvalue="Python tests.Python tests for test_create_player.TestPlayerService.test_create_player_invalid_data" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -64,5 +260,16 @@
   </component>
   <component name="TaskManager">
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/core/views/player_view.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

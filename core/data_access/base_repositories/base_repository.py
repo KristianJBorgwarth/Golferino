@@ -11,7 +11,7 @@ class BaseRepository(ABC, Generic[T]):
         pass
 
     @abstractmethod
-    def get_by_id(self, id: int) -> Optional[T]:
+    def get_by_key(self, **kwargs) -> Optional[T]:
         pass
 
     @abstractmethod

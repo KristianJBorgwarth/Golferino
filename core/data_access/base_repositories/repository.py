@@ -11,9 +11,9 @@ class Repository(BaseRepository[T]):
     def get_all(self) -> List[T]:
         return list(self._model.objects.all())
 
-    def get_by_id(self, id: int) -> Optional[T]:
+    def get_by_key(self, **kwargs) -> Optional[T]:
         try:
-            return self._model.objects.get(pk=id)
+            return self._model.objects.get(**kwargs)
         except self._model.DoesNotExist:
             return None
 

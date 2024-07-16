@@ -9,22 +9,22 @@ from core.views.ResponseEnvelope import ResponseEnvelope
 
 
 class PlayerView(viewsets.ViewSet):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._player_service = PlayerService()
 
     @swagger_auto_schema(request_body=PlayerSerializer,
                          responses={201: PlayerSerializer})
     def post(self, request):
-        result = PlayerService.create_player(request.data)
+        result = self._player_service.create_player(request.data)
         if result.is_success:
             return ResponseEnvelope.success(
-                data=PlayerSerializer(result.value).data,
+                data=result.value,
                 message="Player created successfully",
-                status_code=status.HTTP_201_CREATED
+                status_code=result.status_code
             ).to_response()
         else:
-            return ResponseEnvelope.fail(
-                error=result.error,
-                status_code=status.HTTP_400_BAD_REQUEST
-            ).to_response()
+            return ResponseEnvelope.fail(error=result.error, status_code=result.status_code).to_response()
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -40,7 +40,7 @@ class PlayerView(viewsets.ViewSet):
     def get_by_id(self, request):
         playerid = request.query_params.get('playerid')
 
-        result = PlayerService.get_player_by_id(playerid=playerid)
+        result = PlayerService().get_player_by_id(playerid=playerid)
         if result.is_success:
             return ResponseEnvelope.success(
                 data=PlayerSerializer(result.value).data,
@@ -66,7 +66,7 @@ class PlayerView(viewsets.ViewSet):
     def get_by_name(self, request):
         firstname = request.query_params.get('firstname')
 
-        result = PlayerService.get_player_by_name(firstname=firstname)
+        result = PlayerService().get_player_by_name(firstname=firstname)
         if result.is_success:
             return ResponseEnvelope.success(
                 data=PlayerSerializer(result.value).data,
