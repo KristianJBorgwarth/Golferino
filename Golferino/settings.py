@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'Golferino.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'stats',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',

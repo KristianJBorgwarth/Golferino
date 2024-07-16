@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import PlayerView
+from core.views.player_view import PlayerView
 
 urlpatterns = [
-    path('players/', PlayerView.as_view(), name='player-list-create'),
+    path('players/', PlayerView.as_view(), name='player-post'),
  ]
