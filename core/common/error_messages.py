@@ -26,3 +26,7 @@ class ErrorMessage:
     @staticmethod
     def unspecified_error(message):
         return message
+
+    @staticmethod
+    def not_found(message):
+        return message
