@@ -1,13 +1,13 @@
+import os
 import unittest
 from unittest.mock import patch, MagicMock
-import os
+
 import django
 
 # Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
-from core.models.player_model import Player
 from core.services.player_service import PlayerService
 from core.serializers.player_serializer import PlayerSerializer
 
