@@ -27,9 +27,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        # Ensure migrations are applied
-        python manage.py makemigrations
-        python manage.py migrate
         # Run unittests
         python manage.py test
         
