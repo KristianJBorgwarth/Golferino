@@ -1,43 +1,43 @@
 from core.common.error_messages import ErrorMessage
 from core.common.results import Result
 from core.data_access.models.player_model import Player
+from core.data_access.repositories.player_repository import PlayerRepository
 from core.serializers.player_serializer import PlayerSerializer
 from rest_framework import status
 
 
 class PlayerService:
+    def __init__(self):
+        self._pr = PlayerRepository(Player)
 
-    @staticmethod
-    def create_player(data):
-        if Player.objects.filter(email=data['email']).exists():
+    def create_player(self, data):
+        if self._pr.email_exists(data['email']):
             return Result.fail(ErrorMessage.unspecified_error("Email already exists"),
                                status_code=status.HTTP_400_BAD_REQUEST)
 
         serializer = PlayerSerializer(data=data)
         if serializer.is_valid():
-            player = serializer.save()
-            return Result.ok(PlayerSerializer(player).data)
+            self._pr.create(serializer.data)
+            return Result.ok(serializer.data, status_code=status.HTTP_201_CREATED)
         return Result.fail(serializer.errors)
 
-    @staticmethod
-    def get_player_by_id(playerid):
+    def get_player_by_id(self, playerid):
         if not playerid.isnumeric():
             return Result.fail(ErrorMessage.unspecified_error("playerid must be an integer"),
                                status_code=status.HTTP_400_BAD_REQUEST)
-        try:
-            player = Player.objects.get(playerid=playerid)
+
+        if self._pr.player_exists(playerid=playerid):
+            player = self._pr.get_by_key(playerid=playerid)
             return Result.ok(PlayerSerializer(player).data, status_code=status.HTTP_200_OK)
-        except Player.DoesNotExist:
-            return Result.fail(ErrorMessage.not_found("Player not found"), status_code=status.HTTP_204_NO_CONTENT)
 
+        return Result.fail(ErrorMessage.not_found("Player not found"), status_code=status.HTTP_204_NO_CONTENT)
 
-    @staticmethod
-    def get_player_by_name(firstname):
+    def get_player_by_name(self, firstname):
         if not isinstance(firstname, str) or firstname.isnumeric():
             return Result.fail(ErrorMessage.not_found("firstname must be a string"),
                                status_code=status.HTTP_400_BAD_REQUEST)
-        try:
-            player = Player.objects.get(firstname=firstname)
+        if self._pr.player_exists(firstname=firstname):
+            player = self._pr.get_by_key(firstname=firstname)
             return Result.ok(PlayerSerializer(player).data, status_code=status.HTTP_200_OK)
-        except Player.DoesNotExist:
-            return Result.fail(ErrorMessage.not_found("Player not found"), status_code=status.HTTP_204_NO_CONTENT)
+
+        return Result.fail(ErrorMessage.not_found("Player not found"), status_code=status.HTTP_204_NO_CONTENT)

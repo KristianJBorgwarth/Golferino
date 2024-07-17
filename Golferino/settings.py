@@ -79,17 +79,18 @@ WSGI_APPLICATION = 'Golferino.wsgi.application'
 
 DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'stats',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5433',  # default is 5432
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'stats',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'HOST': 'localhost',
+            'PORT': '5433',  # default is 5432
     }
 }
 
 # Use an in-memory database for tests
 if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    print("Using test instead")
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': ':memory:',

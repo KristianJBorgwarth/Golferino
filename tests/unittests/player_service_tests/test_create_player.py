@@ -28,7 +28,7 @@ class TestPlayerService(unittest.TestCase):
             'lastname': 'testLastName',
             'email': 'test@example.com'
         }
-        result = PlayerService.create_player(data)
+        result = PlayerService().create_player(data)
 
         # Assertions
         self.assertFalse(result.is_success)
@@ -36,14 +36,22 @@ class TestPlayerService(unittest.TestCase):
         mock_filter.assert_called_once_with(email=data['email'])
         mock_filter.return_value.exists.assert_called_once()
         mock_save.assert_not_called()
+        print("Tested error message for email already exists")
+        print("Tested result.is_success = False for email already exists")
 
     @patch('core.data_access.models.player_model.Player.objects.filter')
-    @patch('core.serializers.player_serializer.PlayerSerializer.save')
+    @patch('core.data_access.base_repositories.repository.Repository.create')
     @patch('core.serializers.player_serializer.PlayerSerializer.is_valid')
-    def test_create_player_success(self, mock_is_valid, mock_save, mock_filter):
+    @patch('core.serializers.player_serializer.PlayerSerializer.data', new_callable=MagicMock)
+    def test_create_player_success(self, mock_data, mock_is_valid, mock_save, mock_filter):
         # Mock the filter to simulate email does not exist
         mock_filter.return_value.exists.return_value = False
         mock_is_valid.return_value = True
+        mock_data.return_value = {
+            'firstname': 'testFirstName',
+            'lastname': 'testLastName',
+            'email': 'test@example.com'
+        }
         mock_saved_player = MagicMock()
         mock_save.return_value = mock_saved_player
 
@@ -53,11 +61,12 @@ class TestPlayerService(unittest.TestCase):
             'lastname': 'testLastName',
             'email': 'test@example.com'
         }
-        result = PlayerService.create_player(data)
+        result = PlayerService().create_player(data)
 
         # Assertions
         self.assertTrue(result.is_success)
         mock_filter.assert_called_once_with(email=data['email'])
+        mock_is_valid.assert_called_once()
         mock_save.assert_called_once()
 
     @patch('core.data_access.models.player_model.Player.objects.filter')
@@ -76,7 +85,7 @@ class TestPlayerService(unittest.TestCase):
             'lastname': 'testLastName',
             'email': 'test@example.com'
         }
-        result = PlayerService.create_player(data)
+        result = PlayerService().create_player(data)
 
         # Assertions
         self.assertFalse(result.is_success)
