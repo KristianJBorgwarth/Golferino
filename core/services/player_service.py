@@ -19,7 +19,7 @@ class PlayerService:
         if serializer.is_valid():
             self._pr.create(serializer.data)
             return Result.ok(serializer.data, status_code=status.HTTP_201_CREATED)
-        return Result.fail(ErrorMessage.must_contain_at_symbol(data['email'], symbol='@'))
+        return Result.fail(serializer.errors)
 
     def get_player_by_id(self, playerid):
         if not playerid.isnumeric():
