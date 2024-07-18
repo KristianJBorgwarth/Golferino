@@ -1,5 +1,7 @@
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
+from core.commands.player.create.create_player_command import CreatePlayerCommand
+from core.commands.player.create.create_player_command_handler import CreatePlayerCommandHandler
 from core.common.mediator import Mediator
 
 # Initialize a single instance of the mediator
@@ -13,6 +15,7 @@ def register_handlers():
     This function is called once at application startup.
     """
     mediator.register_handler(CreateLocationCommand, CreateLocationCommandHandler())
+    mediator.register_handler(CreatePlayerCommand, CreatePlayerCommandHandler())
 
 
 def get_mediator() -> Mediator:
