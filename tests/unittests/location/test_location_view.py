@@ -1,5 +1,10 @@
+import os
 from unittest.mock import MagicMock, patch
+import django
 
+# Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
+os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
+django.setup()
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 
