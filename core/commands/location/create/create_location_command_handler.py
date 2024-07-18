@@ -8,9 +8,9 @@ from core.dtos.location_dto import LocationDto
 from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
 
 
-class CreateLocationHandler(RequestHandler[CreateLocationCommand, Result[LocationDto]]):
+class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[LocationDto]]):
     def __init__(self):
-        self._location_repository = LocationRepository(Location)
+        self.location_repository = LocationRepository(Location)
 
     # TODO: write unit test for this
     def handle(self, command: CreateLocationCommand) -> Result[LocationDto]:
@@ -24,10 +24,10 @@ class CreateLocationHandler(RequestHandler[CreateLocationCommand, Result[Locatio
 
         location_data = serializer.validated_data
 
-        if self._location_repository.location_exists(location_data['locationname']):
+        if self.location_repository.location_exists(location_data['locationname']):
             return Result.fail(ErrorMessage.already_exists(location_data['locationname']))
 
-        location = self._location_repository.create(location_data)
+        location = self.location_repository.create(location_data)
         locationDto = LocationDto(location)
 
         return Result.ok(locationDto.data)

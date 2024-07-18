@@ -1,5 +1,5 @@
 from core.commands.location.create.create_location_command import CreateLocationCommand
-from core.commands.location.create.create_location_command_handler import CreateLocationHandler
+from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
 from core.common.mediator import Mediator
 
 # Initialize a single instance of the mediator
@@ -12,7 +12,7 @@ def register_handlers():
     Register all request handlers with the mediator.
     This function is called once at application startup.
     """
-    mediator.register_handler(CreateLocationCommand, CreateLocationHandler())
+    mediator.register_handler(CreateLocationCommand, CreateLocationCommandHandler())
 
 
 def get_mediator() -> Mediator:
