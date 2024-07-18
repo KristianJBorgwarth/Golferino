@@ -6,4 +6,5 @@ class CoreConfig(AppConfig):
     name = 'core'
 
     def ready(self):
-        pass
+        from core.setup.mediator_setup import register_handlers
+        register_handlers()
