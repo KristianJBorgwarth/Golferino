@@ -19,6 +19,7 @@ class ErrorMessage:
     def must_contain_at_symbol(field_name, symbol):
         return f"{field_name} must contain {symbol}"
 
+    # TODO: Should add a type name, to dynamically describe what type already exists for reusability
     @staticmethod
     def already_exists(field_name):
         return f"A player with this {field_name} already exists."
