@@ -1,4 +1,5 @@
 from core.commands.location.create.create_location_command import CreateLocationCommand
+from core.common.error_messages import ErrorMessage
 from core.common.results import Result
 from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
@@ -22,8 +23,10 @@ class CreateLocationHandler(RequestHandler[CreateLocationCommand, Result[Locatio
 
         location_data = serializer.validated_data
 
+        if self._location_repository.location_exists(location_data['locationname']):
+            return Result.fail(ErrorMessage.already_exists(location_data['locationname']))
+
         location = self._location_repository.create(location_data)
         locationDto = LocationDto(location)
+
         return Result.ok(locationDto.data)
-
-
