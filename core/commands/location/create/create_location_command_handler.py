@@ -5,13 +5,14 @@ from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
 from core.common.mediator import RequestHandler
 from core.dtos.location_dto import LocationDto
-from core.serializers.create_location_cmd_serializer import CreateLocationCommandSerializer
+from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
 
 
 class CreateLocationHandler(RequestHandler[CreateLocationCommand, Result[LocationDto]]):
     def __init__(self):
         self._location_repository = LocationRepository(Location)
 
+    # TODO: write unit test for this
     def handle(self, command: CreateLocationCommand) -> Result[LocationDto]:
         serializer = CreateLocationCommandSerializer(data={
             'locationname': command.locationname,

@@ -1,10 +1,9 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
-from rest_framework.viewsets import ViewSet
 
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.dtos.location_dto import LocationDto
-from core.serializers.create_location_cmd_serializer import CreateLocationCommandSerializer
+from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
 from core.setup.mediator_setup import get_mediator
 from core.views.ResponseEnvelope import ResponseEnvelope
 
@@ -14,9 +13,10 @@ class LocationView(viewsets.ViewSet):
         super().__init__(**kwargs)
         self._mediator = get_mediator()
 
+    # TODO: write unit tests for this
     @swagger_auto_schema(
         request_body=CreateLocationCommandSerializer,
-        responses={201: LocationDto, 400: 'Invalid input'}
+        responses={201: LocationDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreateLocationCommand(request.data.get('locationname'), request.data.get('address'), request.data.get('city'))

@@ -6,6 +6,7 @@ from core.common.mediator import Mediator
 mediator = Mediator()
 
 
+# TODO: Look into handling the registration of handlers dynamically during runtime (instantiating a handler upon request) to avoid potential race conditions, if any?
 def register_handlers():
     """
     Register all request handlers with the mediator.
