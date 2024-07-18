@@ -6,7 +6,7 @@ from core.common.validators import validate_non_empty, validate_alpha, validate_
 class CreateLocationCommandSerializer(serializers.Serializer):
     locationname = serializers.CharField(
         max_length=255,
-        validators=[validate_non_empty, validate_alpha]
+        validators=[validate_non_empty, validate_alpha, lambda value: validate_min_length(value, 2)]
     )
     address = serializers.CharField(
         max_length=1024,
@@ -14,5 +14,5 @@ class CreateLocationCommandSerializer(serializers.Serializer):
     )
     city = serializers.CharField(
         max_length=255,
-        validators=[validate_non_empty, validate_alpha]
+        validators=[validate_non_empty, validate_alpha, lambda value: validate_min_length(value, 2)]
     )

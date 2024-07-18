@@ -14,6 +14,7 @@
       <change beforePath="$PROJECT_DIR$/core/commands/location/create/create_location_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/commands/location/create/create_location_command.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/commands/location/create/create_location_command_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/commands/location/create/create_location_command_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/common/mediator.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/common/mediator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/data_access/models/location_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/data_access/models/location_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/views/location_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views/location_view.py" afterDir="false" />
     </list>
@@ -213,7 +214,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721272787079</updated>
-      <workItem from="1721272788513" duration="10461000" />
+      <workItem from="1721272788513" duration="11675000" />
     </task>
     <servers />
   </component>
