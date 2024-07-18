@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5095e267-98f9-47bb-ae8c-02ba33d9d8bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/unittests/location/commandtest/createtest/test_create_location_command_serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unittests/location/test_location_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/commands/location/create/create_location_command_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/commands/location/create/create_location_command_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/dtos/location_dto.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/dtos/location_dto.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +208,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721272787079</updated>
-      <workItem from="1721272788513" duration="18313000" />
+      <workItem from="1721272788513" duration="20434000" />
     </task>
     <servers />
   </component>

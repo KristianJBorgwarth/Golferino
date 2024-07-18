@@ -12,7 +12,6 @@ class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[
     def __init__(self):
         self.location_repository = LocationRepository(Location)
 
-    # TODO: write unit test for this
     def handle(self, command: CreateLocationCommand) -> Result[LocationDto]:
         serializer = CreateLocationCommandSerializer(data={
             'locationname': command.locationname,
@@ -20,14 +19,14 @@ class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[
             'city': command.city
         })
         if not serializer.is_valid():
-            return Result.fail(error=serializer.errors)
+            return Result.fail(error=serializer.errors, status_code=400)
 
         location_data = serializer.validated_data
 
         if self.location_repository.location_exists(location_data['locationname']):
-            return Result.fail(ErrorMessage.already_exists(location_data['locationname']))
+            return Result.fail(ErrorMessage.already_exists(location_data['locationname']), status_code=400)
 
         location = self.location_repository.create(location_data)
         locationDto = LocationDto(location)
 
-        return Result.ok(locationDto.data)
+        return Result.ok(locationDto.data, status_code=200)

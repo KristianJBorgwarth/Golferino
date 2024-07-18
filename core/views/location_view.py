@@ -13,10 +13,9 @@ class LocationView(viewsets.ViewSet):
         super().__init__(**kwargs)
         self._mediator = get_mediator()
 
-    # TODO: write unit tests for this
     @swagger_auto_schema(
         request_body=CreateLocationCommandSerializer,
-        responses={201: LocationDto, 400: 'BadRequest'}
+        responses={200: LocationDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreateLocationCommand(request.data.get('locationname'), request.data.get('address'), request.data.get('city'))
