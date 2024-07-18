@@ -1,17 +1,17 @@
 import os
-import unittest
-from unittest.mock import patch, MagicMock
 
 import django
+# Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
+os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
+django.setup()
 
+import unittest
+from unittest.mock import patch, MagicMock
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
 from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
 
-# Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
-os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
-django.setup()
 
 
 class TestCreateLocationCommandHandler(unittest.TestCase):
