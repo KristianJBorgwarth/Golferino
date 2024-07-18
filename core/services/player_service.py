@@ -10,6 +10,7 @@ class PlayerService:
     def __init__(self):
         self._pr = PlayerRepository(Player)
 
+    # TODO: Remove this as it has been moved into CreatePlayerCommand
     def create_player(self, data):
         if self._pr.email_exists(data['email']):
             return Result.fail(ErrorMessage.unspecified_error("Email already exists"),
