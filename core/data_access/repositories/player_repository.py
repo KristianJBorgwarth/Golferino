@@ -1,6 +1,3 @@
-from typing import Optional
-
-from core.common.results import T
 from core.data_access.base_repositories.repository import Repository
 from core.data_access.models.player_model import Player
 
@@ -15,4 +12,5 @@ class PlayerRepository(Repository[Player]):
 
     @staticmethod
     def player_exists(**kwargs) -> bool:
+        """ Give any key,value pair identifier (e.g. playerid=lookup_playerid) to look in database."""
         return Player.objects.filter(**kwargs).exists()
