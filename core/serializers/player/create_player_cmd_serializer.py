@@ -4,7 +4,7 @@ from core.common.validators import validate_format, validate_alpha, validate_non
     validate_min_length
 
 
-class CreatePlayerCommandSerializer(serializers.ModelSerializer):
+class CreatePlayerCommandSerializer(serializers.Serializer):
     firstname = serializers.CharField(
         validators=[
             lambda value: validate_non_empty(value),
