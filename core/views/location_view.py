@@ -23,9 +23,9 @@ class LocationView(viewsets.ViewSet):
         cmd = CreateLocationCommand(request.data.get('locationname'), request.data.get('address'), request.data.get('city'))
         result = self._mediator.send(cmd)
         if result.is_success:
-            return ResponseEnvelope.success(result.value, result.status_code).to_response()
+            return ResponseEnvelope.success(result.value, result.status_code)
         else:
-            return ResponseEnvelope.fail(result.error, result.status_code).to_response()
+            return ResponseEnvelope.fail(result.error, result.status_code)
         
     @swagger_auto_schema(
         query_serializer=GetLocationsQuerySerializer,
@@ -36,6 +36,6 @@ class LocationView(viewsets.ViewSet):
 
         result = self._mediator.send(query)
         if result.is_success:
-            return ResponseEnvelope.success(result.value, result.status_code).to_response()
+            return ResponseEnvelope.success(result.value, result.status_code)
         else:
-            return ResponseEnvelope.fail(result.error, result.status_code).to_response()
+            return ResponseEnvelope.fail(result.error, result.status_code)

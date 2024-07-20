@@ -12,13 +12,22 @@ class ResponseEnvelope:
         self.status_code = status_code
 
     @staticmethod
-    def success(data=None, message=None, status_code=status.HTTP_200_OK):
-        return ResponseEnvelope(success=True, data=data, status_code=status_code)
+    def success(data, status_code):
+        return Response({
+            'success': True,
+            'data': data,
+            'error': None
+        }, status=status_code)
 
     @staticmethod
-    def fail(error, message=None, status_code=status.HTTP_400_BAD_REQUEST):
-        return ResponseEnvelope(success=False, error=error, status_code=status_code)
+    def fail(error, status_code):
+        return Response({
+            'success': False,
+            'data': None,
+            'error': error
+        }, status=status_code)
 
+    @staticmethod
     def to_response(self):
         response_data = {
             'success': self.success,
