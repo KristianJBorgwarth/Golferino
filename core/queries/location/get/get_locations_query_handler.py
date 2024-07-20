@@ -31,4 +31,4 @@ class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[Loc
         paged_locations = paginator.get_page(query.page)
         paged_locationDtos = LocationDto(paged_locations, many=True).data
         
-        return Result.ok(paged_locationDtos)
+        return Result.ok(paged_locationDtos, 200)
