@@ -27,6 +27,8 @@ class ResponseEnvelope:
             'error': error
         }, status=status_code)
 
+
+    #TODO: remove this method, it is not used
     @staticmethod
     def to_response(self):
         response_data = {

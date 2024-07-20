@@ -7,6 +7,7 @@ from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
 from core.dtos.location_dto import LocationDto
 from core.queries.location.get.get_locations_query import GetLocationsQuery
+from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
 
 
 class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[LocationDto]]]):
@@ -14,6 +15,13 @@ class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[Loc
         self.location_repository = LocationRepository(Location)
         
     def handle(self, query: GetLocationsQuery) -> Result[List[LocationDto]]:
+        serializer = GetLocationsQuerySerializer(data={
+            'page': query.page,
+            'page_size': query.page_size
+        })
+        if not serializer.is_valid():
+            return Result.fail(error=serializer.errors, status_code=400)
+        
         locations = self.location_repository.get_all()
         
         if not locations:
