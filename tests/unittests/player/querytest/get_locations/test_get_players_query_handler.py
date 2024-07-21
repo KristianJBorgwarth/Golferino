@@ -23,7 +23,7 @@ class TestGetPlayersQueryHandler(unittest.TestCase):
         self.handler.player_repository = self.mock_repository
 
     @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
-           return_value=False)
+           return_value=True)
     @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.errors',
            new_callable=MagicMock)
     def test_handle_success_with_players(self, mock_validated_data, mock_is_valid):
