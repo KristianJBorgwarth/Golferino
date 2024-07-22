@@ -23,6 +23,8 @@ class RoundView(viewsets.ViewSet):
 
         result = self._mediator.send(cmd)
         if result.is_success:
-            return ResponseEnvelope.success(result.value, result.status_code)
+            print(result.status_code)
+            return ResponseEnvelope.success(result.value, int(result.status_code))
         else:
-            return ResponseEnvelope.fail(result.error, result.status_code)
+            print(result.status_code)
+            return ResponseEnvelope.fail(result.error, int(result.status_code))
