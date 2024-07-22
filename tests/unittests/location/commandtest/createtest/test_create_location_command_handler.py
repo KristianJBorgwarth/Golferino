@@ -13,7 +13,6 @@ from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
 
 
-
 class TestCreateLocationCommandHandler(unittest.TestCase):
 
     def setUp(self):

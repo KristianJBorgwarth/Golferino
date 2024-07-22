@@ -5,6 +5,8 @@ from core.commands.player.create.create_player_command_handler import CreatePlay
 from core.common.mediator import Mediator
 from core.queries.location.get.get_locations_query import GetLocationsQuery
 from core.queries.location.get.get_locations_query_handler import GetLocationsQueryHandler
+from core.queries.player.get.get_players_query import GetPlayersQuery
+from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
 
 # Initialize a single instance of the mediator
 mediator = Mediator()
@@ -19,6 +21,7 @@ def register_handlers():
     mediator.register_handler(CreateLocationCommand, CreateLocationCommandHandler())
     mediator.register_handler(CreatePlayerCommand, CreatePlayerCommandHandler())
     mediator.register_handler(GetLocationsQuery, GetLocationsQueryHandler())
+    mediator.register_handler(GetPlayersQuery, GetPlayersQueryHandler())
 
 
 def get_mediator() -> Mediator:
