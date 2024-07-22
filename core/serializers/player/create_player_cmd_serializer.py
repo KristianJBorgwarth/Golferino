@@ -3,7 +3,7 @@ from core.data_access.models.player_model import Player
 from core.common.validators import validate_format, validate_alpha, validate_non_empty, validate_max_length, \
     validate_min_length
 
-
+#TODO: SUGGESTION: maybe move to commnads/player/create directory
 class CreatePlayerCommandSerializer(serializers.Serializer):
     firstname = serializers.CharField(
         validators=[
