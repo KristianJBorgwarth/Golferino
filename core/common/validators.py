@@ -1,6 +1,21 @@
+from datetime import datetime
+
 from rest_framework import serializers
 
 from core.common.error_messages import ErrorMessage
+
+
+def validate_date_not_in_future(value: str, dateformat: str = 'YYYYMMDD') -> bool:
+    input_date = datetime.strptime(value, dateformat)
+    now = datetime.now()
+    return input_date < now
+
+
+def validate_dateformat(value: str, dateformat: str = 'YYYYMMDD') -> bool:
+    try:
+        return bool(datetime.strptime(value, dateformat))
+    except ValueError:
+        return False
 
 
 def validate_non_empty(value):
