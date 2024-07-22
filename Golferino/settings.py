@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import sys
 from pathlib import Path
+import structlog
+import seqlog
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,7 +86,7 @@ DATABASES = {
             'USER': 'root',
             'PASSWORD': 'root',
             'HOST': 'localhost',
-            'PORT': '5433',  # default is 5432
+            'PORT': '5434',  # default is 5432
     }
 }
 
@@ -136,3 +138,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging Configuration
+
+# Initialize seqloq
+# seqlog.log_to_seq(
+    
+# )
