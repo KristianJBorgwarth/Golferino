@@ -8,5 +8,6 @@ urlpatterns = [
     path('players/get_by_id/', PlayerView.as_view({'get': 'get_by_id'}), name='player-by-id'),
     path('players/get_by_name/', PlayerView.as_view({'get': 'get_by_name'}), name='player-by-name'),
     path('locations/', LocationView.as_view({'post': 'create'}), name='location-create'),
+    path('locations/get_all', LocationView.as_view({'get': 'get_all'}), name='location-get-all'),
 
 ]

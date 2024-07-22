@@ -18,6 +18,10 @@ class ErrorMessage:
     @staticmethod
     def must_contain_at_symbol(field_name, symbol):
         return f"{field_name} must contain {symbol}"
+    
+    @staticmethod
+    def must_be_of_type(field_name, type):
+        return f"{field_name} must be of type {type}"
 
     # TODO: Should add a type name, to dynamically describe what type already exists for reusability
     @staticmethod

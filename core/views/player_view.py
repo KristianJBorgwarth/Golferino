@@ -28,9 +28,9 @@ class PlayerView(viewsets.ViewSet):
                                   request.data.get('email'))
         result = self._mediator.send(cmd)
         if result.is_success:
-            return ResponseEnvelope.success(result.value, result.status_code).to_response()
+            return ResponseEnvelope.success(result.value, result.status_code)
         else:
-            return ResponseEnvelope.fail(result.error, result.status_code).to_response()
+            return ResponseEnvelope.fail(result.error, result.status_code)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -51,12 +51,12 @@ class PlayerView(viewsets.ViewSet):
             return ResponseEnvelope.success(
                 data=PlayerSerializer(result.value).data,
                 status_code=result.status_code
-            ).to_response()
+            )
         else:
             return ResponseEnvelope.fail(
                 error=result.error,
                 status_code=result.status_code
-            ).to_response()
+            )
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -77,9 +77,9 @@ class PlayerView(viewsets.ViewSet):
             return ResponseEnvelope.success(
                 data=PlayerSerializer(result.value).data,
                 status_code=result.status_code
-            ).to_response()
+            )
         else:
             return ResponseEnvelope.fail(
                 error=result.error,
                 status_code=result.status_code
-            ).to_response()
+            )

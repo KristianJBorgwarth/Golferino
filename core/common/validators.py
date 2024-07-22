@@ -23,6 +23,15 @@ def validate_max_length(value, max_length):
         raise serializers.ValidationError(ErrorMessage.must_be_less_than(value, max_length))
 
 
+def validate_integer(value, min_value=None, max_value=None):
+    if not isinstance(value, int):
+        raise serializers.ValidationError(ErrorMessage.must_be_of_type(value, 'integer'))
+    if min_value is not None and int(value) < min_value:
+        raise serializers.ValidationError(ErrorMessage.must_be_at_least(value, min_value))
+    if max_value is not None and int(value) > max_value:
+        raise serializers.ValidationError(ErrorMessage.must_be_less_than(value, max_value))
+    
+
 def validate_format(value):
     if "@" not in value:
         raise serializers.ValidationError(ErrorMessage.must_contain_at_symbol(value, '@'))
