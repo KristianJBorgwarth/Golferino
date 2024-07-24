@@ -13,7 +13,6 @@ class ResponseEnvelope:
 
     @staticmethod
     def success(data, status_code):
-        print(f"status: {status_code}")
         return Response({
             'success': True,
             'data': data,
