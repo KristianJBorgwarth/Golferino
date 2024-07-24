@@ -5,7 +5,7 @@ from rest_framework import serializers
 from core.common.error_messages import ErrorMessage
 
 
-def validate_date_not_in_future(value: str, dateformat: str = 'YYYYMMDD') -> bool:
+def validate_date_not_in_future(value: str, dateformat: str = '%Y%m%d') -> bool:
     input_date = datetime.strptime(value, dateformat)
     now = datetime.now()
     return input_date < now
