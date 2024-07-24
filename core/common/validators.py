@@ -5,18 +5,10 @@ from rest_framework import serializers
 from core.common.error_messages import ErrorMessage
 
 
-def validate_date_not_in_future(value: str, dateformat: str = '%Y%m%d') -> bool:
-    input_date = datetime.strptime(value, dateformat)
-    now = datetime.now()
-    return input_date < now
-
-
-def validate_dateformat(value: str, dateformat: str = 'YYYYMMDD') -> bool:
-    try:
-        return bool(datetime.strptime(value, dateformat))
-    except ValueError:
-        return False
-
+def validate_date_not_in_future(value):
+    now = datetime.now().date()
+    if value > now:
+        raise serializers.ValidationError(ErrorMessage.unspecified_error("dateplayed can not be in the future."))
 
 def validate_non_empty(value):
     if not value:
@@ -40,7 +32,10 @@ def validate_max_length(value, max_length):
 
 def validate_integer(value, min_value=None, max_value=None):
     if not isinstance(value, int):
-        raise serializers.ValidationError(ErrorMessage.must_be_of_type(value, 'integer'))
+        try:
+            val = int(value)
+        except ValueError:
+            raise serializers.ValidationError(ErrorMessage.must_be_of_type(value, 'integer'))
     if min_value is not None and int(value) < min_value:
         raise serializers.ValidationError(ErrorMessage.must_be_at_least(value, min_value))
     if max_value is not None and int(value) > max_value:
