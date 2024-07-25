@@ -3,7 +3,7 @@ from rest_framework import serializers
 from core.common.validators import validate_non_empty, validate_alpha, validate_min_length
 
 
-# TODO: write unit tests for this
+#TODO: SUGGESTION: maybe move to commnads/player/create directory
 class CreateLocationCommandSerializer(serializers.Serializer):
     locationname = serializers.CharField(
         max_length=255,

@@ -37,9 +37,9 @@ class TestPlayerView(APITestCase):
         response = self.client.post('/players/', data, format='json')
 
         # Assert
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json(),
-                         ResponseEnvelope.success(mediator.send.return_value.value, 201).to_response().data)
+                         ResponseEnvelope.success(mediator.send.return_value.value, 201).data)
 
     @patch('core.views.player_view.get_mediator')
     def test_create_player_failure(self, mock_get_mediator):
@@ -61,4 +61,4 @@ class TestPlayerView(APITestCase):
 
         # Assert
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), ResponseEnvelope.fail('Error creating location', 400).to_response().data)
+        self.assertEqual(response.json(), ResponseEnvelope.fail('Error creating location', 400).data)
