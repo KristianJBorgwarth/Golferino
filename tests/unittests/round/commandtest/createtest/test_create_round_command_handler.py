@@ -1,7 +1,8 @@
 import os
 import unittest
-from unittest.mock import patch, MagicMock
 from datetime import datetime
+from unittest.mock import patch, MagicMock
+
 import django
 
 # Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
@@ -23,8 +24,10 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         self.handler.round_repository = MagicMock(spec=RoundRepository)
         self.handler.golfcourse_repository = MagicMock(spec=GolfcourseRepository)
 
-    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.is_valid', return_value=True)
-    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.validated_data', new_callable=MagicMock)
+    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.is_valid',
+           return_value=True)
+    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.validated_data',
+           new_callable=MagicMock)
     def test_handle_given_valid_command_should_create_and_return_result_ok(self, mock_validated_data, mock_is_valid):
         # Arrange
         command = CreateRoundCommand(
@@ -38,6 +41,7 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         }[k]
 
         round_instance = MagicMock(spec=Round)
+        round_instance.roundid = 420
         round_instance.golfcourseid = '1'
         round_instance.dateplayed = '20230722'
         self.handler.golfcourse_repository.golfcourse_exists.return_value = True
@@ -48,30 +52,32 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
 
         # Assert
         self.assertTrue(result.is_success)
-        self.assertEqual(result.value, {'golfcourseid': '1', 'dateplayed': '20230722'})
+        self.assertEqual(result.value, {'roundid': 420, 'dateplayed': '20230722', 'golfcourseid': '1'})
         self.handler.golfcourse_repository.golfcourse_exists.assert_called_once_with(golfcourseid='1')
         self.handler.round_repository.create.assert_called_once_with(mock_validated_data)
 
-    def test_handle_given_invalid_golfcourse_should_return_not_found_error(self):
+    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.errors',
+           new_callable=MagicMock)
+    def test_handle_given_invalid_golfcourse_should_return_wrong_type_error(self, mock_errors):
         # Arrange
+        mock_errors.return_value = {'golfcourseid': 'invalid_id must be of type integer'}
         command = CreateRoundCommand(
             golfcourseid='invalid_id',
             dateplayed='2023-07-22'
         )
-
-        self.handler.golfcourse_repository.golfcourse_exists.return_value = False
 
         # Act
         result = self.handler.handle(command)
 
         # Assert
         self.assertFalse(result.is_success)
-        self.assertEqual(result.error, ErrorMessage.not_found(f"Golfcourse with id invalid_id not found ..."))
-        self.handler.golfcourse_repository.golfcourse_exists.assert_called_once_with(golfcourseid='invalid_id')
+        self.assertEqual(result.error, mock_errors)
         self.handler.round_repository.create.assert_not_called()
 
-    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.is_valid', return_value=True)
-    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.validated_data', new_callable=MagicMock)
+    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.is_valid',
+           return_value=True)
+    @patch('core.serializers.round.create_round_cmd_serializer.CreateRoundCommandSerializer.validated_data',
+           new_callable=MagicMock)
     def test_handle_should_set_dateplayed_if_not_provided(self, mock_validated_data, mock_is_valid):
         # Arrange
         command = CreateRoundCommand(
@@ -85,6 +91,7 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         }[k]
 
         round_instance = MagicMock(spec=Round)
+        round_instance.roundid = 69
         round_instance.golfcourseid = '1'
         round_instance.dateplayed = datetime.now().strftime(format="%Y%m%d")
         self.handler.golfcourse_repository.golfcourse_exists.return_value = True
@@ -95,7 +102,9 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
 
         # Assert
         self.assertTrue(result.is_success)
-        self.assertEqual(result.value, {'golfcourseid': '1', 'dateplayed': datetime.now().strftime(format="%Y%m%d")})
+        self.assertEqual(result.value, {'roundid': 69,
+                                        'golfcourseid': '1',
+                                        'dateplayed': datetime.now().strftime(format="%Y%m%d")})
         self.handler.golfcourse_repository.golfcourse_exists.assert_called_once_with(golfcourseid='1')
         self.handler.round_repository.create.assert_called_once_with(mock_validated_data)
 
