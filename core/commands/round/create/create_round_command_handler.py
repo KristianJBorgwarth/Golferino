@@ -18,12 +18,6 @@ class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundD
         self.golfcourse_repository = GolfcourseRepository(Golfcourse)
 
     def handle(self, command: CreateRoundCommand) -> Result[RoundDto]:
-        if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
-            return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
-                               status_code=400)
-
-        if not command.dateplayed:
-            command.dateplayed = datetime.now().strftime(format="%Y%m%d")
 
         serializer = CreateRoundCommandSerializer(
             data={
@@ -33,6 +27,13 @@ class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundD
 
         if not serializer.is_valid():
             return Result.fail(serializer.errors, status_code=400)
+
+        if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
+            return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
+                               status_code=400)
+
+        if not command.dateplayed:
+            command.dateplayed = datetime.now().strftime(format="%Y%m%d")
 
         round_data = serializer.validated_data
 
