@@ -10,7 +10,6 @@ django.setup()
 
 from core.commands.player.create.create_player_command import CreatePlayerCommand
 from core.commands.player.create.create_player_command_handler import CreatePlayerCommandHandler
-from core.data_access.repositories.player_repository import PlayerRepository
 from core.data_access.models.player_model import Player
 from core.data_access.repositories.player_repository import PlayerRepository
 

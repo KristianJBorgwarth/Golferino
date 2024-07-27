@@ -10,11 +10,10 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
 from core.commands.round.create.create_round_command import CreateRoundCommand
-from core.common.error_messages import ErrorMessage
+from core.commands.round.create.create_round_command_handler import CreateRoundCommandHandler
 from core.data_access.models.round_model import Round
 from core.data_access.repositories.golfcourse_repository import GolfcourseRepository
 from core.data_access.repositories.round_repository import RoundRepository
-from core.commands.round.create.create_round_command_handler import CreateRoundCommandHandler
 
 
 class TestCreateRoundCommandHandler(unittest.TestCase):
