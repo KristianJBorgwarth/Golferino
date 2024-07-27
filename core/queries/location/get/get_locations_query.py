@@ -1,5 +1,4 @@
 from typing import List
-from rest_framework import serializers
 
 from core.common.mediator import Request
 from core.dtos.location_dto import LocationDto
