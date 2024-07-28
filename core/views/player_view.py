@@ -1,7 +1,5 @@
-from rest_framework import status, viewsets
-from rest_framework.decorators import action
+from rest_framework import viewsets
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 
 from core.commands.player.create.create_player_command import CreatePlayerCommand
 from core.dtos.player_dto import PlayerDto
