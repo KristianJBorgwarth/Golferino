@@ -1,7 +1,7 @@
 
 import logging
+import django
 from typing import List
-
 from core.common.mediator import RequestHandler
 from core.common.results import Result
 from django.core.paginator import Paginator
@@ -14,6 +14,7 @@ from core.serializers.location.get_locations_query_serializer import GetLocation
 class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[LocationDto]]]):
     def __init__(self):
         self.location_repository = LocationRepository(Location)
+        self.logger = logging.getLogger(__name__)
 
         
     def handle(self, query: GetLocationsQuery) -> Result[List[LocationDto]]:
@@ -24,7 +25,9 @@ class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[Loc
         if not serializer.is_valid():
             return Result.fail(error=serializer.errors, status_code=400)
         locations = self.location_repository.get_all()
-        logging.getLogger(__name__).info("Locations: %s", locations)
+
+        logger = logging.getLogger(__name__)
+        logger.error("Logging configured2")
         print("FUUUUUUUUCK")
         
         if not locations:
