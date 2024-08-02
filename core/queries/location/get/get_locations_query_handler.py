@@ -26,9 +26,8 @@ class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[Loc
             return Result.fail(error=serializer.errors, status_code=400)
         locations = self.location_repository.get_all()
 
-        logger = logging.getLogger(__name__)
-        logger.error("Logging configured2")
-        print("FUUUUUUUUCK")
+        self.logger.info("Getting all locations")
+        
         
         if not locations:
             return Result.ok([], 204)
