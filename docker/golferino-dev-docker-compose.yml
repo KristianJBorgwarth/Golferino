@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: golf_postgres
+    environment:
+      POSTGRES_DB: stats
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  seq:
+    image: datalust/seq:latest
+    container_name: golf_seq
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_FIRSTRUN_ADMINPASSWORD: "admin"
+    volumes:
+      - seq_data:/data
+    ports:
+      - "5342:80"
+
+volumes:
+  postgres_data:
+  seq_data:

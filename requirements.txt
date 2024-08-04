@@ -3,4 +3,5 @@ psycopg2-binary==2.9.9
 djangorestframework==3.15.2
 drf-yasg==1.21.7
 parameterized
-
+seqlog
+python-json-logger

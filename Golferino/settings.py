@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import logging
+import logging.config
 import sys
 from pathlib import Path
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'core',
+    'seqlog',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +87,7 @@ DATABASES = {
             'USER': 'root',
             'PASSWORD': 'root',
             'HOST': 'localhost',
-            'PORT': '5433',  # default is 5432
+            'PORT': '5434',  # default is 5432
     }
 }
 
@@ -136,3 +139,43 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging Configuration
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'seq': {
+            'class': 'seqlog.structured_logging.SeqLogHandler',
+            'server_url': 'http://localhost:5342',
+            'api_key': None,
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'json',
+        },
+    },
+    'formatters': {
+        'json': {
+            '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
+            'format': '%(asctime)s %(name)s %(levelname)s %(message)s',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['seq', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['seq', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+            }
+    }
+}
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger(__name__)
+logger.info("Logging configured")
+
