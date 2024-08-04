@@ -13,8 +13,6 @@ import logging
 import logging.config
 import sys
 from pathlib import Path
-import seqlog
-from pythonjsonlogger import jsonlogger
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,10 +141,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Logging Configuration
-
-
-
-import seqlog
 
 LOGGING = {
     'version': 1,
