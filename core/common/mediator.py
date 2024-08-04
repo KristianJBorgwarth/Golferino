@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Any, TypeVar, Generic, Type, Dict
+from typing import Callable, List, Optional, Any, TypeVar, Generic, Type, Dict
 
 # Generic variable for all Requests
-R = TypeVar('R', bound='Request')
 T = TypeVar('T')
-
+R = TypeVar('R', bound='Request[ABC, T]')
 
 class Request(ABC, Generic[T]):
     """
@@ -12,7 +11,6 @@ class Request(ABC, Generic[T]):
     Inherit from this class to define custom requests.
     """
     pass
-
 
 class RequestHandler(ABC, Generic[R, T]):
     """
@@ -52,6 +50,7 @@ class Mediator:
         Initialize the Mediator with an empty dictionary for handlers.
         """
         self._handlers: Dict[Type[Request], RequestHandler] = {}
+        self._pipeline_factories: Dict[Type[Request], List[Callable[[], PipeLineBehavior]]] = {}
 
     def send(self, request: R) -> T:
         """
