@@ -28,7 +28,7 @@ class RequestHandler(ABC, Generic[R, T]):
         """
         pass
 
-class PipeLineBehavior(ABC, Generic[R, T]):
+class PipelineBehavior(ABC, Generic[R, T]):
     
     @abstractmethod
     def handle(self, request: 'Request[T]', next_handler: 'RequestHandler[R, T]') -> T:
@@ -79,22 +79,23 @@ class Mediator:
     
     def send2(self, request: R) -> T:
         request_type = type(request)
-        if request_type in self._handler_pipeline_factories:
-            pipeline_instances = [factory() for factory in self._handler_pipeline_factories[request_type]]
-            
-            def execute_pipeline(index: int, req: R) -> T:
-                if index < len(pipeline_instances):
-                    current_handler = pipeline_instances[index]
-                    if isinstance(current_handler, PipeLineBehavior):
-                        return current_handler.handle(req, lambda r: execute_pipeline(index + 1, r))
-                    else:
-                        return current_handler.handle(req)
-                else:
-                    raise ValueError("No handler found for the request type")
-
-            return execute_pipeline(0, request)
-        else:
+        if request_type not in self._handler_pipeline_factories:
             raise ValueError(f"No handler registered for request: {request_type.__name__}")
+
+        pipeline_instances = [factory() for factory in self._handler_pipeline_factories[request_type]]
+        return self._execute_pipeline(pipeline_instances, 0, request)
+    
+    def _execute_pipeline(self, pipeline_instances: List[Any], index: int, request: R) -> T:
+        if index < len(pipeline_instances):
+            current_handler = pipeline_instances[index]
+            if isinstance(current_handler, PipelineBehavior):
+                return current_handler.handle(request, lambda r: self._execute_pipeline(pipeline_instances, index + 1, r))
+            else:
+                return current_handler.handle(request)
+        else:
+            raise ValueError("No handler found for the request type")
         
     def register_pipeline(self, request_type: Type[R], pipeline_factories: List[Callable[[], Any]]):
         self._handler_pipeline_factories[request_type] = pipeline_factories
+        
+    
