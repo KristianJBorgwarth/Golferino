@@ -7,5 +7,5 @@ class LocationRepository(Repository[Location]):
         super().__init__(Location)
 
     @staticmethod
-    def location_exists(location_name: str) -> bool:
-        return Location.objects.filter(locationname=location_name).exists()
+    def location_exists(**kwargs) -> bool:
+        return Location.objects.filter(**kwargs).exists()

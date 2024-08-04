@@ -29,18 +29,18 @@ def register_handlers():
     """
     # PlayerRound
     mediator.register_pipeline(CreatePlayerroundCommand, [lambda: ValidationBehavior(CreatePlayerroundCommandSerializer), lambda: CreatePlayerroundCommandHandler()])
-    
+
     # Player
     mediator.register_pipeline(CreatePlayerCommand, [lambda: ValidationBehavior(CreatePlayerCommandSerializer), lambda: CreatePlayerCommandHandler()])
     mediator.register_pipeline(GetPlayersQuery,[lambda: ValidationBehavior(GetPlayersQuerySerializer), lambda: GetPlayersQueryHandler()])
 
-    # Round    
+    # Round
     mediator.register_pipeline(CreateRoundCommand, [lambda: ValidationBehavior(CreateRoundCommandSerializer), lambda: CreateRoundCommandHandler()])
 
     # Location
     mediator.register_pipeline(GetLocationsQuery,[lambda: ValidationBehavior(GetLocationsQuerySerializer), lambda: GetLocationsQueryHandler()])
     mediator.register_pipeline(CreateLocationCommand, [lambda: ValidationBehavior(CreateLocationCommandSerializer), lambda: CreateLocationCommandHandler()])
-    
+
 
 
 def get_mediator() -> Mediator:
