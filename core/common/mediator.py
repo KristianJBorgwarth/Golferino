@@ -50,7 +50,7 @@ class Mediator:
         Initialize the Mediator with an empty dictionary for handlers.
         """
         self._handlers: Dict[Type[Request], RequestHandler] = {}
-        self._pipeline_factories: Dict[Type[Request], List[Callable[[], PipeLineBehavior]]] = {}
+        self._handler_pipeline_factories: Dict[Type[Request], List[Callable[[None], Any]]] = {}
 
     def send(self, request: R) -> T:
         """
@@ -75,3 +75,26 @@ class Mediator:
         :param handler: The handler that will process the request.
         """
         self._handlers[request_type] = handler
+        
+    
+    def send2(self, request: R) -> T:
+        request_type = type(request)
+        if request_type in self._handler_pipeline_factories:
+            pipeline_instances = [factory() for factory in self._handler_pipeline_factories[request_type]]
+            
+            def execute_pipeline(index: int, req: R) -> T:
+                if index < len(pipeline_instances):
+                    current_handler = pipeline_instances[index]
+                    if isinstance(current_handler, PipeLineBehavior):
+                        return current_handler.handle(req, lambda r: execute_pipeline(index + 1, r))
+                    else:
+                        return current_handler.handle(req)
+                else:
+                    raise ValueError("No handler found for the request type")
+
+            return execute_pipeline(0, request)
+        else:
+            raise ValueError(f"No handler registered for request: {request_type.__name__}")
+        
+    def register_pipeline(self, request_type: Type[R], pipeline_factories: List[Callable[[], Any]]):
+        self._handler_pipeline_factories[request_type] = pipeline_factories

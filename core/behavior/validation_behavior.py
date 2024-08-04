@@ -1,9 +1,9 @@
 from typing import Callable
-from core.common.mediator import PipelineBehavior, R, T
+from core.common.mediator import PipeLineBehavior, R, T
 from core.common.results import Result
 
 
-class ValidationBehavior(PipelineBehavior[R, T]):
+class ValidationBehavior(PipeLineBehavior[R, T]):
     def __init__(self, serializer_class):
         self.serializer_class = serializer_class
 

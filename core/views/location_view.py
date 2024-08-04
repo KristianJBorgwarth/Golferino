@@ -34,7 +34,7 @@ class LocationView(viewsets.ViewSet):
     def get_all(self, request):
         query = GetLocationsQuery(int(request.query_params.get('page', 1)), int(request.query_params.get('page_size', 10)))
 
-        result = self._mediator.send(query)
+        result = self._mediator.send2(query)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:

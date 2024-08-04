@@ -15,16 +15,11 @@ class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[Loc
     def __init__(self):
         self.location_repository = LocationRepository(Location)
         self.logger = logging.getLogger(__name__)
+        print("GetLocationsQueryHandler initialized")
 
         
     def handle(self, query: GetLocationsQuery) -> Result[List[LocationDto]]:
         try:
-            serializer = GetLocationsQuerySerializer(data={
-                'page': query.page,
-                'page_size': query.page_size
-            })
-            if not serializer.is_valid():
-                return Result.fail(error=serializer.errors, status_code=400)
             locations = self.location_repository.get_all()
         
             if not locations:

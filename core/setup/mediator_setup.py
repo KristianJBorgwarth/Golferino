@@ -1,3 +1,4 @@
+from core.behavior.validation_behavior import ValidationBehavior
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
 from core.commands.player.create.create_player_command import CreatePlayerCommand
@@ -11,6 +12,7 @@ from core.queries.location.get.get_locations_query import GetLocationsQuery
 from core.queries.location.get.get_locations_query_handler import GetLocationsQueryHandler
 from core.queries.player.get.get_players_query import GetPlayersQuery
 from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
+from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
 
 # Initialize a single instance of the mediator
 mediator = Mediator()
@@ -29,7 +31,10 @@ def register_handlers():
     mediator.register_handler(CreatePlayerroundCommand, CreatePlayerroundCommandHandler())
 
     # Getters
-    mediator.register_handler(GetLocationsQuery, GetLocationsQueryHandler())
+    mediator.register_pipeline(
+        GetLocationsQuery,
+        [lambda: ValidationBehavior(GetLocationsQuerySerializer), lambda: GetLocationsQueryHandler()]
+    )
     mediator.register_handler(GetPlayersQuery, GetPlayersQueryHandler())
 
 
