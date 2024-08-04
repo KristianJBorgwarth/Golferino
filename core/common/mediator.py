@@ -30,6 +30,17 @@ class RequestHandler(ABC, Generic[R, T]):
         """
         pass
 
+class PipeLineBehavior(ABC, Generic[R, T]):
+    
+    @abstractmethod
+    def handle(self, request: 'Request[T]', next_handler: 'RequestHandler[R, T]') -> T:
+        """
+        Handle the given request.
+
+        :param request: The request to handle.
+        :return: result of type T from handling the request.
+        """
+        pass
 
 class Mediator:
     """
