@@ -41,24 +41,6 @@ class TestGetPlayersQueryHandler(unittest.TestCase):
         self.assertEqual(len(result.value), len(mock_players))
 
     @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
-           return_value=False)
-    @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.errors',
-           new_callable=MagicMock)
-    def test_handle_invalid_query_parameters(self, mock_errors, mock_is_valid):
-        # Arrange
-        mock_errors.return_value = {'error': 'Invalid data'}
-        invalid_query = GetPlayersQuery(page=-1, page_size=20)
-
-        # Act
-        result = self.handler.handle(invalid_query)
-
-        # Assert
-        self.assertFalse(result.is_success)
-        self.assertEqual(result.status_code, 400)
-        self.assertEqual(result.error, mock_errors)
-        self.mock_repository.get_all.assert_not_called()
-
-    @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
            return_value=True)
     def test_handle_no_players(self, mock_is_valid):
         # Arrange

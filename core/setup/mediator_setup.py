@@ -13,6 +13,7 @@ from core.queries.location.get.get_locations_query_handler import GetLocationsQu
 from core.queries.player.get.get_players_query import GetPlayersQuery
 from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
 from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
+from core.serializers.player.get_players_query_serializer import GetPlayersQuerySerializer
 
 # Initialize a single instance of the mediator
 mediator = Mediator()
@@ -31,11 +32,8 @@ def register_handlers():
     mediator.register_handler(CreatePlayerroundCommand, CreatePlayerroundCommandHandler())
 
     # Getters
-    mediator.register_pipeline(
-        GetLocationsQuery,
-        [lambda: ValidationBehavior(GetLocationsQuerySerializer), lambda: GetLocationsQueryHandler()]
-    )
-    mediator.register_handler(GetPlayersQuery, GetPlayersQueryHandler())
+    mediator.register_pipeline(GetLocationsQuery,[lambda: ValidationBehavior(GetLocationsQuerySerializer), lambda: GetLocationsQueryHandler()])
+    mediator.register_pipeline(GetPlayersQuery,[lambda: ValidationBehavior(GetPlayersQuerySerializer), lambda: GetPlayersQueryHandler()])
 
 
 def get_mediator() -> Mediator:
