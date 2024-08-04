@@ -60,14 +60,17 @@ class TestLocationView(APITestCase):
 
     @patch('core.views.location_view.get_mediator')
     def test_get_all_locations_success(self, mock_get_mediator):
-        # Arrange
+    # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mock_response = MagicMock(is_success=True, value=[
+        mock_response = MagicMock()
+        mock_response.is_success = True
+        mock_response.value = [
             {'locationname': 'Location1', 'address': 'Address1', 'city': 'City1'},
             {'locationname': 'Location2', 'address': 'Address2', 'city': 'City2'}
-        ], status_code=200)
-        mediator.send.return_value = mock_response
+        ]
+        mock_response.status_code = 200
+        mediator.send2.return_value = mock_response
 
         # Act
         response = self.client.get('/locations/get_all', {'page': 1, 'page_size': 2})
@@ -89,25 +92,32 @@ class TestLocationView(APITestCase):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mock_response = MagicMock(is_success=True, value=[], status_code=204)
-        mediator.send.return_value = mock_response
+        mock_response = MagicMock()
+        mock_response.is_success = True
+        mock_response.value = []
+        mock_response.status_code = 204
+        mediator.send2.return_value = mock_response
 
         # Act
         response = self.client.get('/locations/get_all', {'page': 1, 'page_size': 10})
 
         # Assert
-        self.assertEqual(response.status_code, 204)
-
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        
     @patch('core.views.location_view.get_mediator')
     def test_get_all_locations_failure(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mock_response = MagicMock(is_success=False, error='Error retrieving locations', status_code=400)
-        mediator.send.return_value = mock_response
+        mock_response = MagicMock()
+        mock_response.is_success = False
+        mock_response.error = 'Error retrieving locations'
+        mock_response.status_code = 400
+        mediator.send2.return_value = mock_response
 
         # Act
         response = self.client.get('/locations/get_all', {'page': 1, 'page_size': 10})
 
         # Assert
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.json(), ResponseEnvelope.fail('Error retrieving locations', 400).data)

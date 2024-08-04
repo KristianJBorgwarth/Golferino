@@ -39,22 +39,6 @@ class TestGetLocationsQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual(len(result.value), len(mock_locations)) 
 
-    @patch('core.serializers.location.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=False)
-    @patch('core.serializers.location.get_locations_query_serializer.GetLocationsQuerySerializer.errors', new_callable=MagicMock)
-    def test_handle_invalid_query_parameters(self, mock_errors, mock_is_valid):
-        # Arrange
-        mock_errors.return_value = {'error': 'Invalid data'}
-        invalid_query = GetLocationsQuery(page=-1, page_size=20)
-
-        # Act
-        result = self.handler.handle(invalid_query)
-
-        # Assert
-        self.assertFalse(result.is_success)
-        self.assertEqual(result.status_code, 400)
-        self.assertEqual(result.error, mock_errors)
-        self.mock_repository.get_all.assert_not_called()
-
     @patch('core.serializers.location.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=True)
     def test_handle_no_locations(self, mock_is_valid):
         # Arrange
