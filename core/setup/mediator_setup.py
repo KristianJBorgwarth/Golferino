@@ -1,3 +1,5 @@
+from core.commands.golfcourse.create.create_golfcourse_command import CreateGolfcourseCommand
+from core.commands.golfcourse.create.create_golfcourse_command_handler import CreateGolfcourseCommandHandler
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
 from core.commands.player.create.create_player_command import CreatePlayerCommand
@@ -27,6 +29,7 @@ def register_handlers():
     mediator.register_handler(CreatePlayerCommand, CreatePlayerCommandHandler())
     mediator.register_handler(CreateRoundCommand, CreateRoundCommandHandler())
     mediator.register_handler(CreatePlayerroundCommand, CreatePlayerroundCommandHandler())
+    mediator.register_handler(CreateGolfcourseCommand, CreateGolfcourseCommandHandler())
 
     # Getters
     mediator.register_handler(GetLocationsQuery, GetLocationsQueryHandler())
