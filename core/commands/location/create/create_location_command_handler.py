@@ -23,7 +23,7 @@ class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[
 
         location_data = serializer.validated_data
 
-        if self.location_repository.location_exists(location_data['locationname']):
+        if self.location_repository.location_exists(locationname=location_data['locationname']):
             return Result.fail(ErrorMessage.already_exists(location_data['locationname']), status_code=400)
 
         location = self.location_repository.create(location_data)
