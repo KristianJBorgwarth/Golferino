@@ -23,7 +23,15 @@ class TestLocationView(APITestCase):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mediator.send.return_value = MagicMock(is_success=True, value={'locationname': 'TestLocation', 'address': '123 Test Address', 'city': 'TestCity'}, status_code=201)
+        mock_response = MagicMock()
+        mock_response.is_success = True
+        mock_response.value = {
+            'locationname': 'TestLocation',
+            'address': '123 Test Address',
+            'city': 'TestCity'
+        }
+        mock_response.status_code = 201
+        mediator.send2.return_value = mock_response
 
         data = {
             'locationname': 'TestLocation',
@@ -36,14 +44,19 @@ class TestLocationView(APITestCase):
 
         # Assert
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json(), ResponseEnvelope.success(mediator.send.return_value.value, 201).data)
+        expected_response = ResponseEnvelope.success(mock_response.value, 201).data
+        self.assertEqual(response.json(), expected_response)
 
     @patch('core.views.location_view.get_mediator')
     def test_create_location_failure(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mediator.send.return_value = MagicMock(is_success=False, error='Error creating location', status_code=400)
+        mock_response = MagicMock()
+        mock_response.is_success = False
+        mock_response.error = 'Error creating location'
+        mock_response.status_code = 400
+        mediator.send2.return_value = mock_response
 
         data = {
             'locationname': 'TestLocation',

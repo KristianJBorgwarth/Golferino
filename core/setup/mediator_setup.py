@@ -12,6 +12,7 @@ from core.queries.location.get.get_locations_query import GetLocationsQuery
 from core.queries.location.get.get_locations_query_handler import GetLocationsQueryHandler
 from core.queries.player.get.get_players_query import GetPlayersQuery
 from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
+from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
 from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
 from core.serializers.player.get_players_query_serializer import GetPlayersQuerySerializer
 
@@ -26,7 +27,7 @@ def register_handlers():
     This function is called once at application startup.
     """
     # Creators
-    mediator.register_handler(CreateLocationCommand, CreateLocationCommandHandler())
+    mediator.register_pipeline(CreateLocationCommand, [lambda: ValidationBehavior(CreateLocationCommandSerializer), lambda: CreateLocationCommandHandler()])
     mediator.register_handler(CreatePlayerCommand, CreatePlayerCommandHandler())
     mediator.register_handler(CreateRoundCommand, CreateRoundCommandHandler())
     mediator.register_handler(CreatePlayerroundCommand, CreatePlayerroundCommandHandler())

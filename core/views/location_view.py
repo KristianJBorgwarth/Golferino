@@ -21,7 +21,7 @@ class LocationView(viewsets.ViewSet):
     )
     def create(self, request):
         cmd = CreateLocationCommand(request.data.get('locationname'), request.data.get('address'), request.data.get('city'))
-        result = self._mediator.send(cmd)
+        result = self._mediator.send2(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:
