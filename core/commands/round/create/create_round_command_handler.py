@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from core.commands.round.create.create_round_command import CreateRoundCommand
 from core.common.error_messages import ErrorMessage
 from core.common.results import Result
@@ -9,7 +8,6 @@ from core.data_access.models.round_model import Round
 from core.data_access.repositories.golfcourse_repository import GolfcourseRepository
 from core.data_access.repositories.round_repository import RoundRepository
 from core.dtos.round_dto import RoundDto
-from core.serializers.round.create_round_cmd_serializer import CreateRoundCommandSerializer
 
 
 class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundDto]]):
