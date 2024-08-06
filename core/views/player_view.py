@@ -23,7 +23,7 @@ class PlayerView(viewsets.ViewSet):
         cmd = CreatePlayerCommand(request.data.get('firstname'),
                                   request.data.get('lastname'),
                                   request.data.get('email'))
-        result = self._mediator.send(cmd)
+        result = self._mediator.send2(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:

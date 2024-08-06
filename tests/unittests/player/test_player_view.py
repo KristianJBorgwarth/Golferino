@@ -7,10 +7,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
 from rest_framework.test import APITestCase, APIClient
-
 from core.views.ResponseEnvelope import ResponseEnvelope
 from core.views.player_view import PlayerView
-
 
 class TestPlayerView(APITestCase):
 
@@ -23,32 +21,44 @@ class TestPlayerView(APITestCase):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mediator.send.return_value = MagicMock(is_success=True,
-                                               value={'firstname': 'TestFirstName',
-                                                      'lastname': 'TestLastName',
-                                                      'email': 'test@mail.com'},
-                                               status_code=201)
+        
+        # Mock the result of the mediator send2 method
+        mock_response = MagicMock()
+        mock_response.is_success = True
+        mock_response.value = {
+            'firstname': 'TestFirstName',
+            'lastname': 'TestLastName',
+            'email': 'test@mail.com'
+        }
+        mock_response.status_code = 201
+        mediator.send2.return_value = mock_response
 
-        data = {'firstname': 'TestFirstName',
-                'lastname': 'TestLastName',
-                'email': 'test@mail.com'}
+        data = {
+            'firstname': 'TestFirstName',
+            'lastname': 'TestLastName',
+            'email': 'test@mail.com'
+        }
 
         # Act
         response = self.client.post('/players/', data, format='json')
 
         # Assert
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json(),
-                         ResponseEnvelope.success(mediator.send.return_value.value, 201).data)
+        expected_response = ResponseEnvelope.success(mock_response.value, 201).data
+        self.assertEqual(response.json(), expected_response)
 
     @patch('core.views.player_view.get_mediator')
     def test_create_player_failure(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mediator.send.return_value = MagicMock(is_success=False,
-                                               error='Error creating location',
-                                               status_code=400)
+        
+        # Mock the result of the mediator send2 method
+        mock_response = MagicMock()
+        mock_response.is_success = False
+        mock_response.error = 'Error creating player'
+        mock_response.status_code = 400
+        mediator.send2.return_value = mock_response
 
         data = {
             'firstname': 'TestFirstName',
@@ -61,4 +71,5 @@ class TestPlayerView(APITestCase):
 
         # Assert
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), ResponseEnvelope.fail('Error creating location', 400).data)
+        expected_response = ResponseEnvelope.fail('Error creating player', 400).data
+        self.assertEqual(response.json(), expected_response)
