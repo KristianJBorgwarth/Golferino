@@ -16,6 +16,7 @@ from core.serializers.location.create_location_cmd_serializer import CreateLocat
 from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
 from core.serializers.player.create_player_cmd_serializer import CreatePlayerCommandSerializer
 from core.serializers.player.get_players_query_serializer import GetPlayersQuerySerializer
+from core.serializers.playerround.create_playerround_cmd_serializer import CreatePlayerroundCommandSerializer
 from core.serializers.round.create_round_cmd_serializer import CreateRoundCommandSerializer
 
 # Initialize a single instance of the mediator
@@ -27,7 +28,7 @@ def register_handlers():
     This function is called once at application startup.
     """
     # PlayerRound
-    mediator.register_handler(CreatePlayerroundCommand, CreatePlayerroundCommandHandler())
+    mediator.register_pipeline(CreatePlayerroundCommand, [lambda: ValidationBehavior(CreatePlayerroundCommandSerializer), lambda: CreatePlayerroundCommandHandler()])
     
     # Player
     mediator.register_pipeline(CreatePlayerCommand, [lambda: ValidationBehavior(CreatePlayerCommandSerializer), lambda: CreatePlayerCommandHandler()])

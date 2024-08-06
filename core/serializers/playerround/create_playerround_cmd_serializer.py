@@ -12,9 +12,6 @@ class CreatePlayerroundCommandSerializer(serializers.Serializer):
         validators=[
             lambda value: validate_integer(value), validate_non_empty]
     )
-    totalscore = serializers.CharField(allow_blank=True
-
-    )
 
     class Meta:
         model = Playerround

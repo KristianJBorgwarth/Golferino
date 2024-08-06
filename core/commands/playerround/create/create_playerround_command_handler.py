@@ -7,7 +7,6 @@ from core.data_access.models.round_model import Round
 from core.data_access.repositories.playerround_repository import PlayerroundRepository
 from core.data_access.repositories.round_repository import RoundRepository
 from core.dtos.playerround_dto import PlayerroundDto
-from core.serializers.playerround.create_playerround_cmd_serializer import CreatePlayerroundCommandSerializer
 
 
 class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, Result[PlayerroundDto]]):
@@ -18,23 +17,13 @@ class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, R
         self.round_repository = RoundRepository(Round)
 
     def handle(self, command: CreatePlayerroundCommand) -> Result[PlayerroundDto]:
-        serializer = CreatePlayerroundCommandSerializer(
-            data={
-                'playerid': command.playerid,
-                'roundid': command.roundid,
-                'totalscore': '',
-            }
-        )
-        if not serializer.is_valid():
-            return Result.fail(serializer.errors, status_code=400)
-
         if not self.round_repository.round_exists(roundid=command.roundid):
             return Result.fail(ErrorMessage.not_found(f"round with id {command.roundid} not found ..."),
                                status_code=400)
 
-        playerround_data = serializer.validated_data
+        playerround = Playerround(None, roundid_id=command.roundid, playerid_id=command.playerid)
 
-        playerround_repo = self.playerround_repository.create(playerround_data)
+        playerround_repo = self.playerround_repository.create_2(playerround)
         playerroundDto = PlayerroundDto(playerround_repo)
 
         return Result.ok(playerroundDto.data, status_code=200)
