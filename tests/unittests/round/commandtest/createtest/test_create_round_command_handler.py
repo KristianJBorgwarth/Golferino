@@ -36,7 +36,7 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         mock_round_instance.dateplayed = '20230722'
 
         self.handler.golfcourse_repository.golfcourse_exists.return_value = True
-        self.handler.round_repository.create_2.return_value = mock_round_instance
+        self.handler.round_repository.create.return_value = mock_round_instance
 
         # Act
         result = self.handler.handle(command)
@@ -45,7 +45,7 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         self.assertTrue(result.is_success)
         self.assertEqual(result.value, {'roundid': 420, 'dateplayed': '20230722', 'golfcourseid': 1})
         self.handler.golfcourse_repository.golfcourse_exists.assert_called_once_with(golfcourseid=1)
-        self.handler.round_repository.create_2.assert_called_once_with(mock_round_instance)
+        self.handler.round_repository.create.assert_called_once_with(mock_round_instance)
 
     @patch('core.commands.round.create.create_round_command_handler.datetime', wraps=datetime)
     @patch('core.commands.round.create.create_round_command_handler.Round', autospec=True)
@@ -63,7 +63,7 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         mock_round_instance.dateplayed = '20230722'
 
         self.handler.golfcourse_repository.golfcourse_exists.return_value = True
-        self.handler.round_repository.create_2.return_value = mock_round_instance
+        self.handler.round_repository.create.return_value = mock_round_instance
 
         # Act
         result = self.handler.handle(command)
@@ -72,7 +72,7 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         self.assertTrue(result.is_success)
         self.assertEqual(result.value, {'roundid': 69, 'dateplayed': '20230722', 'golfcourseid': 1})
         self.handler.golfcourse_repository.golfcourse_exists.assert_called_once_with(golfcourseid=1)
-        self.handler.round_repository.create_2.assert_called_once_with(mock_round_instance)
+        self.handler.round_repository.create.assert_called_once_with(mock_round_instance)
 
     def test_handle_given_nonexistent_golfcourse_should_return_not_found_error(self):
         # Arrange
@@ -90,4 +90,4 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         self.assertFalse(result.is_success)
         self.assertEqual(result.error, 'Golfcourse with id 99 not found ...')
         self.handler.golfcourse_repository.golfcourse_exists.assert_called_once_with(golfcourseid=99)
-        self.handler.round_repository.create_2.assert_not_called()
+        self.handler.round_repository.create.assert_not_called()

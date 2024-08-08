@@ -13,8 +13,6 @@ class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[Loc
     def __init__(self):
         self.location_repository = LocationRepository(Location)
         self.logger = logging.getLogger(__name__)
-        print("GetLocationsQueryHandler initialized")
-
         
     def handle(self, query: GetLocationsQuery) -> Result[List[LocationDto]]:
         try:

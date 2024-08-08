@@ -24,7 +24,7 @@ class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundD
             command.dateplayed = datetime.now().strftime(format="%Y%m%d")
 
         round = Round(None, command.golfcourseid, command.dateplayed)
-        round_repo = self.round_repository.create_2(round)
+        round_repo = self.round_repository.create(round)
         roundDto = RoundDto(round_repo)
 
         return Result.ok(roundDto.data, status_code=200)

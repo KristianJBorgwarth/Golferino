@@ -21,7 +21,7 @@ class PlayerroundView(viewsets.ViewSet):
         cmd = CreatePlayerroundCommand(request.data.get('playerid'),
                                        request.data.get('roundid'),
                                        )
-        result = self._mediator.send2(cmd)
+        result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:

@@ -34,7 +34,7 @@ class TestCreatePlayerroundCommandHandler(unittest.TestCase):
         playerround_instance = Playerround(playerid=player_instance.playerid, roundid=round_instance.roundid)
 
         command = CreatePlayerroundCommand(playerid=69, roundid=420)
-        self.playerround_repository_mock.create_2.return_value = playerround_instance
+        self.playerround_repository_mock.create.return_value = playerround_instance
 
         # Act
         result = self.handler.handle(command)
@@ -42,7 +42,7 @@ class TestCreatePlayerroundCommandHandler(unittest.TestCase):
         # Assert
         self.assertTrue(result.is_success)
         self.assertEqual(result.status_code, 200)
-        self.playerround_repository_mock.create_2.assert_called_once()
+        self.playerround_repository_mock.create.assert_called_once()
 
     def test_handle_with_non_existent_round(self):
         # Arrange

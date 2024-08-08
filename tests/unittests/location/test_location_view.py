@@ -31,7 +31,7 @@ class TestLocationView(APITestCase):
             'city': 'TestCity'
         }
         mock_response.status_code = 201
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         data = {
             'locationname': 'TestLocation',
@@ -56,7 +56,7 @@ class TestLocationView(APITestCase):
         mock_response.is_success = False
         mock_response.error = 'Error creating location'
         mock_response.status_code = 400
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         data = {
             'locationname': 'TestLocation',
@@ -83,7 +83,7 @@ class TestLocationView(APITestCase):
             {'locationname': 'Location2', 'address': 'Address2', 'city': 'City2'}
         ]
         mock_response.status_code = 200
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         # Act
         response = self.client.get('/locations/get_all', {'page': 1, 'page_size': 2})
@@ -109,7 +109,7 @@ class TestLocationView(APITestCase):
         mock_response.is_success = True
         mock_response.value = []
         mock_response.status_code = 204
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         # Act
         response = self.client.get('/locations/get_all', {'page': 1, 'page_size': 10})
@@ -126,7 +126,7 @@ class TestLocationView(APITestCase):
         mock_response.is_success = False
         mock_response.error = 'Error retrieving locations'
         mock_response.status_code = 400
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         # Act
         response = self.client.get('/locations/get_all', {'page': 1, 'page_size': 10})

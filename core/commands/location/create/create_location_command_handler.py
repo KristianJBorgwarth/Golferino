@@ -14,10 +14,10 @@ class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[
     def handle(self, command: CreateLocationCommand) -> Result[LocationDto]:
         location = Location(None, command.locationname, command.address, command.city) 
 
-        if self.location_repository.location_exists(location_name=location.locationname):
+        if self.location_repository.location_exists(locationname=location.locationname):
             return Result.fail(ErrorMessage.already_exists(field_name=location.locationname), status_code=400)
 
-        location = self.location_repository.create_2(location)
+        location = self.location_repository.create(location)
         locationDto = LocationDto(location)
 
         return Result.ok(locationDto.data, status_code=200)

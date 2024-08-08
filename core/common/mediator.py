@@ -51,33 +51,8 @@ class Mediator:
         """
         self._handlers: Dict[Type[Request], RequestHandler] = {}
         self._handler_pipeline_factories: Dict[Type[Request], List[Callable[[None], Any]]] = {}
-
-    def send(self, request: R) -> T:
-        """
-        Send the given request to the appropriate handler.
-
-        :param request: The request to be handled.
-        :return: Result of type T from the handler.
-        :raises ValueError: If no handler is registered for the request type.
-        """
-        request_type = type(request)
-        if request_type in self._handlers:
-            handler: RequestHandler[R, T] = self._handlers[request_type]
-            return handler.handle(request)
-        else:
-            raise ValueError(f"No handler registered for request: {request_type.__name__}")
-
-    def register_handler(self, request_type: Type[R], handler: RequestHandler[R, T]):
-        """
-        Register a handler for a specific type of request.
-
-        :param request_type: The type of request the handler will handle.
-        :param handler: The handler that will process the request.
-        """
-        self._handlers[request_type] = handler
-        
     
-    def send2(self, request: R) -> T:
+    def send(self, request: R) -> T:
         request_type = type(request)
         if request_type not in self._handler_pipeline_factories:
             raise ValueError(f"No handler registered for request: {request_type.__name__}")

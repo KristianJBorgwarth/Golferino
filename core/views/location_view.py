@@ -21,7 +21,7 @@ class LocationView(viewsets.ViewSet):
     )
     def create(self, request):
         cmd = CreateLocationCommand(request.data.get('locationname'), request.data.get('address'), request.data.get('city'))
-        result = self._mediator.send2(cmd)
+        result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:
@@ -34,7 +34,7 @@ class LocationView(viewsets.ViewSet):
     def get_all(self, request):
         query = GetLocationsQuery(int(request.query_params.get('page', 1)), int(request.query_params.get('page_size', 10)))
 
-        result = self._mediator.send2(query)
+        result = self._mediator.send(query)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:

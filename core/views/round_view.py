@@ -21,7 +21,7 @@ class RoundView(viewsets.ViewSet):
         cmd = CreateRoundCommand(request.data.get('golfcourseid'),
                                  request.data.get('dateplayed'))
 
-        result = self._mediator.send2(cmd)
+        result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, int(result.status_code))
         else:

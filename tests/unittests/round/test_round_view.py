@@ -31,7 +31,7 @@ class TestRoundView(APITestCase):
             'dateplayed': '2023-07-22'
         }
         mock_response.status_code = 201
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         data = {
             'golfcourseid': '1',
@@ -51,7 +51,7 @@ class TestRoundView(APITestCase):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mediator.send2.return_value = MagicMock(is_success=False, error='Error creating round', status_code=400)
+        mediator.send.return_value = MagicMock(is_success=False, error='Error creating round', status_code=400)
 
         data = {
             'golfcourseid': '1',

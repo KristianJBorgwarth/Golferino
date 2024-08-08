@@ -17,7 +17,7 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Play
         if self.player_repository.player_exists(email=player.email):
             return Result.fail(ErrorMessage.already_exists(str(player.email)), status_code=400)
 
-        player = self.player_repository.create_2(player)
+        player = self.player_repository.create(player)
         playerDto = PlayerDto(player)
 
         return Result.ok(playerDto.data, status_code=200)

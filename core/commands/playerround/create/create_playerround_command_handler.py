@@ -23,7 +23,7 @@ class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, R
 
         playerround = Playerround(None, roundid_id=command.roundid, playerid_id=command.playerid)
 
-        playerround_repo = self.playerround_repository.create_2(playerround)
+        playerround_repo = self.playerround_repository.create(playerround)
         playerroundDto = PlayerroundDto(playerround_repo)
 
         return Result.ok(playerroundDto.data, status_code=200)

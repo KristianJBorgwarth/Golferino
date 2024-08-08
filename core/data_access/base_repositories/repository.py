@@ -15,13 +15,8 @@ class Repository(BaseRepository[T]):
             return self._model.objects.get(**kwargs)
         except self._model.DoesNotExist:
             return None
-
-    def create(self, obj: Dict[str, Any]) -> T:
-        instance = self._model(**obj)
-        instance.save()
-        return instance
     
-    def create_2(self, obj: T) -> T:
+    def create(self, obj: T) -> T:
         obj.save()
         return obj
 

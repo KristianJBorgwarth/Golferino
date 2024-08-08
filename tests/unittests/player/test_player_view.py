@@ -31,7 +31,7 @@ class TestPlayerView(APITestCase):
             'email': 'test@mail.com'
         }
         mock_response.status_code = 201
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         data = {
             'firstname': 'TestFirstName',
@@ -58,7 +58,7 @@ class TestPlayerView(APITestCase):
         mock_response.is_success = False
         mock_response.error = 'Error creating player'
         mock_response.status_code = 400
-        mediator.send2.return_value = mock_response
+        mediator.send.return_value = mock_response
 
         data = {
             'firstname': 'TestFirstName',
