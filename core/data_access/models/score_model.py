@@ -4,9 +4,9 @@ from core.data_access.models.playerround_model import Playerround
 
 
 class Score(models.Model):
-    scoreid = models.IntegerField(primary_key=True)
-    playerroundid = models.ForeignKey(Playerround, models.DO_NOTHING, db_column='playerroundid', blank=True, null=True)
-    golfholeid = models.ForeignKey(Golfhole, models.DO_NOTHING, db_column='golfholeid', blank=True, null=True)
+    scoreid = models.AutoField(primary_key=True)
+    playerroundid = models.ForeignKey(Playerround, models.DO_NOTHING, db_column='playerroundid')
+    golfholeid = models.ForeignKey(Golfhole, models.DO_NOTHING, db_column='golfholeid')
     strokes = models.IntegerField(blank=True, null=True)
 
     class Meta:

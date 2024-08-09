@@ -6,6 +6,7 @@ from core.views.location_view import LocationView
 from core.views.player_view import PlayerView
 from core.views.playerround_view import PlayerroundView
 from core.views.round_view import RoundView
+from core.views.score_view import ScoreView
 
 urlpatterns = [
     path('players/', PlayerView.as_view({'post': 'create'}), name='player-post'),  # Assuming this is for POST requests
@@ -18,4 +19,5 @@ urlpatterns = [
     path('playerrounds/', PlayerroundView.as_view({'post': 'create'}), name='playerround-post'),
     path('golfcourse/', GolfcourseView.as_view({'post': 'create'}), name='golfcourse-post'),
     path('golfhole/', GolfholeView.as_view({'post': 'create'}), name='golfhole-post'),
+    path('score/', ScoreView.as_view({'post': 'create'}), name='score-post'),
 ]
