@@ -1,6 +1,8 @@
 from core.behavior.validation_behavior import ValidationBehavior
 from core.commands.golfcourse.create.create_golfcourse_command import CreateGolfcourseCommand
 from core.commands.golfcourse.create.create_golfcourse_command_handler import CreateGolfcourseCommandHandler
+from core.commands.golfhole.create.create_golfhole_command import CreateGolfholeCommand
+from core.commands.golfhole.create.create_golfhole_command_handler import CreateGolfholeCommandHandler
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
 from core.commands.player.create.create_player_command import CreatePlayerCommand
@@ -15,6 +17,7 @@ from core.queries.location.get.get_locations_query_handler import GetLocationsQu
 from core.queries.player.get.get_players_query import GetPlayersQuery
 from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
 from core.serializers.golfcourse.create_golfcourse_cmd_serializer import CreateGolfcourseCommandSerializer
+from core.serializers.golfhole.create_golfhole_cmd_serializer import CreateGolfholeCommandSerializer
 from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
 from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
 from core.serializers.player.create_player_cmd_serializer import CreatePlayerCommandSerializer
@@ -24,6 +27,7 @@ from core.serializers.round.create_round_cmd_serializer import CreateRoundComman
 
 # Initialize a single instance of the mediator
 mediator = Mediator()
+
 
 def register_handlers():
     """
@@ -46,6 +50,10 @@ def register_handlers():
 
     # Golfcourse
     mediator.register_pipeline(CreateGolfcourseCommand, [lambda: ValidationBehavior(CreateGolfcourseCommandSerializer), lambda: CreateGolfcourseCommandHandler()])
+
+    # Golfhole
+    mediator.register_pipeline(CreateGolfholeCommand, [lambda: ValidationBehavior(CreateGolfholeCommandSerializer), lambda: CreateGolfholeCommandHandler()])
+
 
 def get_mediator() -> Mediator:
     """
