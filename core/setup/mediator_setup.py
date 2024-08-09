@@ -1,4 +1,6 @@
 from core.behavior.validation_behavior import ValidationBehavior
+from core.commands.golfcourse.create.create_golfcourse_command import CreateGolfcourseCommand
+from core.commands.golfcourse.create.create_golfcourse_command_handler import CreateGolfcourseCommandHandler
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
 from core.commands.player.create.create_player_command import CreatePlayerCommand
@@ -12,6 +14,7 @@ from core.queries.location.get.get_locations_query import GetLocationsQuery
 from core.queries.location.get.get_locations_query_handler import GetLocationsQueryHandler
 from core.queries.player.get.get_players_query import GetPlayersQuery
 from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
+from core.serializers.golfcourse.create_golfcourse_cmd_serializer import CreateGolfcourseCommandSerializer
 from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
 from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
 from core.serializers.player.create_player_cmd_serializer import CreatePlayerCommandSerializer
@@ -29,19 +32,20 @@ def register_handlers():
     """
     # PlayerRound
     mediator.register_pipeline(CreatePlayerroundCommand, [lambda: ValidationBehavior(CreatePlayerroundCommandSerializer), lambda: CreatePlayerroundCommandHandler()])
-    
+
     # Player
     mediator.register_pipeline(CreatePlayerCommand, [lambda: ValidationBehavior(CreatePlayerCommandSerializer), lambda: CreatePlayerCommandHandler()])
     mediator.register_pipeline(GetPlayersQuery,[lambda: ValidationBehavior(GetPlayersQuerySerializer), lambda: GetPlayersQueryHandler()])
 
-    # Round    
+    # Round
     mediator.register_pipeline(CreateRoundCommand, [lambda: ValidationBehavior(CreateRoundCommandSerializer), lambda: CreateRoundCommandHandler()])
 
     # Location
     mediator.register_pipeline(GetLocationsQuery,[lambda: ValidationBehavior(GetLocationsQuerySerializer), lambda: GetLocationsQueryHandler()])
     mediator.register_pipeline(CreateLocationCommand, [lambda: ValidationBehavior(CreateLocationCommandSerializer), lambda: CreateLocationCommandHandler()])
-    
 
+    # Golfcourse
+    mediator.register_pipeline(CreateGolfcourseCommand, [lambda: ValidationBehavior(CreateGolfcourseCommandSerializer), lambda: CreateGolfcourseCommandHandler()])
 
 def get_mediator() -> Mediator:
     """
