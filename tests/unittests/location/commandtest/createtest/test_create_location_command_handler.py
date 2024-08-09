@@ -64,7 +64,7 @@ class TestCreateLocationCommandHandler(unittest.TestCase):
 
         # Assert
         self.assertFalse(result.is_success)
-        self.assertEqual(result.error, 'A player with this Existing Location already exists.')
+        self.assertEqual(result.error, '(Existing Location) already exists.')
         self.mock_repository.location_exists.assert_called_once_with(locationname='Existing Location')
         self.mock_repository.create.assert_not_called()
 

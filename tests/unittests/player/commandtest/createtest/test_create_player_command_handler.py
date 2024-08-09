@@ -27,7 +27,7 @@ class TestCreatePlayerCommandHandler(TestCase):
 
         # Assert
         self.assertFalse(result.is_success)
-        self.assertEqual(result.error, 'A player with this Test@mail.com already exists.')
+        self.assertEqual(result.error, '(Test@mail.com) already exists.')
         self.mock_repository.player_exists.assert_called_once_with(email='Test@mail.com')
         self.mock_repository.create.assert_not_called()
 

@@ -1,6 +1,7 @@
 from django.urls import path
 
 from core.views.golfcourse_view import GolfcourseView
+from core.views.golfhole_view import GolfholeView
 from core.views.location_view import LocationView
 from core.views.player_view import PlayerView
 from core.views.playerround_view import PlayerroundView
@@ -16,4 +17,5 @@ urlpatterns = [
     path('rounds/', RoundView.as_view({'post': 'create'}), name='round-post'),
     path('playerrounds/', PlayerroundView.as_view({'post': 'create'}), name='playerround-post'),
     path('golfcourse/', GolfcourseView.as_view({'post': 'create'}), name='golfcourse-post'),
+    path('golfhole/', GolfholeView.as_view({'post': 'create'}), name='golfhole-post'),
 ]
