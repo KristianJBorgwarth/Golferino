@@ -4,7 +4,7 @@ from core.common.validators import validate_non_empty, validate_integer
 
 
 class CreateGolfholeCommandSerializer(serializers.Serializer):
-    golfcourseid = serializers.CharField(
+    golfcourseid = serializers.IntegerField(
         validators=[lambda value: validate_integer(value), validate_non_empty]
     )
     length = serializers.IntegerField(

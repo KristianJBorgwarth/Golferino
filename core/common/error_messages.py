@@ -26,7 +26,7 @@ class ErrorMessage:
     # TODO: Should add a type name, to dynamically describe what type already exists for reusability
     @staticmethod
     def already_exists(field_name):
-        return f"A player with this {field_name} already exists."
+        return f"({field_name}) already exists."
 
     @staticmethod
     def unspecified_error(message):

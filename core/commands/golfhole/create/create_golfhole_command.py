@@ -4,7 +4,7 @@ from core.dtos.golfhole_dto import GolfholeDto
 
 
 class CreateGolfholeCommand(Request[Result[GolfholeDto]]):
-    def __init__(self, golfcourseid: str, length: int, par: int, number: int):
+    def __init__(self, golfcourseid: int, length: int, par: int, number: int):
         self.golfcourseid = golfcourseid
         self.length = length
         self.par = par
