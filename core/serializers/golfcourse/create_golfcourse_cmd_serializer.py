@@ -5,8 +5,9 @@ from core.data_access.models.location_model import Location
 
 
 class CreateGolfcourseCommandSerializer(serializers.Serializer):
-    locationid = serializers.PrimaryKeyRelatedField(queryset=Location.objects.all())
-
+    locationid = serializers.CharField(
+        validators=[lambda value: validate_integer(value), validate_non_empty]
+    )
     numholes = serializers.IntegerField(
         validators=[validate_non_empty, lambda value: validate_integer(value=value, min_value=1, max_value=18)]
     )

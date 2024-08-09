@@ -17,27 +17,15 @@ class CreateGolfcourseCommandHandler(RequestHandler[CreateGolfcourseCommand, Res
         self.location_repository = LocationRepository(Location)
 
     def handle(self, command: CreateGolfcourseCommand) -> Result[GolfcourseDto]:
-
+        golfcourse = Golfcourse(None, command.locationid, command.numholes, command.name
+                                )
         if not self.location_repository.location_exists(locationid=command.locationid):
             return Result.fail(ErrorMessage.not_found(f"Location with id ({command.locationid}) does not exist..."),
                                status_code=400)
+        if self.golfcourse_repository.golfcourse_exists(name=golfcourse.name):
+            return Result.fail(ErrorMessage.already_exists(golfcourse.name), status_code=400)
 
-        serializer = CreateGolfcourseCommandSerializer(data={
-            'locationid': command.locationid,
-            'numholes': command.numholes,
-            'name': command.name
-        })
-
-        if not serializer.is_valid():
-            return Result.fail(error=serializer.errors, status_code=400)
-
-        # Extract validated data
-        golfcourse_data = serializer.validated_data
-
-        if self.golfcourse_repository.golfcourse_exists(name=golfcourse_data['name']):
-            return Result.fail(ErrorMessage.already_exists(golfcourse_data['name']), status_code=400)
-
-        golfcourse = self.golfcourse_repository.create(golfcourse_data)
+        golfcourse = self.golfcourse_repository.create(golfcourse)
         golfcourseDto = GolfcourseDto(golfcourse)
 
         return Result.ok(golfcourseDto.data, status_code=200)
