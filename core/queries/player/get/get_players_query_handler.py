@@ -16,13 +16,6 @@ class GetPlayersQueryHandler(RequestHandler[GetPlayersQuery, Result[List[PlayerD
         self.player_repository = PlayerRepository(Player)
 
     def handle(self, query: GetPlayersQuery) -> Result[List[PlayerDto]]:
-        serializer = GetPlayersQuerySerializer(data={
-            'page': query.page,
-            'page_size': query.page_size
-        })
-        if not serializer.is_valid():
-            return Result.fail(error=serializer.errors, status_code=400)
-
         players = self.player_repository.get_all()
 
         if not players:

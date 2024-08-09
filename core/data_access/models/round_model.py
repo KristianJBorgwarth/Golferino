@@ -3,7 +3,7 @@ from core.data_access.models.golfcourse_model import Golfcourse
 
 
 class Round(models.Model):
-    roundid = models.IntegerField(primary_key=True)
+    roundid = models.AutoField(primary_key=True)
     golfcourseid = models.ForeignKey(Golfcourse, models.DO_NOTHING, db_column='golfcourseid', blank=True, null=True)
     dateplayed = models.DateField(blank=True, null=True)
 

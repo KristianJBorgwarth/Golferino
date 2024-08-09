@@ -1,5 +1,4 @@
 from typing import Type, List, Optional, Dict, Any
-from django.db import transaction
 from django.db.models import Model
 from .base_repository import BaseRepository, T
 
@@ -16,11 +15,10 @@ class Repository(BaseRepository[T]):
             return self._model.objects.get(**kwargs)
         except self._model.DoesNotExist:
             return None
-
-    def create(self, obj: Dict[str, Any]) -> T:
-        instance = self._model(**obj)
-        instance.save()
-        return instance
+    
+    def create(self, obj: T) -> T:
+        obj.save()
+        return obj
 
     def update(self, obj: T) -> T:
         obj.save()

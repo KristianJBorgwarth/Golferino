@@ -24,7 +24,14 @@ class TestRoundView(APITestCase):
         # Arrange
         mediator = MagicMock()
         mock_get_mediator.return_value = mediator
-        mediator.send.return_value = MagicMock(is_success=True, value={'golfcourseid': '1', 'dateplayed': '2023-07-22'}, status_code=201)
+        mock_response = MagicMock()
+        mock_response.is_success = True
+        mock_response.value = {
+            'golfcourseid': '1',
+            'dateplayed': '2023-07-22'
+        }
+        mock_response.status_code = 201
+        mediator.send.return_value = mock_response
 
         data = {
             'golfcourseid': '1',
@@ -36,7 +43,8 @@ class TestRoundView(APITestCase):
 
         # Assert
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json(), ResponseEnvelope.success(mediator.send.return_value.value, 201).data)
+        expected_response = ResponseEnvelope.success(mock_response.value, 201).data
+        self.assertEqual(response.json(), expected_response)
 
     @patch('core.views.round_view.get_mediator')
     def test_create_round_failure(self, mock_get_mediator):

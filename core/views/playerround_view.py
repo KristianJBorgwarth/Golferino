@@ -19,7 +19,7 @@ class PlayerroundView(viewsets.ViewSet):
     )
     def create(self, request):
         cmd = CreatePlayerroundCommand(request.data.get('playerid'),
-                                       request.data.get('roundid')
+                                       request.data.get('roundid'),
                                        )
         result = self._mediator.send(cmd)
         if result.is_success:
