@@ -12,3 +12,5 @@ __pycache__/
 .iws
 workspace.xml
 tasks.xml
+
+venv/
