@@ -14,3 +14,4 @@ workspace.xml
 tasks.xml
 
 venv/
+.venv
