@@ -1,3 +1,4 @@
+import logging
 from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.common.error_messages import ErrorMessage
 from core.common.results import Result
@@ -10,14 +11,21 @@ from core.dtos.location_dto import LocationDto
 class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[LocationDto]]):
     def __init__(self):
         self.location_repository = LocationRepository(Location)
-
+        self.logger = logging.getLogger(__name__)
+        
     def handle(self, command: CreateLocationCommand) -> Result[LocationDto]:
-        location = Location(None, command.locationname, command.address, command.city)
+        try:
+            
+            location = Location(None, command.locationname, command.address, command.city)
 
-        if self.location_repository.location_exists(locationname=location.locationname):
-            return Result.fail(ErrorMessage.already_exists(field_name=location.locationname), status_code=400)
+            if self.location_repository.location_exists(locationname=location.locationname):    
+                return Result.fail(ErrorMessage.already_exists(field_name=location.locationname), status_code=400)
 
-        location = self.location_repository.create(location)
-        locationDto = LocationDto(location)
+            location = self.location_repository.create(location)
+            locationDto = LocationDto(location)
 
-        return Result.ok(locationDto.data, status_code=200)
+            return Result.ok(locationDto.data, status_code=200)
+
+        except Exception as e:
+            self.logger.error("An error occurred while handling the command: %s", str(e), exc_info=True)
+            return Result.fail(error="An unexpected error occured", status_code=500)

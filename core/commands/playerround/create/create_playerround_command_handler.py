@@ -1,3 +1,4 @@
+import logging
 from core.commands.playerround.create.create_playerround_command import CreatePlayerroundCommand
 from core.common.error_messages import ErrorMessage
 from core.common.mediator import RequestHandler
@@ -15,15 +16,21 @@ class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, R
         super().__init__()
         self.playerround_repository = PlayerroundRepository(Playerround)
         self.round_repository = RoundRepository(Round)
-
+        self.logger = logging.getLogger(__name__)
+        
     def handle(self, command: CreatePlayerroundCommand) -> Result[PlayerroundDto]:
-        if not self.round_repository.round_exists(roundid=command.roundid):
-            return Result.fail(ErrorMessage.not_found(f"round with id {command.roundid} not found ..."),
+        try:
+            
+            if not self.round_repository.round_exists(roundid=command.roundid):
+                return Result.fail(ErrorMessage.not_found(f"round with id {command.roundid} not found ..."),
                                status_code=400)
 
-        playerround = Playerround(None, roundid_id=command.roundid, playerid_id=command.playerid)
+            playerround = Playerround(None, roundid_id=command.roundid, playerid_id=command.playerid)
 
-        playerround_repo = self.playerround_repository.create(playerround)
-        playerroundDto = PlayerroundDto(playerround_repo)
+            playerround_repo = self.playerround_repository.create(playerround)
+            playerroundDto = PlayerroundDto(playerround_repo)
 
-        return Result.ok(playerroundDto.data, status_code=200)
+            return Result.ok(playerroundDto.data, status_code=200)
+        except Exception as e:
+            self.logger.error("An error occurred while handling the command: %s", str(e), exc_info=True)
+            return Result.fail(error="An unexpected error occured", status_code=500)

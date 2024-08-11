@@ -1,3 +1,4 @@
+import logging
 from core.commands.golfhole.create.create_golfhole_command import CreateGolfholeCommand
 from core.common.error_messages import ErrorMessage
 from core.common.results import Result
@@ -13,17 +14,24 @@ class CreateGolfholeCommandHandler(RequestHandler[CreateGolfholeCommand, Result[
     def __init__(self):
         self.golfcourse_repository = GolfcourseRepository(Golfcourse)
         self.golfhole_repository = GolfholeRepository(Golfhole)
-
+        self.logger = logging.getLogger(__name__)
+        
     def handle(self, command: CreateGolfholeCommand) -> Result[GolfholeDto]:
-        golfhole = Golfhole(None, command.golfcourseid, command.length, command.par, command.number)
+        try:
+            
+            golfhole = Golfhole(None, command.golfcourseid, command.length, command.par, command.number)
 
-        if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
-            return Result.fail(ErrorMessage.already_exists(field_name=command.golfcourseid), status_code=400)
+            if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
+                return Result.fail(ErrorMessage.already_exists(field_name=command.golfcourseid), status_code=400)
 
-        if self.golfhole_repository.golfhole_exists(golfcourseid=command.golfcourseid, number=golfhole.number):
-            return Result.fail(ErrorMessage.already_exists(field_name=command.number), status_code=400)
+            if self.golfhole_repository.golfhole_exists(golfcourseid=command.golfcourseid, number=golfhole.number):
+                return Result.fail(ErrorMessage.already_exists(field_name=command.number), status_code=400)
 
-        golfhole = self.golfhole_repository.create(golfhole)
-        golfholeDto = GolfholeDto(golfhole)
+            golfhole = self.golfhole_repository.create(golfhole)
+            golfholeDto = GolfholeDto(golfhole)
 
-        return Result.ok(golfholeDto.data, status_code=200)
+            return Result.ok(golfholeDto.data, status_code=200)
+        
+        except Exception as e:
+            self.logger.error("An error occurred while handling the command: %s", str(e), exc_info=True)
+            return Result.fail(error="An unexpected error occured", status_code=500)

@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 from core.commands.round.create.create_round_command import CreateRoundCommand
 from core.common.error_messages import ErrorMessage
 from core.common.results import Result
@@ -14,17 +15,24 @@ class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundD
     def __init__(self):
         self.round_repository = RoundRepository(Round)
         self.golfcourse_repository = GolfcourseRepository(Golfcourse)
-
+        self.logger = logging.getLogger(__name__)
+        
     def handle(self, command: CreateRoundCommand) -> Result[RoundDto]:
-        if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
-            return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
+        try:
+            
+            if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
+                return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
                                status_code=400)
 
-        if not command.dateplayed:
-            command.dateplayed = datetime.now().strftime(format="%Y%m%d")
+            if not command.dateplayed:
+                command.dateplayed = datetime.now().strftime(format="%Y%m%d")
 
-        round = Round(None, command.golfcourseid, command.dateplayed)
-        round_repo = self.round_repository.create(round)
-        roundDto = RoundDto(round_repo)
+            round = Round(None, command.golfcourseid, command.dateplayed)
+            round_repo = self.round_repository.create(round)
+            roundDto = RoundDto(round_repo)
 
-        return Result.ok(roundDto.data, status_code=200)
+            return Result.ok(roundDto.data, status_code=200)
+        
+        except Exception as e:
+            self.logger.error("An error occurred while handling the command: %s", str(e), exc_info=True)
+            return Result.fail(error="An unexpected error occured", status_code=500)
