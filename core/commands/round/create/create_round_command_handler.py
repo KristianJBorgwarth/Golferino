@@ -19,8 +19,7 @@ class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundD
         
     def handle(self, command: CreateRoundCommand) -> Result[RoundDto]:
         try:
-            
-            if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
+            if not self.golfcourse_repository.exists(golfcourseid=command.golfcourseid):
                 return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
                                status_code=400)
 

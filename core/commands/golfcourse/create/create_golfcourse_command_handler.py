@@ -1,6 +1,5 @@
 import logging
 from core.commands.golfcourse.create.create_golfcourse_command import CreateGolfcourseCommand
-from core.commands.location.create.create_location_command import CreateLocationCommand
 from core.common.error_messages import ErrorMessage
 from core.common.results import Result
 from core.data_access.models.golfcourse_model import Golfcourse
@@ -22,10 +21,10 @@ class CreateGolfcourseCommandHandler(RequestHandler[CreateGolfcourseCommand, Res
             
             golfcourse = Golfcourse(None, command.locationid, command.numholes, command.name
                                 )
-            if not self.location_repository.location_exists(locationid=command.locationid):
+            if not self.location_repository.exists(locationid=command.locationid):
                 return Result.fail(ErrorMessage.not_found(f"Location with id ({command.locationid}) does not exist..."),
                                status_code=400)
-            if self.golfcourse_repository.golfcourse_exists(name=golfcourse.name):
+            if self.golfcourse_repository.exists(name=golfcourse.name):
                 return Result.fail(ErrorMessage.already_exists(golfcourse.name), status_code=400)
 
             golfcourse = self.golfcourse_repository.create(golfcourse)

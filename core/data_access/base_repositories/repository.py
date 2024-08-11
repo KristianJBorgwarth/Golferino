@@ -26,3 +26,6 @@ class Repository(BaseRepository[T]):
 
     def delete(self, id: int) -> None:
         self._model.objects.filter(pk=id).delete()
+        
+    def exists(self, **kwargs) -> bool:
+        return self._model.objects.filter(**kwargs).exists()

@@ -25,3 +25,7 @@ class BaseRepository(ABC, Generic[T]):
     @abstractmethod
     def delete(self, id: int) -> None:
         pass
+    
+    @abstractmethod
+    def exists(self, **kwargs) -> bool:
+        pass
