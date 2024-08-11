@@ -34,7 +34,7 @@ class TestCreateLocationCommandHandler(unittest.TestCase):
             city='Test City'
         )
 
-        self.mock_repository.location_exists.return_value = False
+        self.mock_repository.exists.return_value = False
         self.mock_repository.create.return_value = location
 
         # Act
@@ -46,7 +46,7 @@ class TestCreateLocationCommandHandler(unittest.TestCase):
         self.assertEqual(result.value['locationname'], 'Test Location')
         self.assertEqual(result.value['address'], '123 Test Address')
         self.assertEqual(result.value['city'], 'Test City')
-        self.mock_repository.location_exists.assert_called_once_with(locationname='Test Location')
+        self.mock_repository.exists.assert_called_once_with(locationname='Test Location')
         self.mock_repository.create.assert_called()
 
     def test_handle_given_existing_location_should_return_already_exists_error(self):
@@ -57,7 +57,7 @@ class TestCreateLocationCommandHandler(unittest.TestCase):
             city='Test City'
         )
 
-        self.mock_repository.location_exists.return_value = True
+        self.mock_repository.exists.return_value = True
 
         # Act
         result = self.handler.handle(command)
@@ -65,6 +65,6 @@ class TestCreateLocationCommandHandler(unittest.TestCase):
         # Assert
         self.assertFalse(result.is_success)
         self.assertEqual(result.error, '(Existing Location) already exists.')
-        self.mock_repository.location_exists.assert_called_once_with(locationname='Existing Location')
+        self.mock_repository.exists.assert_called_once_with(locationname='Existing Location')
         self.mock_repository.create.assert_not_called()
 

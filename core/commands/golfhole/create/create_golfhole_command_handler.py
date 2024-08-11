@@ -17,10 +17,10 @@ class CreateGolfholeCommandHandler(RequestHandler[CreateGolfholeCommand, Result[
     def handle(self, command: CreateGolfholeCommand) -> Result[GolfholeDto]:
         golfhole = Golfhole(None, command.golfcourseid, command.length, command.par, command.number)
 
-        if not self.golfcourse_repository.golfcourse_exists(golfcourseid=command.golfcourseid):
+        if not self.golfcourse_repository.exists(golfcourseid=command.golfcourseid):
             return Result.fail(ErrorMessage.already_exists(field_name=command.golfcourseid), status_code=400)
 
-        if self.golfhole_repository.golfhole_exists(golfcourseid=command.golfcourseid, number=golfhole.number):
+        if self.golfhole_repository.exists(golfcourseid=command.golfcourseid, number=golfhole.number):
             return Result.fail(ErrorMessage.already_exists(field_name=command.number), status_code=400)
 
         golfhole = self.golfhole_repository.create(golfhole)

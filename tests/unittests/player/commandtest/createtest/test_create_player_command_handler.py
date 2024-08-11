@@ -20,7 +20,7 @@ class TestCreatePlayerCommandHandler(TestCase):
             email='Test@mail.com'
         )
 
-        self.mock_repository.player_exists.return_value = True
+        self.mock_repository.exists.return_value = True
 
         # Act
         result = self.handler.handle(command)
@@ -28,7 +28,7 @@ class TestCreatePlayerCommandHandler(TestCase):
         # Assert
         self.assertFalse(result.is_success)
         self.assertEqual(result.error, '(Test@mail.com) already exists.')
-        self.mock_repository.player_exists.assert_called_once_with(email='Test@mail.com')
+        self.mock_repository.exists.assert_called_once_with(email='Test@mail.com')
         self.mock_repository.create.assert_not_called()
 
     def test_handle_given_valid_command_should_create_and_return_result_ok_playerDto(self):
@@ -39,7 +39,7 @@ class TestCreatePlayerCommandHandler(TestCase):
             email='Test@mail.com'
         )
 
-        self.mock_repository.player_exists.return_value = False
+        self.mock_repository.exists.return_value = False
 
         player = Player(
             firstname='TestFirstName',
@@ -59,5 +59,5 @@ class TestCreatePlayerCommandHandler(TestCase):
         self.assertEqual(result.value['firstname'], 'TestFirstName')
         self.assertEqual(result.value['lastname'], 'TestLastName')
         self.assertEqual(result.value['email'], 'Test@mail.com')
-        self.mock_repository.player_exists.assert_called_once_with(email='Test@mail.com')
+        self.mock_repository.exists.assert_called_once_with(email='Test@mail.com')
         self.mock_repository.create.assert_called_once()

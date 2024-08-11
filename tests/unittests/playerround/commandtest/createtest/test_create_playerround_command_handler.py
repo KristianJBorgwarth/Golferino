@@ -27,7 +27,7 @@ class TestCreatePlayerroundCommandHandler(unittest.TestCase):
 
     def test_handle_with_valid_command(self):
         # Arrange
-        self.round_repository_mock.round_exists.return_value = True
+        self.round_repository_mock.exists.return_value = True
 
         round_instance = Round()
         player_instance = Player()
@@ -47,7 +47,7 @@ class TestCreatePlayerroundCommandHandler(unittest.TestCase):
     def test_handle_with_non_existent_round(self):
         # Arrange
         command = CreatePlayerroundCommand(playerid=1, roundid=999)  # Non-existent roundid
-        self.round_repository_mock.round_exists.return_value = False
+        self.round_repository_mock.exists.return_value = False
 
         # Act
         result = self.handler.handle(command)
