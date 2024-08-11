@@ -18,8 +18,8 @@ class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[
             
             location = Location(None, command.locationname, command.address, command.city)
 
-        if self.location_repository.exists(locationname=location.locationname):
-            return Result.fail(ErrorMessage.already_exists(field_name=location.locationname), status_code=400)
+            if self.location_repository.exists(locationname=location.locationname):
+                return Result.fail(ErrorMessage.already_exists(field_name=location.locationname), status_code=400)
 
             location = self.location_repository.create(location)
             locationDto = LocationDto(location)

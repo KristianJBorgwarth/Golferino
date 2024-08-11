@@ -18,8 +18,9 @@ class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundD
         self.logger = logging.getLogger(__name__)
         
     def handle(self, command: CreateRoundCommand) -> Result[RoundDto]:
-        if not self.golfcourse_repository.exists(golfcourseid=command.golfcourseid):
-            return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
+        try:
+            if not self.golfcourse_repository.exists(golfcourseid=command.golfcourseid):
+                return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
                                status_code=400)
 
             if not command.dateplayed:

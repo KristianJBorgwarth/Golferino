@@ -21,11 +21,11 @@ class CreateGolfcourseCommandHandler(RequestHandler[CreateGolfcourseCommand, Res
             
             golfcourse = Golfcourse(None, command.locationid, command.numholes, command.name
                                 )
-        if not self.location_repository.exists(locationid=command.locationid):
-            return Result.fail(ErrorMessage.not_found(f"Location with id ({command.locationid}) does not exist..."),
+            if not self.location_repository.exists(locationid=command.locationid):
+                return Result.fail(ErrorMessage.not_found(f"Location with id ({command.locationid}) does not exist..."),
                                status_code=400)
-        if self.golfcourse_repository.exists(name=golfcourse.name):
-            return Result.fail(ErrorMessage.already_exists(golfcourse.name), status_code=400)
+            if self.golfcourse_repository.exists(name=golfcourse.name):
+                return Result.fail(ErrorMessage.already_exists(golfcourse.name), status_code=400)
 
             golfcourse = self.golfcourse_repository.create(golfcourse)
             golfcourseDto = GolfcourseDto(golfcourse)

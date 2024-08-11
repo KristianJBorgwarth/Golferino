@@ -19,8 +19,9 @@ class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, R
         self.logger = logging.getLogger(__name__)
         
     def handle(self, command: CreatePlayerroundCommand) -> Result[PlayerroundDto]:
-        if not self.round_repository.exists(roundid=command.roundid):
-            return Result.fail(ErrorMessage.not_found(f"round with id {command.roundid} not found ..."),
+        try:
+            if not self.round_repository.exists(roundid=command.roundid):
+                return Result.fail(ErrorMessage.not_found(f"round with id {command.roundid} not found ..."),
                                status_code=400)
 
             playerround = Playerround(None, roundid_id=command.roundid, playerid_id=command.playerid)
