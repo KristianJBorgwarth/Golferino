@@ -18,7 +18,6 @@ class ScoreView(viewsets.ViewSet):
         responses={200: ScoreDto, 400: 'BadRequest'}
     )
     def create(self, request):
-        print(request.data.get("golfcourseid"))
         cmd = CreateScoreCommand(request.data.get('playerroundid'),
                                  request.data.get('golfholeid'),
                                  request.data.get('strokes')

@@ -28,7 +28,7 @@ class CreateScoreCommandHandler(RequestHandler[CreateScoreCommand, Result[ScoreD
                 return Result.fail(ErrorMessage.not_found(message=command.playerroundid), status_code=400)
 
             print(score.golfholeid)
-            if self.score_repository.score_exists(playerroundid=command.playerroundid, golfholeid=command.golfholeid):
+            if self.score_repository.exists(playerroundid=command.playerroundid, golfholeid=command.golfholeid):
                 return Result.fail(ErrorMessage.already_exists(field_name=command.golfholeid), status_code=400)
 
             score = self.score_repository.create(score)
