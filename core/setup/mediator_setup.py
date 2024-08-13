@@ -20,6 +20,8 @@ from core.queries.location.get.get_locations_query import GetLocationsQuery
 from core.queries.location.get.get_locations_query_handler import GetLocationsQueryHandler
 from core.queries.player.get.get_players_query import GetPlayersQuery
 from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
+from core.queries.playerround.get.get_playerrounds_query import GetPlayerroundsQuery
+from core.queries.playerround.get.get_playerrounds_query_handler import GetPlayerroundsQueryHandler
 from core.serializers.golfcourse.create_golfcourse_cmd_serializer import CreateGolfcourseCommandSerializer
 from core.serializers.golfcourse.get_golfcourses_query_serializer import GetGolfcoursesQuerySerializer
 from core.serializers.golfhole.create_golfhole_cmd_serializer import CreateGolfholeCommandSerializer
@@ -28,6 +30,7 @@ from core.serializers.location.get_locations_query_serializer import GetLocation
 from core.serializers.player.create_player_cmd_serializer import CreatePlayerCommandSerializer
 from core.serializers.player.get_players_query_serializer import GetPlayersQuerySerializer
 from core.serializers.playerround.create_playerround_cmd_serializer import CreatePlayerroundCommandSerializer
+from core.serializers.playerround.get_playerrounds_query_serializer import GetPlayerroundsQuerySerializer
 from core.serializers.round.create_round_cmd_serializer import CreateRoundCommandSerializer
 from core.serializers.score.create_score_cmd_serializer import CreateScoreCommandSerializer
 
@@ -42,6 +45,7 @@ def register_handlers():
     """
     # PlayerRound
     mediator.register_pipeline(CreatePlayerroundCommand, [lambda: ValidationBehavior(CreatePlayerroundCommandSerializer), lambda: CreatePlayerroundCommandHandler()])
+    mediator.register_pipeline(GetPlayerroundsQuery,[lambda: ValidationBehavior(GetPlayerroundsQuerySerializer), lambda: GetPlayerroundsQueryHandler()])
 
     # Player
     mediator.register_pipeline(CreatePlayerCommand, [lambda: ValidationBehavior(CreatePlayerCommandSerializer), lambda: CreatePlayerCommandHandler()])
