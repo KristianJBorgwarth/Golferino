@@ -12,14 +12,14 @@ from core.queries.golfcourse.get.get_golfcourses_query import GetGolfcoursesQuer
 import unittest
 from unittest.mock import patch, MagicMock
 
-from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
+from core.queries.golfcourse.get.get_golfcourses_query_handler import GetGolfcoursesQueryHandler
 
 
 class TestGetGolfcoursesQueryHandler(unittest.TestCase):
 
     def setUp(self):
         self.mock_repository = MagicMock(spec=GolfcourseRepository)
-        self.handler = GetPlayersQueryHandler()
+        self.handler = GetGolfcoursesQueryHandler()
         self.handler.golfcourse_repository = self.mock_repository
 
     @patch('core.serializers.golfcourse.get_golfcourses_query_serializer.GetGolfcoursesQuerySerializer.is_valid',
@@ -55,7 +55,7 @@ class TestGetGolfcoursesQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 204)
         self.assertEqual(result.value, [])
 
-    @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
+    @patch('core.serializers.golfcourse.get_golfcourses_query_serializer.GetGolfcoursesQuerySerializer.is_valid',
            return_value=True)
     def test_handle_pagination(self, mock_is_valid):
         # Arrange
