@@ -3,7 +3,9 @@ from rest_framework import viewsets
 
 from core.commands.golfcourse.create.create_golfcourse_command import CreateGolfcourseCommand
 from core.dtos.golfcourse_dto import GolfcourseDto
+from core.queries.golfcourse.get.get_golfcourses_query import GetGolfcoursesQuery
 from core.serializers.golfcourse.create_golfcourse_cmd_serializer import CreateGolfcourseCommandSerializer
+from core.serializers.golfcourse.get_golfcourses_query_serializer import GetGolfcoursesQuerySerializer
 from core.setup.mediator_setup import get_mediator
 from core.views.ResponseEnvelope import ResponseEnvelope
 
@@ -22,6 +24,20 @@ class GolfcourseView(viewsets.ViewSet):
                                       request.data.get('numholes'),
                                       request.data.get('name'))
         result = self._mediator.send(cmd)
+        if result.is_success:
+            return ResponseEnvelope.success(result.value, result.status_code)
+        else:
+            return ResponseEnvelope.fail(result.error, result.status_code)
+
+    @swagger_auto_schema(
+        query_serializer=GetGolfcoursesQuerySerializer,
+        responses={200: GolfcourseDto(many=True), 204: 'No Content', 400: 'BadRequest'}
+    )
+    def get_all(self, request):
+        query = GetGolfcoursesQuery(int(request.query_params.get('page', 1)),
+                                    int(request.query_params.get('page_size', 10)))
+
+        result = self._mediator.send(query)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:
