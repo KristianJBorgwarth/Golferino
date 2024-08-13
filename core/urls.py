@@ -19,5 +19,4 @@ urlpatterns = [
     path('golfcourses/get_all', GolfcourseView.as_view({'get': 'get_all'}), name='golfcourse-get-all'),
     path('golfholes/', GolfholeView.as_view({'post': 'create'}), name='golfhole-post'),
     path('score/', ScoreView.as_view({'post': 'create'}), name='score-post'),
-
-1]
+]
