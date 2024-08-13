@@ -20,13 +20,13 @@ class TestGetGolfcoursesQueryHandler(unittest.TestCase):
     def setUp(self):
         self.mock_repository = MagicMock(spec=GolfcourseRepository)
         self.handler = GetPlayersQueryHandler()
-        self.handler.player_repository = self.mock_repository
+        self.handler.golfcourse_repository = self.mock_repository
 
     @patch('core.serializers.golfcourse.get_golfcourses_query_serializer.GetGolfcoursesQuerySerializer.is_valid',
            return_value=True)
     @patch('core.serializers.golfcourse.get_golfcourses_query_serializer.GetGolfcoursesQuerySerializer.errors',
            new_callable=MagicMock)
-    def test_handle_success_with_players(self, mock_validated_data, mock_is_valid):
+    def test_handle_success_with_golfcourses(self, mock_validated_data, mock_is_valid):
         # Arrange
         mock_golfcourses = [MagicMock(), MagicMock()]
         self.mock_repository.get_all.return_value = mock_golfcourses
