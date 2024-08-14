@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from core.common.validators import validate_non_empty, validate_integer
-from core.data_access.models.location_model import Location
 
 
 class CreateGolfcourseCommandSerializer(serializers.Serializer):
