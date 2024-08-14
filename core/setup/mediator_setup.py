@@ -14,11 +14,14 @@ from core.commands.round.create.create_round_command_handler import CreateRoundC
 from core.commands.score.create.create_score_command import CreateScoreCommand
 from core.commands.score.create.create_score_command_handler import CreateScoreCommandHandler
 from core.common.mediator import Mediator
+from core.queries.golfcourse.get.get_golfcourses_query import GetGolfcoursesQuery
+from core.queries.golfcourse.get.get_golfcourses_query_handler import GetGolfcoursesQueryHandler
 from core.queries.location.get.get_locations_query import GetLocationsQuery
 from core.queries.location.get.get_locations_query_handler import GetLocationsQueryHandler
 from core.queries.player.get.get_players_query import GetPlayersQuery
 from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
 from core.serializers.golfcourse.create_golfcourse_cmd_serializer import CreateGolfcourseCommandSerializer
+from core.serializers.golfcourse.get_golfcourses_query_serializer import GetGolfcoursesQuerySerializer
 from core.serializers.golfhole.create_golfhole_cmd_serializer import CreateGolfholeCommandSerializer
 from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
 from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
@@ -53,6 +56,7 @@ def register_handlers():
 
     # Golfcourse
     mediator.register_pipeline(CreateGolfcourseCommand, [lambda: ValidationBehavior(CreateGolfcourseCommandSerializer), lambda: CreateGolfcourseCommandHandler()])
+    mediator.register_pipeline(GetGolfcoursesQuery, [lambda: ValidationBehavior(GetGolfcoursesQuerySerializer), lambda: GetGolfcoursesQueryHandler()])
 
     # Golfhole
     mediator.register_pipeline(CreateGolfholeCommand, [lambda: ValidationBehavior(CreateGolfholeCommandSerializer), lambda: CreateGolfholeCommandHandler()])
