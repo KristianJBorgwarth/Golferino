@@ -10,5 +10,5 @@ class Golfcourse(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'golfcourse'

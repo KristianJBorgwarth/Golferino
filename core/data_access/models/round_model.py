@@ -8,5 +8,5 @@ class Round(models.Model):
     dateplayed = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'round'
