@@ -9,10 +9,10 @@ django.setup()
 
 import unittest
 from unittest.mock import patch, MagicMock
-from core.queries.playerround.get.get_playerrounds_query import GetPlayerroundsQuery
+from core.features.playerround.queries.get.get_playerrounds_query import GetPlayerroundsQuery
 
 from core.data_access.repositories.playerround_repository import PlayerroundRepository
-from core.queries.playerround.get.get_playerrounds_query_handler import GetPlayerroundsQueryHandler
+from core.features.playerround.queries.get.get_playerrounds_query_handler import GetPlayerroundsQueryHandler
 
 
 class TestGetPlayerroundsQueryHandler(unittest.TestCase):
@@ -22,9 +22,9 @@ class TestGetPlayerroundsQueryHandler(unittest.TestCase):
         self.handler = GetPlayerroundsQueryHandler()
         self.handler.playerround_repository = self.mock_repository
 
-    @patch('core.serializers.playerround.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.is_valid',
+    @patch('core.features.playerround.queries.get.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.is_valid',
            return_value=True)
-    @patch('core.serializers.playerround.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.errors',
+    @patch('core.features.playerround.queries.get.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.errors',
            new_callable=MagicMock)
     def test_handle_success_with_playerrounds(self, mock_validated_data, mock_is_valid):
         # Arrange
@@ -40,7 +40,7 @@ class TestGetPlayerroundsQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual(len(result.value), len(mock_playerrounds))
 
-    @patch('core.serializers.playerround.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.is_valid',
+    @patch('core.features.playerround.queries.get.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.is_valid',
            return_value=True)
     def test_handle_no_playerrounds(self, mock_is_valid):
         # Arrange
@@ -55,7 +55,7 @@ class TestGetPlayerroundsQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 204)
         self.assertEqual(result.value, [])
 
-    @patch('core.serializers.playerround.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.is_valid',
+    @patch('core.features.playerround.queries.get.get_playerrounds_query_serializer.GetPlayerroundsQuerySerializer.is_valid',
            return_value=True)
     def test_handle_pagination(self, mock_is_valid):
         # Arrange

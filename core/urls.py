@@ -1,12 +1,12 @@
 from django.urls import path
 
-from core.views.golfcourse_view import GolfcourseView
-from core.views.golfhole_view import GolfholeView
-from core.views.location_view import LocationView
-from core.views.player_view import PlayerView
-from core.views.playerround_view import PlayerroundView
-from core.views.round_view import RoundView
-from core.views.score_view import ScoreView
+from core.features.golfcourse.golfcourse_view import GolfcourseView
+from core.features.golfhole.golfhole_view import GolfholeView
+from core.features.location.location_view import LocationView
+from core.features.player.player_view import PlayerView
+from core.features.playerround.playerround_view import PlayerroundView
+from core.features.round.round_view import RoundView
+from core.features.score.score_view import ScoreView
 
 urlpatterns = [
     path('players/', PlayerView.as_view({'post': 'create'}), name='player-post'),  # Assuming this is for POST requests

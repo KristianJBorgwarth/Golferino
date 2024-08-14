@@ -1,7 +1,7 @@
 
 import unittest
 from parameterized import parameterized
-from core.serializers.location.get_locations_query_serializer import GetLocationsQuerySerializer
+from core.features.location.queries.get.get_locations_query_serializer import GetLocationsQuerySerializer
 
 
 class TestGetLocationsQuerySerializer(unittest.TestCase):

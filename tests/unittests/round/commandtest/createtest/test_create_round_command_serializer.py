@@ -7,7 +7,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
 from datetime import datetime, timedelta
-from core.serializers.round.create_round_cmd_serializer import CreateRoundCommandSerializer
+from core.features.round.commands.create.create_round_cmd_serializer import CreateRoundCommandSerializer
 
 
 class TestCreateRoundCommandSerializer(unittest.TestCase):

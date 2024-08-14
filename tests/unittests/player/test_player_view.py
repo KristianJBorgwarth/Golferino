@@ -7,8 +7,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
 from rest_framework.test import APITestCase, APIClient
-from core.views.ResponseEnvelope import ResponseEnvelope
-from core.views.player_view import PlayerView
+from core.common.ResponseEnvelope import ResponseEnvelope
+from core.features.player.player_view import PlayerView
 
 class TestPlayerView(APITestCase):
 
@@ -16,7 +16,7 @@ class TestPlayerView(APITestCase):
         self.client = APIClient()
         self.view = PlayerView.as_view({'post': 'create'})
 
-    @patch('core.views.player_view.get_mediator')
+    @patch('core.features.player.player_view.get_mediator')
     def test_create_player_success(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
@@ -47,7 +47,7 @@ class TestPlayerView(APITestCase):
         expected_response = ResponseEnvelope.success(mock_response.value, 201).data
         self.assertEqual(response.json(), expected_response)
 
-    @patch('core.views.player_view.get_mediator')
+    @patch('core.features.player.player_view.get_mediator')
     def test_create_player_failure(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()

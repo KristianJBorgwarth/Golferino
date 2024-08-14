@@ -10,6 +10,7 @@ def validate_date_not_in_future(value):
     if value > now:
         raise serializers.ValidationError(ErrorMessage.unspecified_error("dateplayed can not be in the future."))
 
+
 def validate_non_empty(value):
     if not value:
         raise serializers.ValidationError(ErrorMessage.value_cant_be_empty(value))
