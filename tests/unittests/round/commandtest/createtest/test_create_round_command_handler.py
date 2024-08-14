@@ -9,8 +9,8 @@ import django
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
-from core.commands.round.create.create_round_command import CreateRoundCommand
-from core.commands.round.create.create_round_command_handler import CreateRoundCommandHandler
+from core.features.round.commands.create.create_round_command import CreateRoundCommand
+from core.features.round.commands.create.create_round_command_handler import CreateRoundCommandHandler
 from core.data_access.repositories.golfcourse_repository import GolfcourseRepository
 from core.data_access.repositories.round_repository import RoundRepository
 
@@ -21,7 +21,7 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         self.handler.round_repository = MagicMock(spec=RoundRepository)
         self.handler.golfcourse_repository = MagicMock(spec=GolfcourseRepository)
 
-    @patch('core.commands.round.create.create_round_command_handler.Round', autospec=True)
+    @patch('core.features.round.commands.create.create_round_command_handler.Round', autospec=True)
     def test_handle_given_valid_command_should_create_and_return_result_ok(self, MockRound):
         # Arrange
         command = CreateRoundCommand(
@@ -46,8 +46,8 @@ class TestCreateRoundCommandHandler(unittest.TestCase):
         self.handler.golfcourse_repository.exists.assert_called_once_with(golfcourseid=1)
         self.handler.round_repository.create.assert_called_once_with(mock_round_instance)
 
-    @patch('core.commands.round.create.create_round_command_handler.datetime', wraps=datetime)
-    @patch('core.commands.round.create.create_round_command_handler.Round', autospec=True)
+    @patch('core.features.round.commands.create.create_round_command_handler.datetime', wraps=datetime)
+    @patch('core.features.round.commands.create.create_round_command_handler.Round', autospec=True)
     def test_handle_should_set_dateplayed_if_not_provided(self, MockRound, mock_datetime):
         # Arrange
         mock_datetime.now.return_value = datetime(2023, 7, 22)

@@ -9,10 +9,10 @@ django.setup()
 
 import unittest
 from unittest.mock import patch, MagicMock
-from core.queries.player.get.get_players_query import GetPlayersQuery
+from core.features.player.queries.get.get_players_query import GetPlayersQuery
 
 from core.data_access.repositories.player_repository import PlayerRepository
-from core.queries.player.get.get_players_query_handler import GetPlayersQueryHandler
+from core.features.player.queries.get.get_players_query_handler import GetPlayersQueryHandler
 
 
 class TestGetPlayersQueryHandler(unittest.TestCase):
@@ -22,9 +22,9 @@ class TestGetPlayersQueryHandler(unittest.TestCase):
         self.handler = GetPlayersQueryHandler()
         self.handler.player_repository = self.mock_repository
 
-    @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
+    @patch('core.features.player.queries.get.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
            return_value=True)
-    @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.errors',
+    @patch('core.features.player.queries.get.get_players_query_serializer.GetPlayersQuerySerializer.errors',
            new_callable=MagicMock)
     def test_handle_success_with_players(self, mock_validated_data, mock_is_valid):
         # Arrange
@@ -40,7 +40,7 @@ class TestGetPlayersQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual(len(result.value), len(mock_players))
 
-    @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
+    @patch('core.features.player.queries.get.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
            return_value=True)
     def test_handle_no_players(self, mock_is_valid):
         # Arrange
@@ -55,7 +55,7 @@ class TestGetPlayersQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 204)
         self.assertEqual(result.value, [])
 
-    @patch('core.serializers.player.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
+    @patch('core.features.player.queries.get.get_players_query_serializer.GetPlayersQuerySerializer.is_valid',
            return_value=True)
     def test_handle_pagination(self, mock_is_valid):
         # Arrange

@@ -8,8 +8,8 @@ django.setup()
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 
-from core.views.ResponseEnvelope import ResponseEnvelope
-from core.views.location_view import LocationView
+from core.common.ResponseEnvelope import ResponseEnvelope
+from core.features.location.location_view import LocationView
 
 
 class TestLocationView(APITestCase):
@@ -18,7 +18,7 @@ class TestLocationView(APITestCase):
         self.client = APIClient()
         self.view = LocationView.as_view({'post': 'create'})
 
-    @patch('core.views.location_view.get_mediator')
+    @patch('core.features.location.location_view.get_mediator')
     def test_create_location_success(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
@@ -47,7 +47,7 @@ class TestLocationView(APITestCase):
         expected_response = ResponseEnvelope.success(mock_response.value, 201).data
         self.assertEqual(response.json(), expected_response)
 
-    @patch('core.views.location_view.get_mediator')
+    @patch('core.features.location.location_view.get_mediator')
     def test_create_location_failure(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
@@ -71,7 +71,7 @@ class TestLocationView(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), ResponseEnvelope.fail('Error creating location', 400).data)
 
-    @patch('core.views.location_view.get_mediator')
+    @patch('core.features.location.location_view.get_mediator')
     def test_get_all_locations_success(self, mock_get_mediator):
     # Arrange
         mediator = MagicMock()
@@ -100,7 +100,7 @@ class TestLocationView(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), expected_response)
 
-    @patch('core.views.location_view.get_mediator')
+    @patch('core.features.location.location_view.get_mediator')
     def test_get_all_locations_no_content(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
@@ -117,7 +117,7 @@ class TestLocationView(APITestCase):
         # Assert
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         
-    @patch('core.views.location_view.get_mediator')
+    @patch('core.features.location.location_view.get_mediator')
     def test_get_all_locations_failure(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()

@@ -9,11 +9,9 @@ django.setup()
 
 import unittest
 from unittest.mock import patch, MagicMock
-from core.queries.location.get.get_locations_query import GetLocationsQuery
-from core.dtos.location_dto import LocationDto
-from core.common.results import Result
+from core.features.location.queries.get.get_locations_query import GetLocationsQuery
 from core.data_access.repositories.location_repository import LocationRepository
-from core.queries.location.get.get_locations_query_handler import GetLocationsQueryHandler
+from core.features.location.queries.get.get_locations_query_handler import GetLocationsQueryHandler
 
 
 class TestGetLocationsQueryHandler(unittest.TestCase):
@@ -23,8 +21,8 @@ class TestGetLocationsQueryHandler(unittest.TestCase):
         self.handler = GetLocationsQueryHandler()
         self.handler.location_repository = self.mock_repository
 
-    @patch('core.serializers.location.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=True)
-    @patch('core.serializers.location.get_locations_query_serializer.GetLocationsQuerySerializer.validated_data', new_callable=MagicMock)
+    @patch('core.features.location.queries.get.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=True)
+    @patch('core.features.location.queries.get.get_locations_query_serializer.GetLocationsQuerySerializer.validated_data', new_callable=MagicMock)
     def test_handle_success_with_locations(self, mock_validated_data, mock_is_valid):
         # Arrange
         mock_locations = [MagicMock(), MagicMock()] 
@@ -39,7 +37,7 @@ class TestGetLocationsQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual(len(result.value), len(mock_locations)) 
 
-    @patch('core.serializers.location.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=True)
+    @patch('core.features.location.queries.get.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=True)
     def test_handle_no_locations(self, mock_is_valid):
         # Arrange
         self.mock_repository.get_all.return_value = []
@@ -53,7 +51,7 @@ class TestGetLocationsQueryHandler(unittest.TestCase):
         self.assertEqual(result.status_code, 204)
         self.assertEqual(result.value, [])
 
-    @patch('core.serializers.location.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=True)
+    @patch('core.features.location.queries.get.get_locations_query_serializer.GetLocationsQuerySerializer.is_valid', return_value=True)
     def test_handle_pagination(self, mock_is_valid):
         # Arrange
         mock_locations = [MagicMock() for _ in range(10)]  # Create 10 mock locations

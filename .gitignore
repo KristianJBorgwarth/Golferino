@@ -1,17 +1,151 @@
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Django specific files
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.mo
+*.pickle
+db.sqlite3
+db.sqlite3-journal
+*.db
+*.env
+.env.*
+local_settings.py
+
+# If you're using Django static files handling
+/staticfiles/
+/static/
+
+# Media files
+/media/
+
+# Django migrations
+**/migrations/*
+!**/migrations/__init__.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.hypothesis/
+.pytest_cache/
+
+# Translations
+
+# Django stuff:
+
+# Celery stuff:
+celerybeat-schedule
+
+# SageMath parsed files:
+*.sage.py
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# MkDocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Editor-specific files
 # VS Code
 .vscode/
-
 # Pycharm
 .idea/
 .iws
 workspace.xml
 tasks.xml
 
-venv/
-.venv
+# MacOS
+.DS_Store
+
+# Thumbnails
+._*
+Thumbs.db
+
+# dotenv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# pytest
+
+# Pyre type checker

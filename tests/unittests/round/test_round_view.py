@@ -6,11 +6,10 @@ import django
 # Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
-from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 
-from core.views.ResponseEnvelope import ResponseEnvelope
-from core.views.round_view import RoundView
+from core.common.ResponseEnvelope import ResponseEnvelope
+from core.features.round.round_view import RoundView
 
 
 class TestRoundView(APITestCase):
@@ -19,7 +18,7 @@ class TestRoundView(APITestCase):
         self.client = APIClient()
         self.view = RoundView.as_view({'post': 'create'})
 
-    @patch('core.views.round_view.get_mediator')
+    @patch('core.features.round.round_view.get_mediator')
     def test_create_round_success(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()
@@ -46,7 +45,7 @@ class TestRoundView(APITestCase):
         expected_response = ResponseEnvelope.success(mock_response.value, 201).data
         self.assertEqual(response.json(), expected_response)
 
-    @patch('core.views.round_view.get_mediator')
+    @patch('core.features.round.round_view.get_mediator')
     def test_create_round_failure(self, mock_get_mediator):
         # Arrange
         mediator = MagicMock()

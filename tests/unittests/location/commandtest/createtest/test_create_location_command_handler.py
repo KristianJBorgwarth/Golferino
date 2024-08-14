@@ -7,8 +7,8 @@ django.setup()
 
 import unittest
 from unittest.mock import MagicMock
-from core.commands.location.create.create_location_command import CreateLocationCommand
-from core.commands.location.create.create_location_command_handler import CreateLocationCommandHandler
+from core.features.location.commands.create.create_location_command import CreateLocationCommand
+from core.features.location.commands.create.create_location_command_handler import CreateLocationCommandHandler
 from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
 

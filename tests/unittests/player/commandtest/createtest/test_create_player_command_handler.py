@@ -1,10 +1,10 @@
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 from unittest import TestCase
-from core.commands.player.create.create_player_command import CreatePlayerCommand
-from core.commands.player.create.create_player_command_handler import CreatePlayerCommandHandler
+from core.features.player.commands.create.create_player_command import CreatePlayerCommand
+from core.features.player.commands.create.create_player_command_handler import CreatePlayerCommandHandler
 from core.data_access.repositories.player_repository import PlayerRepository
 from core.data_access.models.player_model import Player
-from core.common.results import Result
+
 
 class TestCreatePlayerCommandHandler(TestCase):
     def setUp(self):

@@ -9,7 +9,7 @@ import django
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
-from core.serializers.player.create_player_cmd_serializer import CreatePlayerCommandSerializer
+from core.features.player.commands.create.create_player_cmd_serializer import CreatePlayerCommandSerializer
 
 
 class TestCreatePlayerCommandSerializer(unittest.TestCase):

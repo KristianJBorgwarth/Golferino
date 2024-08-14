@@ -8,7 +8,7 @@ import django
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
-from core.serializers.location.create_location_cmd_serializer import CreateLocationCommandSerializer
+from core.features.location.commands.create.create_location_cmd_serializer import CreateLocationCommandSerializer
 
 
 class TestCreateLocationCommandSerializer(unittest.TestCase):

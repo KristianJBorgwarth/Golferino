@@ -9,12 +9,12 @@ from core.data_access.models.player_model import Player
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
 django.setup()
 
-from core.commands.playerround.create.create_playerround_command import CreatePlayerroundCommand
+from core.features.playerround.commands.create.create_playerround_command import CreatePlayerroundCommand
 from core.data_access.models.playerround_model import Playerround
 from core.data_access.models.round_model import Round
 from core.data_access.repositories.playerround_repository import PlayerroundRepository
 from core.data_access.repositories.round_repository import RoundRepository
-from core.commands.playerround.create.create_playerround_command_handler import CreatePlayerroundCommandHandler
+from core.features.playerround.commands.create.create_playerround_command_handler import CreatePlayerroundCommandHandler
 
 class TestCreatePlayerroundCommandHandler(unittest.TestCase):
 
