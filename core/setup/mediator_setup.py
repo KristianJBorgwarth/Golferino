@@ -11,6 +11,9 @@ from core.features.playerround.commands.create.create_playerround_command import
 from core.features.playerround.commands.create.create_playerround_command_handler import CreatePlayerroundCommandHandler
 from core.features.round.commands.create.create_round_command import CreateRoundCommand
 from core.features.round.commands.create.create_round_command_handler import CreateRoundCommandHandler
+from core.features.round.queries.get.get_rounds_query import GetRoundsQuery
+from core.features.round.queries.get.get_rounds_query_handler import GetRoundsQueryHandler
+from core.features.round.queries.get.get_rounds_query_serializer import GetRoundsQuerySerializer
 from core.features.score.commands.create.create_score_command import CreateScoreCommand
 from core.features.score.commands.create.create_score_command_handler import CreateScoreCommandHandler
 from core.common.mediator import Mediator
@@ -53,6 +56,7 @@ def register_handlers():
 
     # Round
     mediator.register_pipeline(CreateRoundCommand, [lambda: ValidationBehavior(CreateRoundCommandSerializer), lambda: CreateRoundCommandHandler()])
+    mediator.register_pipeline(GetRoundsQuery,[lambda: ValidationBehavior(GetRoundsQuerySerializer), lambda: GetRoundsQueryHandler()])
 
     # Location
     mediator.register_pipeline(GetLocationsQuery,[lambda: ValidationBehavior(GetLocationsQuerySerializer), lambda: GetLocationsQueryHandler()])
