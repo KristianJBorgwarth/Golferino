@@ -19,7 +19,7 @@ class GetPlayerroundsQueryHandler(RequestHandler[GetPlayerroundsQuery, Result[Li
     def handle(self, query: GetPlayerroundsQuery) -> Result[List[PlayerroundDto]]:
         try:
 
-            playerrounds = self.playerround_repository.get_all()
+            playerrounds = self.playerround_repository.get_all_by_playerid(playerid=query.playerid)
 
             if not playerrounds:
                 return Result.ok([], 204)
