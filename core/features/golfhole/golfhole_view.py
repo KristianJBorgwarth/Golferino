@@ -21,7 +21,6 @@ class GolfholeView(viewsets.ViewSet):
         responses={200: GolfcourseDto, 400: 'BadRequest'}
     )
     def create(self, request):
-        print(request.data.get("golfcourseid"))
         cmd = CreateGolfholeCommand(request.data.get('golfcourseid'),
                                       request.data.get('length'),
                                       request.data.get('par'),
@@ -37,8 +36,10 @@ class GolfholeView(viewsets.ViewSet):
         responses={200: GetGolfholeDto(many=True), 204: 'No Content', 400: 'BadRequest'}
     )
     def get_all(self, request):
-        query = GetGolfholesQuery(int(request.query_params.get('page', 1)),
-                                  int(request.query_params.get('page_size', 10)))
+        print(request.query_params.get('golfcourseid'))
+        query = GetGolfholesQuery(page=int(request.query_params.get('page', 1)),
+                                  page_size=int(request.query_params.get('page_size', 10)),
+                                  golfcourseid=int(request.query_params.get('golfcourseid')))
 
         result = self._mediator.send(query)
         if result.is_success:

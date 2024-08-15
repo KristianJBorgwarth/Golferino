@@ -18,7 +18,7 @@ class GetGolfholesQueryHandler(RequestHandler[GetGolfholesQuery, Result[List[Get
 
     def handle(self, query: GetGolfholesQuery) -> Result[List[GetGolfholeDto]]:
         try:
-            golfholes = self.golfhole_repository.get_all()
+            golfholes = self.golfhole_repository.get_list_by_key(golfcourseid=query.golfcourseid)
 
             if not golfholes:
                 return Result.ok([], 204)
