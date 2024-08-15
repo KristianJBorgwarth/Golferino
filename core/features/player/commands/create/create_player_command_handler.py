@@ -20,13 +20,9 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Play
         self.verification_code_service = VerificationCodeService()
         self.verification_code_repository = VerificationCodeRepository(VerificationCode)
         self.logger = logging.getLogger(__name__)
-        
+    
     def handle(self, command: CreatePlayerCommand) -> Result[PlayerDto]:
         try:
-            passwordValidationResult = self.password_service.validate_password_format(command.password)
-            if passwordValidationResult.is_success is False:
-                return Result.fail(passwordValidationResult.error, status_code=400)
-            
             hashed_password = self.password_service.hash_password(command.password)
             
             player = Player(firstname = command.firstname, lastname = command.lastname, email = command.email, password = hashed_password, is_verified = False)

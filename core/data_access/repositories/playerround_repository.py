@@ -9,3 +9,5 @@ class PlayerroundRepository(Repository[Playerround]):
     @staticmethod
     def playerround_exists(**kwargs) -> bool:
         return Playerround.objects.filter(**kwargs).exists()
+    
+    

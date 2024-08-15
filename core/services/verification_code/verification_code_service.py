@@ -6,8 +6,8 @@ import random
 
 class VerificationCodeService:
     def generate_verification_code(self, player: Player) -> VerificationCode:
-        code = random.randint(0, 99999999)
-        formatted_code = str(code).zfill(8)
+        code = random.randint(0, 999999)
+        formatted_code = str(code).zfill(6)
         verification_code = VerificationCode(code=formatted_code, is_used=False, player=player, expiration_date=datetime.now() + timedelta(minutes=5))
         return verification_code
     

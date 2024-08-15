@@ -10,3 +10,4 @@ class Round(models.Model):
     class Meta:
         managed = True
         db_table = 'round'
+    
