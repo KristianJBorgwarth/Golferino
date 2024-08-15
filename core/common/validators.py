@@ -12,7 +12,7 @@ def validate_date_not_in_future(value):
 
 
 def validate_non_empty(value):
-    if not value:
+    if value is None:
         raise serializers.ValidationError(ErrorMessage.value_cant_be_empty(value))
 
 

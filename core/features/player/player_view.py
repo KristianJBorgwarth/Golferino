@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 from drf_yasg.utils import swagger_auto_schema
-
 from core.features.player.commands.create.create_player_command import CreatePlayerCommand
 from core.dtos.player_dto import PlayerDto
 from core.features.player.queries.get.get_players_query import GetPlayersQuery
@@ -15,14 +14,9 @@ class PlayerView(viewsets.ViewSet):
         super().__init__(**kwargs)
         self._mediator = get_mediator()
 
-    @swagger_auto_schema(
-        request_body=CreatePlayerCommandSerializer,
-        responses={200: PlayerDto, 400: 'BadRequest'}
-    )
+    @swagger_auto_schema(request_body=CreatePlayerCommandSerializer, responses={200: PlayerDto, 400: 'BadRequest'})
     def create(self, request):
-        cmd = CreatePlayerCommand(request.data.get('firstname'),
-                                  request.data.get('lastname'),
-                                  request.data.get('email'))
+        cmd = CreatePlayerCommand(request.data.get('firstname'),request.data.get('lastname'),request.data.get('email'),request.data.get('password'))
         result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)

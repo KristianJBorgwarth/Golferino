@@ -1,5 +1,4 @@
 from django.db import models
-from core.data_access.models.verification_code_model import VerificationCode
 
 
 class Player(models.Model):
@@ -9,7 +8,6 @@ class Player(models.Model):
     email = models.CharField(max_length=100, blank=True, null=True)
     password = models.CharField(max_length=255, blank=True, null=True)
     is_verified = models.BooleanField(blank=True, null=True)
-    verification_code = models.ForeignKey(VerificationCode, models.OneToOneField, db_column='code_id', blank=True, null=True)
 
     class Meta:
         managed = True
