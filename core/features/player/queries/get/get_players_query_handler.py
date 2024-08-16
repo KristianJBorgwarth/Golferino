@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 
 from core.common.mediator import RequestHandler
 from core.common.results import Result
-from core.data_access.models.player_model import Player
+from core.data_access.models.player.player_model import Player
 from core.data_access.repositories.player_repository import PlayerRepository
 from core.dtos.player_dto import PlayerDto
 from core.features.player.queries.get.get_players_query import GetPlayersQuery

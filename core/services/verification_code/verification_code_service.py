@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from core.common.results import Result
-from core.data_access.models.player_model import Player
+from core.data_access.models.player.player_model import Player
 from core.data_access.models.verification_code_model import VerificationCode
 import random
 

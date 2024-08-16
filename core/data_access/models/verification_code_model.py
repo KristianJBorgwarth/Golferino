@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.data_access.models.player_model import Player
+from core.data_access.models.player.player_model import Player
 
 class VerificationCode(models.Model):
     code_id = models.AutoField(primary_key=True)

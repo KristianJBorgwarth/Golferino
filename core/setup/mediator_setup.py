@@ -1,4 +1,5 @@
 from core.behavior.validation_behavior import ValidationBehavior
+from core.data_access.models.player.player_created_event import PlayerCreatedEvent
 from core.features.golfcourse.commands.create.create_golfcourse_command import CreateGolfcourseCommand
 from core.features.golfcourse.commands.create.create_golfcourse_command_handler import CreateGolfcourseCommandHandler
 from core.features.golfhole.commands.create.create_golfhole_command import CreateGolfholeCommand
@@ -7,6 +8,7 @@ from core.features.location.commands.create.create_location_command import Creat
 from core.features.location.commands.create.create_location_command_handler import CreateLocationCommandHandler
 from core.features.player.commands.create.create_player_command import CreatePlayerCommand
 from core.features.player.commands.create.create_player_command_handler import CreatePlayerCommandHandler
+from core.features.player.events.player_created_event_handler import PlayerCreatedEventHandler
 from core.features.playerround.commands.create.create_playerround_command import CreatePlayerroundCommand
 from core.features.playerround.commands.create.create_playerround_command_handler import CreatePlayerroundCommandHandler
 from core.features.round.commands.create.create_round_command import CreateRoundCommand
@@ -67,7 +69,9 @@ def register_handlers():
 
     # Score
     mediator.register_pipeline(CreateScoreCommand, [lambda: ValidationBehavior(CreateScoreCommandSerializer), lambda: CreateScoreCommandHandler()])
-
+    
+    
+    #EVENTS ------------------------------------------------------
 
 def get_mediator() -> Mediator:
     """
