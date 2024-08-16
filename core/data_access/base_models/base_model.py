@@ -21,6 +21,8 @@ class BaseModel(models.Model):
 
     def dispatch_events(self):
         """Dispatch all events."""
+        if self._events.count == 0: 
+            return
         for event in self._events:
             from core.setup.mediator_setup import get_mediator  # Local import to avoid circular dependencies
             get_mediator().publish(event)
