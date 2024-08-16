@@ -1,4 +1,5 @@
 import logging
+from core.data_access.models.player.player_created_event import PlayerCreatedEvent
 from core.data_access.models.verification_code_model import VerificationCode
 from core.data_access.repositories.verification_code_repository import VerificationCodeRepository
 from core.features.player.commands.create.create_player_command import CreatePlayerCommand
@@ -26,7 +27,6 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Play
             if self.player_repository.exists(email=command.email):
                 return Result.fail(ErrorMessage.already_exists(str(player.email)), status_code=400)
             
-            
             hashed_password = self.password_service.hash_password(command.password)
             
             player = Player(firstname = command.firstname, 
@@ -35,6 +35,8 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Play
                             password = hashed_password, 
                             is_verified = False)
             verificationCode = self.verification_code_service.generate_verification_code(player)
+            
+            player.add_event(PlayerCreatedEvent(player= player, code= verificationCode))
             
             player = self.player_repository.create(player)
             verificationCode = self.verification_code_repository.create(verificationCode)

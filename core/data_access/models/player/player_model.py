@@ -1,7 +1,8 @@
 from django.db import models
+from core.data_access.base_models.base_model import BaseModel
 
 
-class Player(models.Model):
+class Player(BaseModel):
     playerid = models.AutoField(primary_key=True)
     firstname = models.CharField(max_length=20, blank=True, null=True)
     lastname = models.CharField(max_length=30, blank=True, null=True)

@@ -1,6 +1,5 @@
-from datetime import timezone
 from core.common.mediator import Notification
-
+from django.utils import timezone
 
 class ModelEvent(Notification):
     """Base class for all model events."""

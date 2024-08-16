@@ -72,6 +72,10 @@ def register_handlers():
     
     
     #EVENTS ------------------------------------------------------
+    
+    # Player
+    mediator.register_notification(PlayerCreatedEvent, lambda: PlayerCreatedEventHandler())
+
 
 def get_mediator() -> Mediator:
     """
