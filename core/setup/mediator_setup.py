@@ -36,6 +36,9 @@ from core.features.playerround.commands.create.create_playerround_cmd_serializer
 from core.features.playerround.queries.get.get_playerrounds_query_serializer import GetPlayerroundsQuerySerializer
 from core.features.round.commands.create.create_round_cmd_serializer import CreateRoundCommandSerializer
 from core.features.score.commands.create.create_score_cmd_serializer import CreateScoreCommandSerializer
+from core.features.score.queries.get.get_scores_query import GetScoresQuery
+from core.features.score.queries.get.get_scores_query_handler import GetScoresQueryHandler
+from core.features.score.queries.get.get_scores_query_serializer import GetScoresQuerySerializer
 
 # Initialize a single instance of the mediator
 mediator = Mediator()
@@ -71,6 +74,7 @@ def register_handlers():
 
     # Score
     mediator.register_pipeline(CreateScoreCommand, [lambda: ValidationBehavior(CreateScoreCommandSerializer), lambda: CreateScoreCommandHandler()])
+    mediator.register_pipeline(GetScoresQuery, [lambda: ValidationBehavior(GetScoresQuerySerializer), lambda: GetScoresQueryHandler()])
 
 
 def get_mediator() -> Mediator:
