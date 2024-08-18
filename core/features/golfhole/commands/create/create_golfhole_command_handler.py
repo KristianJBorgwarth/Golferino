@@ -6,17 +6,17 @@ from core.data_access.models.golfcourse_model import Golfcourse
 from core.data_access.repositories.golfcourse_repository import GolfcourseRepository
 from core.common.mediator import RequestHandler
 from core.data_access.repositories.golfhole_repository import GolfholeRepository
-from core.dtos.golfhole_dto import GolfholeDto
+from core.features.golfhole.commands.create.create_golfhole_dto import CreateGolfholeDto
 from core.data_access.models.golfhole_model import Golfhole
 
 
-class CreateGolfholeCommandHandler(RequestHandler[CreateGolfholeCommand, Result[GolfholeDto]]):
+class CreateGolfholeCommandHandler(RequestHandler[CreateGolfholeCommand, Result[CreateGolfholeDto]]):
     def __init__(self):
         self.golfcourse_repository = GolfcourseRepository(Golfcourse)
         self.golfhole_repository = GolfholeRepository(Golfhole)
         self.logger = logging.getLogger(__name__)
         
-    def handle(self, command: CreateGolfholeCommand) -> Result[GolfholeDto]:
+    def handle(self, command: CreateGolfholeCommand) -> Result[CreateGolfholeDto]:
         try:
             
             golfhole = Golfhole(None, command.golfcourseid, command.length, command.par, command.number)
@@ -28,7 +28,7 @@ class CreateGolfholeCommandHandler(RequestHandler[CreateGolfholeCommand, Result[
                 return Result.fail(ErrorMessage.already_exists(field_name=command.number), status_code=400)
 
             golfhole = self.golfhole_repository.create(golfhole)
-            golfholeDto = GolfholeDto(golfhole)
+            golfholeDto = CreateGolfholeDto(golfhole)
 
             return Result.ok(golfholeDto.data, status_code=200)
         

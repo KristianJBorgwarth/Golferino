@@ -2,8 +2,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
 from core.features.golfhole.commands.create.create_golfhole_command import CreateGolfholeCommand
-from core.dtos.golfcourse_dto import GolfcourseDto
 from core.features.golfhole.commands.create.create_golfhole_cmd_serializer import CreateGolfholeCommandSerializer
+from core.features.golfhole.commands.create.create_golfhole_dto import CreateGolfholeDto
 from core.features.golfhole.queries.get.get_golfhole_dto import GetGolfholeDto
 from core.features.golfhole.queries.get.get_golfholes_query import GetGolfholesQuery
 from core.features.golfhole.queries.get.get_golfholes_query_serializer import GetGolfholesQuerySerializer
@@ -18,13 +18,13 @@ class GolfholeView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         request_body=CreateGolfholeCommandSerializer,
-        responses={200: GolfcourseDto, 400: 'BadRequest'}
+        responses={200: CreateGolfholeDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreateGolfholeCommand(request.data.get('golfcourseid'),
-                                      request.data.get('length'),
-                                      request.data.get('par'),
-                                      request.data.get('number'))
+                                    request.data.get('length'),
+                                    request.data.get('par'),
+                                    request.data.get('number'))
         result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
