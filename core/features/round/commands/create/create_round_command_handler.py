@@ -8,16 +8,16 @@ from core.data_access.models.golfcourse_model import Golfcourse
 from core.data_access.models.round_model import Round
 from core.data_access.repositories.golfcourse_repository import GolfcourseRepository
 from core.data_access.repositories.round_repository import RoundRepository
-from core.dtos.round_dto import RoundDto
+from core.features.round.commands.create.create_round_dto import CreateRoundDto
 
 
-class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundDto]]):
+class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[CreateRoundDto]]):
     def __init__(self):
         self.round_repository = RoundRepository(Round)
         self.golfcourse_repository = GolfcourseRepository(Golfcourse)
         self.logger = logging.getLogger(__name__)
         
-    def handle(self, command: CreateRoundCommand) -> Result[RoundDto]:
+    def handle(self, command: CreateRoundCommand) -> Result[CreateRoundDto]:
         try:
             if not self.golfcourse_repository.exists(golfcourseid=command.golfcourseid):
                 return Result.fail(ErrorMessage.not_found(f"Golfcourse with id {command.golfcourseid} not found ..."),
@@ -28,7 +28,7 @@ class CreateRoundCommandHandler(RequestHandler[CreateRoundCommand, Result[RoundD
 
             round = Round(None, command.golfcourseid, command.dateplayed)
             round_repo = self.round_repository.create(round)
-            roundDto = RoundDto(round_repo)
+            roundDto = CreateRoundDto(round_repo)
 
             return Result.ok(roundDto.data, status_code=200)
         
