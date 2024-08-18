@@ -5,16 +5,16 @@ from core.common.results import Result
 from django.core.paginator import Paginator
 from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
-from core.dtos.location_dto import LocationDto
+from core.features.location.queries.get.get_location_dto import GetLocationDto
 from core.features.location.queries.get.get_locations_query import GetLocationsQuery
 
 
-class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[LocationDto]]]):
+class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[GetLocationDto]]]):
     def __init__(self):
         self.location_repository = LocationRepository(Location)
         self.logger = logging.getLogger(__name__)
         
-    def handle(self, query: GetLocationsQuery) -> Result[List[LocationDto]]:
+    def handle(self, query: GetLocationsQuery) -> Result[List[GetLocationDto]]:
         try:
             locations = self.location_repository.get_all()
         
@@ -23,7 +23,7 @@ class GetLocationsQueryHandler(RequestHandler[GetLocationsQuery, Result[List[Loc
         
             paginator = Paginator(locations, query.page_size)
             paged_locations = paginator.get_page(query.page)
-            paged_locationDtos = LocationDto(paged_locations, many=True).data
+            paged_locationDtos = GetLocationDto(paged_locations, many=True).data
         
             return Result.ok(paged_locationDtos, 200)
         
