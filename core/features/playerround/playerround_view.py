@@ -2,7 +2,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
 from core.features.playerround.commands.create.create_playerround_command import CreatePlayerroundCommand
-from core.dtos.playerround_dto import PlayerroundDto
+from core.features.playerround.commands.create.create_playerround_dto import CreatePlayerroundDto
+from core.features.playerround.queries.get.get_playerround_dto import GetPlayerroundDto
 from core.features.playerround.queries.get.get_playerrounds_query import GetPlayerroundsQuery
 from core.features.playerround.commands.create.create_playerround_cmd_serializer import CreatePlayerroundCommandSerializer
 from core.features.playerround.queries.get.get_playerrounds_query_serializer import GetPlayerroundsQuerySerializer
@@ -17,7 +18,7 @@ class PlayerroundView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         request_body=CreatePlayerroundCommandSerializer,
-        responses={200: PlayerroundDto, 400: 'BadRequest'}
+        responses={200: CreatePlayerroundDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreatePlayerroundCommand(request.data.get('playerid'),
@@ -31,7 +32,7 @@ class PlayerroundView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         query_serializer=GetPlayerroundsQuerySerializer,
-        responses={200: PlayerroundDto(many=True), 204: 'No Content', 400: 'BadRequest'}
+        responses={200: GetPlayerroundDto(many=True), 204: 'No Content', 400: 'BadRequest'}
     )
     def get_all(self, request):
         query = GetPlayerroundsQuery(page=int(request.query_params.get('page', 1)),
