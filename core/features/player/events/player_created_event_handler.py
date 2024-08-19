@@ -11,7 +11,10 @@ class PlayerCreatedEventHandler(NotificationHandler):
 
     def handle(self, event: PlayerCreatedEvent):
         try:
-            print("cant believe this is working")
+            
+            self.email_service.send(to_email=event.player.email, 
+                                    subject="Welcome to Golferino", 
+                                    message=f"Hi {event.player.firstname}, welcome to Golferino! Here is your verification code: {event.verification_code.code}")
             
         except Exception as e:
             self.logger.error("An error occurred while handling the event: %s", str(e), exc_info=True)

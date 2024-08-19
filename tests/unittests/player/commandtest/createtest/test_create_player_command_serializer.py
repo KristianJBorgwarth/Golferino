@@ -19,7 +19,8 @@ class TestCreatePlayerCommandSerializer(unittest.TestCase):
         data = {
             'firstname': 'TestFirstName',
             'lastname': 'TestLastName',
-            'email': 'Test@mail.com'
+            'email': 'Test@mail.com',
+            "password": "validPasswordKJ?1"
         }
         serializer = CreatePlayerCommandSerializer(data=data)
 

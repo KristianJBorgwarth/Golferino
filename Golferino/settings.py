@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import logging
 import logging.config
+import os
 import sys
 from pathlib import Path
 
@@ -139,6 +140,22 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# EMAIL Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.environ['EMAIL_USER_G']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD_G']
+EMAIL_FROM = os.environ['EMAIL_USER_G']
+
+print(EMAIL_HOST)
+print(EMAIL_HOST_USER)
+print(EMAIL_HOST_PASSWORD)
 
 # Logging Configuration
 

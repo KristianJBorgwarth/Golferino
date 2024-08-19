@@ -15,7 +15,7 @@ class BaseModel(models.Model):
         """Add an event to the list of events."""
         self._events.append(event)
         
-    def clear_events(self):
+    def _clear_events(self):
         """Clear the list of events."""
         self._events = []
 

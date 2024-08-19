@@ -25,7 +25,7 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Play
     def handle(self, command: CreatePlayerCommand) -> Result[PlayerDto]:
         try:
             if self.player_repository.exists(email=command.email):
-                return Result.fail(ErrorMessage.already_exists(str(player.email)), status_code=400)
+                return Result.fail(ErrorMessage.already_exists(str(command.email)), status_code=400)
             
             hashed_password = self.password_service.hash_password(command.password)
             
@@ -46,4 +46,4 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Play
         
         except Exception as e:
             self.logger.error("An error occurred while handling the command: %s", str(e), exc_info=True)
-            return Result.fail(error="An unexpected error occured", status_code=500)
+            return Result.fail(error="An unexpected error occured" + str(e), status_code=500)
