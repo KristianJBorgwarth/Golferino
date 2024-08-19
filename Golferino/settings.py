@@ -153,10 +153,6 @@ EMAIL_HOST_USER = os.environ['EMAIL_USER_G']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD_G']
 EMAIL_FROM = os.environ['EMAIL_USER_G']
 
-print(EMAIL_HOST)
-print(EMAIL_HOST_USER)
-print(EMAIL_HOST_PASSWORD)
-
 # Logging Configuration
 
 LOGGING = {
