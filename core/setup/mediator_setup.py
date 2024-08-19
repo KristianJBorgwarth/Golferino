@@ -4,6 +4,9 @@ from core.features.golfcourse.commands.create.create_golfcourse_command import C
 from core.features.golfcourse.commands.create.create_golfcourse_command_handler import CreateGolfcourseCommandHandler
 from core.features.golfhole.commands.create.create_golfhole_command import CreateGolfholeCommand
 from core.features.golfhole.commands.create.create_golfhole_command_handler import CreateGolfholeCommandHandler
+from core.features.golfhole.queries.get.get_golfholes_query import GetGolfholesQuery
+from core.features.golfhole.queries.get.get_golfholes_query_handler import GetGolfholesQueryHandler
+from core.features.golfhole.queries.get.get_golfholes_query_serializer import GetGolfholesQuerySerializer
 from core.features.location.commands.create.create_location_command import CreateLocationCommand
 from core.features.location.commands.create.create_location_command_handler import CreateLocationCommandHandler
 from core.features.player.commands.create.create_player_command import CreatePlayerCommand
@@ -35,6 +38,9 @@ from core.features.playerround.commands.create.create_playerround_cmd_serializer
 from core.features.playerround.queries.get.get_playerrounds_query_serializer import GetPlayerroundsQuerySerializer
 from core.features.round.commands.create.create_round_cmd_serializer import CreateRoundCommandSerializer
 from core.features.score.commands.create.create_score_cmd_serializer import CreateScoreCommandSerializer
+from core.features.score.queries.get.get_scores_query import GetScoresQuery
+from core.features.score.queries.get.get_scores_query_handler import GetScoresQueryHandler
+from core.features.score.queries.get.get_scores_query_serializer import GetScoresQuerySerializer
 
 # Initialize a single instance of the mediator
 mediator = Mediator()
@@ -66,6 +72,7 @@ def register_handlers():
 
     # Golfhole
     mediator.register_pipeline(CreateGolfholeCommand, [lambda: ValidationBehavior(CreateGolfholeCommandSerializer), lambda: CreateGolfholeCommandHandler()])
+    mediator.register_pipeline(GetGolfholesQuery, [lambda: ValidationBehavior(GetGolfholesQuerySerializer), lambda: GetGolfholesQueryHandler()])
 
     # Score
     mediator.register_pipeline(CreateScoreCommand, [lambda: ValidationBehavior(CreateScoreCommandSerializer), lambda: CreateScoreCommandHandler()])
@@ -75,6 +82,7 @@ def register_handlers():
     
     # Player
     mediator.register_notification(PlayerCreatedEvent, lambda: PlayerCreatedEventHandler())
+    mediator.register_pipeline(GetScoresQuery, [lambda: ValidationBehavior(GetScoresQuerySerializer), lambda: GetScoresQueryHandler()])
 
 
 def get_mediator() -> Mediator:

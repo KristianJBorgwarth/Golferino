@@ -34,8 +34,10 @@ class PlayerroundView(viewsets.ViewSet):
         responses={200: PlayerroundDto(many=True), 204: 'No Content', 400: 'BadRequest'}
     )
     def get_all(self, request):
-        query = GetPlayerroundsQuery(int(request.query_params.get('page', 1)),
-                                     int(request.query_params.get('page_size', 10)))
+        query = GetPlayerroundsQuery(page=int(request.query_params.get('page', 1)),
+                                     page_size=int(request.query_params.get('page_size', 10)),
+                                     playerid=int(request.query_params.get('playerid'))
+                                     )
 
         result = self._mediator.send(query)
         if result.is_success:
