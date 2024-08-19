@@ -145,13 +145,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL Configuration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST = os.environ['EMAIL_HOST', 'default']
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.environ['EMAIL_USER_G']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD_G']
-EMAIL_FROM = os.environ['EMAIL_USER_G']
+EMAIL_HOST_USER = os.environ['EMAIL_USER_G', 'default']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD_G', 'default']
+EMAIL_FROM = os.environ['EMAIL_USER_G', 'default']
 
 # Logging Configuration
 
