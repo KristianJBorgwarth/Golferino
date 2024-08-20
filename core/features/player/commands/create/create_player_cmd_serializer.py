@@ -31,8 +31,6 @@ class CreatePlayerCommandSerializer(serializers.Serializer):
     
     password = serializers.CharField(
         validators=[lambda value: validate_non_empty(value), 
-                    lambda value: validate_min_length(value, 8), 
-                    lambda value: validate_max_length(value, 255), 
                     lambda value: validate_password_format(value)])
 
     class Meta:

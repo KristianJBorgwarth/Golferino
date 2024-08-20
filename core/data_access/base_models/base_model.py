@@ -26,7 +26,7 @@ class BaseModel(models.Model):
         for event in self._events:
             from core.setup.mediator_setup import get_mediator  # Local import to avoid circular dependencies
             get_mediator().publish(event)
-        self.clear_events()
+        self._clear_events()
         
     def save(self, *args, **kwargs):
         """Override the save method to dispatch events and update timestamps."""
