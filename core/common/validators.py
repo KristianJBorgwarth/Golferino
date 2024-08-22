@@ -1,7 +1,6 @@
+import re
 from datetime import datetime
-
 from rest_framework import serializers
-
 from core.common.error_messages import ErrorMessage
 
 
@@ -12,7 +11,7 @@ def validate_date_not_in_future(value):
 
 
 def validate_non_empty(value):
-    if not value:
+    if value is None:
         raise serializers.ValidationError(ErrorMessage.value_cant_be_empty(value))
 
 
@@ -46,3 +45,8 @@ def validate_integer(value, min_value=None, max_value=None):
 def validate_format(value):
     if "@" not in value:
         raise serializers.ValidationError(ErrorMessage.must_contain_at_symbol(value, '@'))
+    
+def validate_password_format(value):
+     pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[\W_]).{8,255}$'
+     if not re.match(pattern, value):
+         raise serializers.ValidationError('Password must be between 8 and 255 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character. It should not contain spaces.')

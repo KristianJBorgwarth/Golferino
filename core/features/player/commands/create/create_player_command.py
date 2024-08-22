@@ -4,7 +4,8 @@ from core.dtos.player_dto import PlayerDto
 
 
 class CreatePlayerCommand(Request[Result[PlayerDto]]):
-    def __init__(self, firstname: str, lastname: str, email: str):
+    def __init__(self, firstname: str, lastname: str, email: str, password: str):
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
+        self.password = password

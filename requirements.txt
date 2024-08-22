@@ -5,3 +5,4 @@ drf-yasg==1.21.7
 parameterized
 seqlog
 python-json-logger
+bcrypt

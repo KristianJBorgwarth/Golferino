@@ -3,7 +3,7 @@ import unittest
 import django
 from unittest.mock import Mock
 
-from core.data_access.models.player_model import Player
+from core.data_access.models.player.player_model import Player
 
 # Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
