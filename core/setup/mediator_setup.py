@@ -14,6 +14,10 @@ from core.features.player.commands.create.create_player_command_handler import C
 from core.features.player.events.player_created_event_handler import PlayerCreatedEventHandler
 from core.features.playerround.commands.create.create_playerround_command import CreatePlayerroundCommand
 from core.features.playerround.commands.create.create_playerround_command_handler import CreatePlayerroundCommandHandler
+from core.features.playerround.commands.update.update_playerround_cmd_serializer import \
+    UpdatePlayerroundCommandSerializer
+from core.features.playerround.commands.update.update_playerround_command import UpdatePlayerroundCommand
+from core.features.playerround.commands.update.update_playerround_command_handler import UpdatePlayerroundCommandHandler
 from core.features.round.commands.create.create_round_command import CreateRoundCommand
 from core.features.round.commands.create.create_round_command_handler import CreateRoundCommandHandler
 from core.features.score.commands.create.create_score_command import CreateScoreCommand
@@ -57,6 +61,7 @@ def register_handlers():
     # PlayerRound
     mediator.register_pipeline(CreatePlayerroundCommand, [lambda: ValidationBehavior(CreatePlayerroundCommandSerializer), lambda: CreatePlayerroundCommandHandler()])
     mediator.register_pipeline(GetPlayerroundsQuery,[lambda: ValidationBehavior(GetPlayerroundsQuerySerializer), lambda: GetPlayerroundsQueryHandler()])
+    mediator.register_pipeline(UpdatePlayerroundCommand, [lambda: ValidationBehavior(UpdatePlayerroundCommandSerializer), lambda: UpdatePlayerroundCommandHandler()])
 
     # Player
     mediator.register_pipeline(CreatePlayerCommand, [lambda: ValidationBehavior(CreatePlayerCommandSerializer), lambda: CreatePlayerCommandHandler()])
