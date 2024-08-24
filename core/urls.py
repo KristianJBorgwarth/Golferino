@@ -15,6 +15,7 @@ urlpatterns = [
     path('locations/get_all', LocationView.as_view({'get': 'get_all'}), name='location-get-all'),
     path('rounds/', RoundView.as_view({'post': 'create'}), name='round-post'),
     path('playerrounds/', PlayerroundView.as_view({'post': 'create'}), name='playerround-post'),
+    path('playerrounds/update', PlayerroundView.as_view({'post': 'update'}), name='playerround-update'),
     path('playerrounds/get_all', PlayerroundView.as_view({'get': 'get_all'}), name='playerround-get-all'),
     path('golfcourses/', GolfcourseView.as_view({'post': 'create'}), name='golfcourse-post'),
     path('golfcourses/get_all', GolfcourseView.as_view({'get': 'get_all'}), name='golfcourse-get-all'),

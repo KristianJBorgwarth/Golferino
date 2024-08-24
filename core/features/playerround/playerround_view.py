@@ -3,6 +3,10 @@ from rest_framework import viewsets
 
 from core.features.playerround.commands.create.create_playerround_command import CreatePlayerroundCommand
 from core.features.playerround.commands.create.create_playerround_dto import CreatePlayerroundDto
+from core.features.playerround.commands.update.update_playerround_cmd_serializer import \
+    UpdatePlayerroundCommandSerializer
+from core.features.playerround.commands.update.update_playerround_command import UpdatePlayerroundCommand
+from core.features.playerround.commands.update.update_playerround_dto import UpdatePlayerroundDto
 from core.features.playerround.queries.get.get_playerround_dto import GetPlayerroundDto
 from core.features.playerround.queries.get.get_playerrounds_query import GetPlayerroundsQuery
 from core.features.playerround.commands.create.create_playerround_cmd_serializer import CreatePlayerroundCommandSerializer
@@ -41,6 +45,19 @@ class PlayerroundView(viewsets.ViewSet):
                                      )
 
         result = self._mediator.send(query)
+        if result.is_success:
+            return ResponseEnvelope.success(result.value, result.status_code)
+        else:
+            return ResponseEnvelope.fail(result.error, result.status_code)
+
+    @swagger_auto_schema(
+        request_body=UpdatePlayerroundCommandSerializer,
+        responses={200: UpdatePlayerroundDto, 400: 'BadRequest'}
+    )
+    def update(self, request):
+        cmd = UpdatePlayerroundCommand(request.data.get('playerroundid')
+                                       )
+        result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:
