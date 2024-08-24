@@ -40,7 +40,7 @@ class TestPlayerView(APITestCase):
         }
 
         # Act
-        response = self.client.post('/players/', data, format='json')
+        response = self.client.post('/players/create', data, format='json')
 
         # Assert
         self.assertEqual(response.status_code, 201)
@@ -67,7 +67,7 @@ class TestPlayerView(APITestCase):
         }
 
         # Act
-        response = self.client.post('/players/', data, format='json')
+        response = self.client.post('/players/create', data, format='json')
 
         # Assert
         self.assertEqual(response.status_code, 400)

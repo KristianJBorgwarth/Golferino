@@ -40,7 +40,7 @@ class TestLocationView(APITestCase):
         }
 
         # Act
-        response = self.client.post('/locations/', data, format='json')
+        response = self.client.post('/locations/create', data, format='json')
 
         # Assert
         self.assertEqual(response.status_code, 201)
@@ -65,7 +65,7 @@ class TestLocationView(APITestCase):
         }
 
         # Act
-        response = self.client.post('/locations/', data, format='json')
+        response = self.client.post('/locations/create', data, format='json')
 
         # Assert
         self.assertEqual(response.status_code, 400)
