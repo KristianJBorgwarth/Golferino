@@ -38,7 +38,7 @@ class TestRoundView(APITestCase):
         }
 
         # Act
-        response = self.client.post('/rounds/', data, format='json')
+        response = self.client.post('/rounds/create', data, format='json')
 
         # Assert
         self.assertEqual(response.status_code, 201)
@@ -58,7 +58,7 @@ class TestRoundView(APITestCase):
         }
 
         # Act
-        response = self.client.post('/rounds/', data, format='json')
+        response = self.client.post('/rounds/create', data, format='json')
 
         # Assert
         self.assertEqual(response.status_code, 400)
