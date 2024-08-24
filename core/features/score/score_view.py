@@ -2,7 +2,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
 from core.features.score.commands.create.create_score_command import CreateScoreCommand
-from core.dtos.score_dto import ScoreDto
+from core.features.score.commands.create.create_score_dto import CreateScoreDto
 from core.features.score.commands.create.create_score_cmd_serializer import CreateScoreCommandSerializer
 from core.features.score.queries.get.get_score_dto import GetScoreDto
 from core.features.score.queries.get.get_scores_query import GetScoresQuery
@@ -18,7 +18,7 @@ class ScoreView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         request_body=CreateScoreCommandSerializer,
-        responses={200: ScoreDto, 400: 'BadRequest'}
+        responses={200: CreateScoreDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreateScoreCommand(request.data.get('playerroundid'),

@@ -7,16 +7,16 @@ from core.data_access.models.location_model import Location
 from core.data_access.repositories.golfcourse_repository import GolfcourseRepository
 from core.common.mediator import RequestHandler
 from core.data_access.repositories.location_repository import LocationRepository
-from core.dtos.golfcourse_dto import GolfcourseDto
+from core.features.golfcourse.commands.create.create_golfcourse_dto import CreateGolfcourseDto
 
 
-class CreateGolfcourseCommandHandler(RequestHandler[CreateGolfcourseCommand, Result[GolfcourseDto]]):
+class CreateGolfcourseCommandHandler(RequestHandler[CreateGolfcourseCommand, Result[CreateGolfcourseDto]]):
     def __init__(self):
         self.golfcourse_repository = GolfcourseRepository(Golfcourse)
         self.location_repository = LocationRepository(Location)
         self.logger = logging.getLogger(__name__)
         
-    def handle(self, command: CreateGolfcourseCommand) -> Result[GolfcourseDto]:
+    def handle(self, command: CreateGolfcourseCommand) -> Result[CreateGolfcourseDto]:
         try:
             
             golfcourse = Golfcourse(None, command.locationid, command.numholes, command.name
@@ -28,7 +28,7 @@ class CreateGolfcourseCommandHandler(RequestHandler[CreateGolfcourseCommand, Res
                 return Result.fail(ErrorMessage.already_exists(golfcourse.name), status_code=400)
 
             golfcourse = self.golfcourse_repository.create(golfcourse)
-            golfcourseDto = GolfcourseDto(golfcourse)
+            golfcourseDto = CreateGolfcourseDto(golfcourse)
 
             return Result.ok(golfcourseDto.data, status_code=200)
         except Exception as e:

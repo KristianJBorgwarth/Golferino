@@ -5,15 +5,15 @@ from core.common.results import Result
 from core.data_access.models.location_model import Location
 from core.data_access.repositories.location_repository import LocationRepository
 from core.common.mediator import RequestHandler
-from core.dtos.location_dto import LocationDto
+from core.features.location.commands.create.create_location_dto import CreateLocationDto
 
 
-class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[LocationDto]]):
+class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[CreateLocationDto]]):
     def __init__(self):
         self.location_repository = LocationRepository(Location)
         self.logger = logging.getLogger(__name__)
         
-    def handle(self, command: CreateLocationCommand) -> Result[LocationDto]:
+    def handle(self, command: CreateLocationCommand) -> Result[CreateLocationDto]:
         try:
             
             location = Location(None, command.locationname, command.address, command.city)
@@ -22,7 +22,7 @@ class CreateLocationCommandHandler(RequestHandler[CreateLocationCommand, Result[
                 return Result.fail(ErrorMessage.already_exists(field_name=location.locationname), status_code=400)
 
             location = self.location_repository.create(location)
-            locationDto = LocationDto(location)
+            locationDto = CreateLocationDto(location)
 
             return Result.ok(locationDto.data, status_code=200)
 

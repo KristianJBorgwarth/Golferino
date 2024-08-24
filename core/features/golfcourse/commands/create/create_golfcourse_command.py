@@ -1,9 +1,9 @@
 from core.common.mediator import Request
 from core.common.results import Result
-from core.dtos.golfcourse_dto import GolfcourseDto
+from core.features.golfcourse.commands.create.create_golfcourse_dto import CreateGolfcourseDto
 
 
-class CreateGolfcourseCommand(Request[Result[GolfcourseDto]]):
+class CreateGolfcourseCommand(Request[Result[CreateGolfcourseDto]]):
     def __init__(self, locationid: int, numholes: int, name: str):
         self.locationid = locationid
         self.numholes = numholes

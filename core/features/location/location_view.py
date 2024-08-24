@@ -2,7 +2,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
 from core.features.location.commands.create.create_location_command import CreateLocationCommand
-from core.dtos.location_dto import LocationDto
+from core.features.location.commands.create.create_location_dto import CreateLocationDto
+from core.features.location.queries.get.get_location_dto import GetLocationDto
 from core.features.location.queries.get.get_locations_query import GetLocationsQuery
 from core.features.location.commands.create.create_location_cmd_serializer import CreateLocationCommandSerializer
 from core.features.location.queries.get.get_locations_query_serializer import GetLocationsQuerySerializer
@@ -17,7 +18,7 @@ class LocationView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         request_body=CreateLocationCommandSerializer,
-        responses={200: LocationDto, 400: 'BadRequest'}
+        responses={200: CreateLocationDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreateLocationCommand(request.data.get('locationname'), request.data.get('address'), request.data.get('city'))
@@ -29,7 +30,7 @@ class LocationView(viewsets.ViewSet):
         
     @swagger_auto_schema(
         query_serializer=GetLocationsQuerySerializer,
-        responses={200: LocationDto(many=True), 204: 'No Content', 400: 'BadRequest'}
+        responses={200: GetLocationDto(many=True), 204: 'No Content', 400: 'BadRequest'}
     )
     def get_all(self, request):
         query = GetLocationsQuery(int(request.query_params.get('page', 1)), int(request.query_params.get('page_size', 10)))

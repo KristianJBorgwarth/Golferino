@@ -2,7 +2,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
 from core.features.golfcourse.commands.create.create_golfcourse_command import CreateGolfcourseCommand
-from core.dtos.golfcourse_dto import GolfcourseDto
+from core.features.golfcourse.commands.create.create_golfcourse_dto import CreateGolfcourseDto
+from core.features.golfcourse.queries.get.get_golfcourse_dto import GetGolfcourseDto
 from core.features.golfcourse.queries.get.get_golfcourses_query import GetGolfcoursesQuery
 from core.features.golfcourse.commands.create.create_golfcourse_cmd_serializer import CreateGolfcourseCommandSerializer
 from core.features.golfcourse.queries.get.get_golfcourses_query_serializer import GetGolfcoursesQuerySerializer
@@ -17,7 +18,7 @@ class GolfcourseView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         request_body=CreateGolfcourseCommandSerializer,
-        responses={200: GolfcourseDto, 400: 'BadRequest'}
+        responses={200: CreateGolfcourseDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreateGolfcourseCommand(request.data.get('locationid'),
@@ -31,7 +32,7 @@ class GolfcourseView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         query_serializer=GetGolfcoursesQuerySerializer,
-        responses={200: GolfcourseDto(many=True), 204: 'No Content', 400: 'BadRequest'}
+        responses={200: GetGolfcourseDto(many=True), 204: 'No Content', 400: 'BadRequest'}
     )
     def get_all(self, request):
         query = GetGolfcoursesQuery(int(request.query_params.get('page', 1)),

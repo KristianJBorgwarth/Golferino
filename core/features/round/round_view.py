@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from drf_yasg.utils import swagger_auto_schema
 
 from core.features.round.commands.create.create_round_command import CreateRoundCommand
-from core.dtos.round_dto import RoundDto
+from core.features.round.commands.create.create_round_dto import CreateRoundDto
 from core.features.round.commands.create.create_round_cmd_serializer import CreateRoundCommandSerializer
 from core.setup.mediator_setup import get_mediator
 from core.common.ResponseEnvelope import ResponseEnvelope
@@ -15,7 +15,7 @@ class RoundView(viewsets.ViewSet):
 
     @swagger_auto_schema(
         request_body=CreateRoundCommandSerializer,
-        responses={200: RoundDto, 400: 'BadRequest'}
+        responses={200: CreateRoundDto, 400: 'BadRequest'}
     )
     def create(self, request):
         cmd = CreateRoundCommand(request.data.get('golfcourseid'),

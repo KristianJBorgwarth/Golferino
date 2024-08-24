@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 
-class GolfcourseDto(serializers.Serializer):
+class CreateGolfcourseDto(serializers.Serializer):
     golfcourseid = serializers.IntegerField()
     locationid = serializers.IntegerField(source="locationid_id")
     numholes = serializers.IntegerField()

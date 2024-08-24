@@ -7,10 +7,10 @@ from core.data_access.models.playerround_model import Playerround
 from core.data_access.models.round_model import Round
 from core.data_access.repositories.playerround_repository import PlayerroundRepository
 from core.data_access.repositories.round_repository import RoundRepository
-from core.dtos.playerround_dto import PlayerroundDto
+from core.features.playerround.commands.create.create_playerround_dto import CreatePlayerroundDto
 
 
-class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, Result[PlayerroundDto]]):
+class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, Result[CreatePlayerroundDto]]):
 
     def __init__(self):
         super().__init__()
@@ -18,7 +18,7 @@ class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, R
         self.round_repository = RoundRepository(Round)
         self.logger = logging.getLogger(__name__)
         
-    def handle(self, command: CreatePlayerroundCommand) -> Result[PlayerroundDto]:
+    def handle(self, command: CreatePlayerroundCommand) -> Result[CreatePlayerroundDto]:
         try:
             if not self.round_repository.exists(roundid=command.roundid):
                 return Result.fail(ErrorMessage.not_found(f"round with id {command.roundid} not found ..."),
@@ -27,7 +27,7 @@ class CreatePlayerroundCommandHandler(RequestHandler[CreatePlayerroundCommand, R
             playerround = Playerround(None, roundid_id=command.roundid, playerid_id=command.playerid)
 
             playerround_repo = self.playerround_repository.create(playerround)
-            playerroundDto = PlayerroundDto(playerround_repo)
+            playerroundDto = CreatePlayerroundDto(playerround_repo)
 
             return Result.ok(playerroundDto.data, status_code=200)
         except Exception as e:
