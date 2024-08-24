@@ -4,6 +4,9 @@ from rest_framework import viewsets
 from core.features.score.commands.create.create_score_command import CreateScoreCommand
 from core.features.score.commands.create.create_score_dto import CreateScoreDto
 from core.features.score.commands.create.create_score_cmd_serializer import CreateScoreCommandSerializer
+from core.features.score.commands.update.update_score_cmd_serializer import UpdateScoreCommandSerializer
+from core.features.score.commands.update.update_score_command import UpdateScoreCommand
+from core.features.score.commands.update.update_score_dto import UpdateScoreDto
 from core.features.score.queries.get.get_score_dto import GetScoreDto
 from core.features.score.queries.get.get_scores_query import GetScoresQuery
 from core.features.score.queries.get.get_scores_query_serializer import GetScoresQuerySerializer
@@ -41,6 +44,20 @@ class ScoreView(viewsets.ViewSet):
                                playerroundid=int(request.query_params.get('playerroundid')))
 
         result = self._mediator.send(query)
+        if result.is_success:
+            return ResponseEnvelope.success(result.value, result.status_code)
+        else:
+            return ResponseEnvelope.fail(result.error, result.status_code)
+
+    @swagger_auto_schema(
+        request_body=UpdateScoreCommandSerializer,
+        responses={200: UpdateScoreDto, 400: 'BadRequest'}
+    )
+    def update(self, request):
+        cmd = UpdateScoreCommand(request.data.get('scoreid'),
+                                 request.data.get('strokes')
+                                 )
+        result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)
         else:

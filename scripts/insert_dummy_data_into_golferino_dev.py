@@ -12,7 +12,7 @@ django.setup()
 from core.data_access.models.location_model import Location
 from core.data_access.models.golfcourse_model import Golfcourse
 from core.data_access.models.golfhole_model import Golfhole
-from core.data_access.models.player_model import Player
+from core.data_access.models.player.player_model import Player
 from core.data_access.models.round_model import Round
 from core.data_access.models.playerround_model import Playerround
 from core.data_access.models.score_model import Score
