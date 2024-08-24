@@ -22,4 +22,5 @@ urlpatterns = [
     path('golfholes/get_all', GolfholeView.as_view({'get': 'get_all'}), name='golfhole-get-all'),
     path('scores/', ScoreView.as_view({'post': 'create'}), name='score-post'),
     path('scores/get_all', ScoreView.as_view({'get': 'get_all'}), name='score-get-all'),
+    path('scores/update', ScoreView.as_view({'post': 'update'}), name='score-update'),
 ]
