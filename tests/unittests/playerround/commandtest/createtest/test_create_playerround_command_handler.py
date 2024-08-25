@@ -3,7 +3,7 @@ import unittest
 import django
 from unittest.mock import Mock
 
-from core.data_access.models.player.player_model import Player
+from django.contrib.auth.models import User
 
 # Ensure the DJANGO_SETTINGS_MODULE is set to your project's settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Golferino.settings'
@@ -30,8 +30,8 @@ class TestCreatePlayerroundCommandHandler(unittest.TestCase):
         self.round_repository_mock.exists.return_value = True
 
         round_instance = Round()
-        player_instance = Player()
-        playerround_instance = Playerround(playerid=player_instance.playerid, roundid=round_instance.roundid)
+        player_instance = User()
+        playerround_instance = Playerround(playerid=player_instance.id, roundid=round_instance.roundid)
 
         command = CreatePlayerroundCommand(playerid=69, roundid=420)
         self.playerround_repository_mock.create.return_value = playerround_instance

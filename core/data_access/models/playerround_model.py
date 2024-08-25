@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from core.data_access.models.golfcourse_model import Golfcourse
-from core.data_access.models.player.player_model import Player
 
 
 class Playerround(models.Model):

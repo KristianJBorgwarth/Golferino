@@ -2,13 +2,19 @@
 import logging
 from django.contrib.auth.models import User
 from core.common.results import Result
+from core.data_access.models.player.player_created_event import PlayerCreatedEvent
+from core.data_access.models.verification_code_model import VerificationCode
+from core.data_access.repositories.verification_code_repository import VerificationCodeRepository
 from core.features.player.commands.create.create_player_command import CreatePlayerCommand
 from core.features.player.commands.create.create_player_dto import CreatePlayerDto
 from core.common.mediator import RequestHandler
+from core.services.verification_code.verification_code_service import VerificationCodeService
 
 
 class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[CreatePlayerDto]]):
     def __init__(self):
+        self.verification_code_repository = VerificationCodeRepository(VerificationCode)
+        self.verification_code_service = VerificationCodeService()
         self.logger = logging.getLogger(__name__)
 
     def handle(self, command: CreatePlayerCommand) -> Result[CreatePlayerDto]:
@@ -23,6 +29,10 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Crea
                 first_name=command.first_name,
                 last_name=command.last_name
             )
+           # verificationCode = self.verification_code_service.generate_verification_code(user)
+
+           # verificationCode = self.verification_code_repository.create(verificationCode)
+           # user.add_event(PlayerCreatedEvent(player=user, code=verificationCode))
 
             # Create user DTO
             user_dto = CreatePlayerDto(user)

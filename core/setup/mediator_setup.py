@@ -87,9 +87,9 @@ def register_handlers():
     mediator.register_pipeline(GetScoresQuery, [lambda: ValidationBehavior(GetScoresQuerySerializer), lambda: GetScoresQueryHandler()])
     mediator.register_pipeline(UpdateScoreCommand, [lambda: ValidationBehavior(UpdateScoreCommandSerializer), lambda: UpdateScoreCommandHandler()])
 
-    
+
     #EVENTS ------------------------------------------------------
-    
+
     # Player
     mediator.register_notification(PlayerCreatedEvent, lambda: PlayerCreatedEventHandler())
 

@@ -1,11 +1,13 @@
 from datetime import datetime, timedelta
+
+from django.contrib.auth.models import User
+
 from core.common.results import Result
-from core.data_access.models.player.player_model import Player
 from core.data_access.models.verification_code_model import VerificationCode
 import random
 
 class VerificationCodeService:
-    def generate_verification_code(self, player: Player) -> VerificationCode:
+    def generate_verification_code(self, player: User) -> VerificationCode:
         code = random.randint(0, 999999)
         formatted_code = str(code).zfill(6)
         verification_code = VerificationCode(code=formatted_code, is_used=False, player=player, expiration_date=datetime.now() + timedelta(minutes=5))
