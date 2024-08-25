@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.common.validators import validate_integer, validate_max_length, validate_min_length, validate_non_empty
+from core.common.validators import validate_integer
 
 
 #TODO: SUGGESTION: maybe move to queries/location/getLocations directory

@@ -1,4 +1,4 @@
-from typing import Type, List, Optional, Dict, Any
+from typing import Type, List, Optional
 from django.db.models import Model
 from .base_repository import BaseRepository, T
 

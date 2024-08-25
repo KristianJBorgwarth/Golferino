@@ -4,13 +4,8 @@ from core.common.mediator import RequestHandler
 from core.common.results import Result
 from django.core.paginator import Paginator
 
-from core.data_access.models.golfhole_model import Golfhole
 from core.data_access.models.score_model import Score
-from core.data_access.repositories.golfhole_repository import GolfholeRepository
 from core.data_access.repositories.score_repository import ScoreRepository
-
-from core.features.golfhole.queries.get.get_golfhole_dto import GetGolfholeDto
-from core.features.golfhole.queries.get.get_golfholes_query import GetGolfholesQuery
 from core.features.score.queries.get.get_score_dto import GetScoreDto
 from core.features.score.queries.get.get_scores_query import GetScoresQuery
 

@@ -15,7 +15,6 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Crea
         self.logger = logging.getLogger(__name__)
 
     def handle(self, command: CreatePlayerCommand) -> Result[CreatePlayerDto]:
-        user = None
         try:
             if User.objects.filter(email=command.email).exists():
                 return Result.fail("User with this email already exists.", status_code=400)

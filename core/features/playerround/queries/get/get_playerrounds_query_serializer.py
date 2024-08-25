@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.common.validators import validate_integer, validate_non_empty
+from core.common.validators import validate_integer
 
 
 class GetPlayerroundsQuerySerializer(serializers.Serializer):
