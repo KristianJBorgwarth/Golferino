@@ -1,6 +1,6 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -8,12 +8,12 @@ from core.common.ResponseEnvelope import ResponseEnvelope
 from core.features.auth.serializers.password_change_serializer import PasswordChangeSerializer
 
 
-class PasswordChangeView(APIView):
+class PasswordChangeView(viewsets.ViewSet):
     @swagger_auto_schema(
         request_body=PasswordChangeSerializer,
         responses={200: 'OK', 400: 'BadRequest'}
     )
-    def post(self, request):
+    def update(self, request):
         if not request.user.is_authenticated:
             return ResponseEnvelope.fail('Authentication required', 401)
 

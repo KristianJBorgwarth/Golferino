@@ -16,7 +16,7 @@ urlpatterns = [
     path('locations/get_all', LocationView.as_view({'get': 'get_all'}), name='location-get-all'),
     path('rounds/create', RoundView.as_view({'post': 'create'}), name='round-post'),
     path('playerrounds/create', PlayerroundView.as_view({'post': 'create'}), name='playerround-post'),
-    path('playerrounds/update', PlayerroundView.as_view({'post': 'update'}), name='playerround-update'),
+    path('playerrounds/update', PlayerroundView.as_view({'put': 'update'}), name='playerround-update'),
     path('playerrounds/get_all', PlayerroundView.as_view({'get': 'get_all'}), name='playerround-get-all'),
     path('golfcourses/create', GolfcourseView.as_view({'post': 'create'}), name='golfcourse-post'),
     path('golfcourses/get_all', GolfcourseView.as_view({'get': 'get_all'}), name='golfcourse-get-all'),
@@ -24,6 +24,6 @@ urlpatterns = [
     path('golfholes/get_all', GolfholeView.as_view({'get': 'get_all'}), name='golfhole-get-all'),
     path('scores/create', ScoreView.as_view({'post': 'create'}), name='score-post'),
     path('scores/get_all', ScoreView.as_view({'get': 'get_all'}), name='score-get-all'),
-    path('scores/update', ScoreView.as_view({'post': 'update'}), name='score-update'),
-    path('accounts/password_change/', PasswordChangeView.as_view(), name='password_change'),
+    path('scores/update', ScoreView.as_view({'put': 'update'}), name='score-update'),
+    path('accounts/password_change/', PasswordChangeView.as_view({'put': 'update'}), name='password_change'),
 ]
