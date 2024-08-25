@@ -4,8 +4,8 @@ from core.features.player.commands.create.create_player_dto import CreatePlayerD
 
 
 class CreatePlayerCommand(Request[Result[CreatePlayerDto]]):
-    def __init__(self, firstname: str, lastname: str, email: str, password: str):
-        self.firstname = firstname
-        self.lastname = lastname
+    def __init__(self, first_name: str, last_name: str, email: str, password: str):
+        self.first_name = first_name
+        self.last_name = last_name
         self.email = email
         self.password = password

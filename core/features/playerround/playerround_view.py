@@ -39,9 +39,12 @@ class PlayerroundView(viewsets.ViewSet):
         responses={200: GetPlayerroundDto(many=True), 204: 'No Content', 400: 'BadRequest'}
     )
     def get_all(self, request):
+        if not request.user.is_authenticated:
+            return ResponseEnvelope.fail('Authentication required', 401)
+
         query = GetPlayerroundsQuery(page=int(request.query_params.get('page', 1)),
                                      page_size=int(request.query_params.get('page_size', 10)),
-                                     playerid=int(request.query_params.get('playerid'))
+                                     playerid=int(request.user.id)
                                      )
 
         result = self._mediator.send(query)

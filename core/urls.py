@@ -1,5 +1,6 @@
 from django.urls import path
 
+from core.features.auth.views.password_change_view import PasswordChangeView
 from core.features.golfcourse.golfcourse_view import GolfcourseView
 from core.features.golfhole.golfhole_view import GolfholeView
 from core.features.location.location_view import LocationView
@@ -24,4 +25,5 @@ urlpatterns = [
     path('scores/create', ScoreView.as_view({'post': 'create'}), name='score-post'),
     path('scores/get_all', ScoreView.as_view({'get': 'get_all'}), name='score-get-all'),
     path('scores/update', ScoreView.as_view({'post': 'update'}), name='score-update'),
+    path('accounts/password_change/', PasswordChangeView.as_view(), name='password_change'),
 ]
