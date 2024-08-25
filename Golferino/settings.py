@@ -152,6 +152,7 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER_G', 'default')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD_G', 'default')
 EMAIL_FROM = os.environ.get('EMAIL_USER_G', 'default')
+DEFAULT_FROM_EMAIL = EMAIL_FROM
 
 # Logging Configuration
 

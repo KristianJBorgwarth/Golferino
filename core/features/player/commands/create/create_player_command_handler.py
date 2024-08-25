@@ -2,22 +2,20 @@
 import logging
 from django.contrib.auth.models import User
 from core.common.results import Result
-from core.data_access.models.player.player_created_event import PlayerCreatedEvent
 from core.data_access.models.verification_code_model import VerificationCode
-from core.data_access.repositories.verification_code_repository import VerificationCodeRepository
 from core.features.player.commands.create.create_player_command import CreatePlayerCommand
 from core.features.player.commands.create.create_player_dto import CreatePlayerDto
 from core.common.mediator import RequestHandler
-from core.services.verification_code.verification_code_service import VerificationCodeService
+from core.services.email.email_service import EmailService
 
 
 class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[CreatePlayerDto]]):
     def __init__(self):
-        self.verification_code_repository = VerificationCodeRepository(VerificationCode)
-        self.verification_code_service = VerificationCodeService()
+        self.email_service = EmailService()
         self.logger = logging.getLogger(__name__)
 
     def handle(self, command: CreatePlayerCommand) -> Result[CreatePlayerDto]:
+        user = None
         try:
             if User.objects.filter(email=command.email).exists():
                 return Result.fail("User with this email already exists.", status_code=400)
@@ -29,10 +27,12 @@ class CreatePlayerCommandHandler(RequestHandler[CreatePlayerCommand, Result[Crea
                 first_name=command.first_name,
                 last_name=command.last_name
             )
-           # verificationCode = self.verification_code_service.generate_verification_code(user)
+            # Generate verification code
+            verification_code = VerificationCode(user=user)
+            verification_code.save()
 
-           # verificationCode = self.verification_code_repository.create(verificationCode)
-           # user.add_event(PlayerCreatedEvent(player=user, code=verificationCode))
+            # Send verification email
+            self.email_service.send_verification_email(user, verification_code.code)
 
             # Create user DTO
             user_dto = CreatePlayerDto(user)
