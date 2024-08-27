@@ -153,6 +153,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD_G', 'default')
 EMAIL_FROM = os.environ.get('EMAIL_USER_G', 'default')
 DEFAULT_FROM_EMAIL = EMAIL_FROM
 
+FRONTEND_URL = "https://127.0.0.1/"
 # Logging Configuration
 
 LOGGING = {
