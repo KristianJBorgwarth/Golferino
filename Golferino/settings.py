@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import logging
 import logging.config
 import os
 import sys
@@ -152,7 +151,9 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER_G', 'default')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD_G', 'default')
 EMAIL_FROM = os.environ.get('EMAIL_USER_G', 'default')
+DEFAULT_FROM_EMAIL = EMAIL_FROM
 
+FRONTEND_URL = "https://127.0.0.1/"
 # Logging Configuration
 
 LOGGING = {

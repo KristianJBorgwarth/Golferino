@@ -1,7 +1,8 @@
+from django.contrib.auth.models import User
+
 from core.data_access.base_repositories.repository import Repository
-from core.data_access.models.player.player_model import Player
 
 
-class PlayerRepository(Repository[Player]):
+class PlayerRepository(Repository[User]):
     def init(self):
-        super().__init__(Player)
+        super().__init__(User)

@@ -2,6 +2,6 @@ from rest_framework import serializers
 
 
 class GetPlayerDto(serializers.Serializer):
-    firstname = serializers.CharField(max_length=255)
-    lastname = serializers.CharField(max_length=1024)
+    first_name = serializers.CharField(max_length=255)
+    last_name = serializers.CharField(max_length=1024)
     email = serializers.CharField(max_length=255)

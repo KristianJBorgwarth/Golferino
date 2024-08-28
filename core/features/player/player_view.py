@@ -17,7 +17,11 @@ class PlayerView(viewsets.ViewSet):
 
     @swagger_auto_schema(request_body=CreatePlayerCommandSerializer, responses={200: CreatePlayerDto, 400: 'BadRequest'})
     def create(self, request):
-        cmd = CreatePlayerCommand(request.data.get('firstname'),request.data.get('lastname'),request.data.get('email'),request.data.get('password'))
+        cmd = CreatePlayerCommand(request.data.get('first_name'),
+                                  request.data.get('last_name'),
+                                  request.data.get('email'),
+                                  request.data.get('password'))
+
         result = self._mediator.send(cmd)
         if result.is_success:
             return ResponseEnvelope.success(result.value, result.status_code)

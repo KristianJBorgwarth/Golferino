@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Callable, List, Optional, Any, TypeVar, Generic, Type, Dict
+from typing import Callable, List, Any, TypeVar, Generic, Type, Dict
 
 # Generic variable for all Requests
 T = TypeVar('T')
